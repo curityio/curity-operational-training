@@ -4,28 +4,6 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 # A utility that can create certificates for the admin and runtime workloads
 ############################################################################
 
-#
-# Point to the OpenSSL configuration file for the platform
-#
-case "$(uname -s)" in
-
-  # macOS
-  Darwin)
-    export OPENSSL_CONF='/System/Library/OpenSSL/openssl.cnf'
- 	;;
-
-  # Windows with Git Bash
-  MINGW64*)
-    export OPENSSL_CONF='C:/Program Files/Git/usr/ssl/openssl.cnf';
-    export MSYS_NO_PATHCONV=1;
-	;;
-
-  # Linux
-  Linux*)
-    export OPENSSL_CONF='/usr/lib/ssl/openssl.cnf';
-	;;
-esac
-
 ROOT_CERT_FILE_PREFIX='example.ca'
 ROOT_CERT_DESCRIPTION='Development CA for Curity Identity Server'
 SSL_CERT_FILE_PREFIX='example.ssl'
