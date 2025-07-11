@@ -1,0 +1,11 @@
+services:
+  idsvr:
+    image: curity.azurecr.io/curity/idsvr:latest
+    ports:
+      - 6749:6749
+      - 8443:8443
+    volumes:
+      - ./cdb:/opt/idsvr/var/cdb
+    environment:
+      PASSWORD: '${PASSWORD}'
+      CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'

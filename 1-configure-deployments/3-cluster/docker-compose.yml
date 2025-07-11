@@ -1,0 +1,54 @@
+services:
+
+  idsvr-admin:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: idsvr-admin
+    volumes:
+      - ./license.json:/opt/idsvr/etc/init/license/license.json
+      - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
+      - ./cluster.xml:/opt/idsvr/etc/init/cluster.xml
+    environment:
+      ADMIN: 'true'
+      CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
+      ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
+      SERVICE_NAME: 'Admin'
+
+  idsvr-runtime1:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: idsvr-runtime1
+    volumes:
+      - ./license.json:/opt/idsvr/etc/init/license/license.json
+      - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
+      - ./cluster.xml:/opt/idsvr/etc/init/cluster.xml
+    environment:
+      CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
+      ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
+      SERVICE_NAME: 'Runtime1'
+
+  idsvr-runtime2:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: idsvr-runtime2
+    volumes:
+      - ./license.json:/opt/idsvr/etc/init/license/license.json
+      - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
+      - ./cluster.xml:/opt/idsvr/etc/init/cluster.xml
+    environment:
+      CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
+      RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
+      SERVICE_NAME: 'Runtime2'
+
+  api-gateway:
+    image: kong/kong:latest
+    hostname: apigateway
+    ports:
+      - 80:3000
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml
+    environment:
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
+      KONG_PROXY_LISTEN: '0.0.0.0:3000'
+      KONG_LOG_LEVEL: 'info'
