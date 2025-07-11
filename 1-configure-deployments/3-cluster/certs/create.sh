@@ -10,7 +10,6 @@ SSL_CERT_FILE_PREFIX='example.ssl'
 SSL_CERT_PASSWORD='Password1'
 WILDCARD_DOMAIN_NAME='*.example'
 
-
 openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:prime256v1 -out $ROOT_CERT_FILE_PREFIX.key
 if [ $? -ne 0 ]; then
   echo '*** Problem encountered creating the Root CA key'
