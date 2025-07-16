@@ -4,6 +4,19 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 # A utility that can create certificates for the admin and runtime workloads
 ############################################################################
 
+ROOT_CERT_FILE_PREFIX='example.ca'
+ROOT_CERT_DESCRIPTION='Development CA for Curity Identity Server'
+SSL_CERT_FILE_PREFIX='example.ssl'
+SSL_CERT_PASSWORD='Password1'
+WILDCARD_DOMAIN_NAME='*.example'
+
+#
+# Do nothing if files exist already
+#
+if [ -f $SSL_CERT_FILE_PREFIX.crt ]; then
+  exit 0
+fi
+
 #
 # Point to the OpenSSL configuration file for the platform
 #
@@ -26,11 +39,6 @@ case "$(uname -s)" in
 	;;
 esac
 
-ROOT_CERT_FILE_PREFIX='example.ca'
-ROOT_CERT_DESCRIPTION='Development CA for Curity Identity Server'
-SSL_CERT_FILE_PREFIX='example.ssl'
-SSL_CERT_PASSWORD='Password1'
-WILDCARD_DOMAIN_NAME='*.example'
 
 
 openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:prime256v1 -out $ROOT_CERT_FILE_PREFIX.key
@@ -81,4 +89,4 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-rm 'example.ssl.csr'
+rm example.ssl.csr

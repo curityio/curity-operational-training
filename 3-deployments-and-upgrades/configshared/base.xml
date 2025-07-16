@@ -60,6 +60,8 @@
           <curve-name>P-256</curve-name>
         </signing-key>
       </signing-keys>
+      <signature-verification-keys>
+      </signature-verification-keys>
     </crypto>
     <caching-services>
       <default-caching-service>

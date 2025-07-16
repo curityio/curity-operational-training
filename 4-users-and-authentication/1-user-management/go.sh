@@ -46,6 +46,14 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Create HTTPS certificates for the API gateway if required
+#
+../../utils/ssl-certs/create.sh "$(pwd)"
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+#
 # Run crypto tools to create protected secrets
 #
 ../../utils/crypto/run-crypto-tools.sh "$(pwd)"

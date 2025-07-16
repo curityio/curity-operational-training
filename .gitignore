@@ -2,6 +2,7 @@
 license.json
 cdb
 *.key
+*.csr
 *.crt
 *.p12
 protected-secrets.env
@@ -16,3 +17,5 @@ runtime.yml
 1-configure-deployments/6-service-roles/config/cluster.xml
 2-data-sources/config/cluster.xml
 3-deployments-and-upgrades/config/cluster.xml
+4-users-and-authentication/1-user-management/config/cluster.xml
+4-users-and-authentication/1-user-management/server/server.ext

@@ -17,19 +17,7 @@ This deployment gets these areas up and running, to back up the course theory:
 - Then use a corporate login policy (Entra ID) for employees (Admin UI and DevOps Dashboard).
 - Then use a username authenticator in applications to handle both customer users and employees.
 
-## Initial API Access
+## TODO
 
-The work in progress state of this PME deployment is to call SCIM endpoints like these:
-
-```bash
-ACCESS_TOKEN=$(curl -s -X POST http://login.demo.example/oauth/v2/oauth-token \
-     -H 'Content-Type: application/x-www-form-urlencoded' \
-     -d 'grant_type=client_credentials' \
-     -d 'client_id=migration-client' \
-     -d "client_secret=Password1" \
-     -d 'scope=migrations' | jq -r '.access_token')
-
-curl http://login.demo.example/users/Users \
-    -H "Accept: application/scim+json" \
-    -H "Authorization: Bearer $ACCESS_TOKEN"
-```
+1. For early deployments, rename cluster.xml to cluster-configuration.xml
+   Then avoid checking in cluster.xml
