@@ -23,6 +23,12 @@
           </client-capabilities>
           <scopes>
             <scope>
+              <id>accounts</id>
+            </scope>
+            <scope>
+              <id>accounts_migration</id>
+            </scope>
+            <scope>
               <id>address</id>
               <description>OpenId Connect address scope</description>
               <claims>address</claims>
@@ -32,9 +38,6 @@
               <description>OpenId Connect email scope</description>
               <claims>email</claims>
               <claims>email_verified</claims>
-            </scope>
-            <scope>
-              <id>migrations</id>
             </scope>
             <scope>
               <id>openid</id>

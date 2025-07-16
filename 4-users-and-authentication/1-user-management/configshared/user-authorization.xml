@@ -5,7 +5,7 @@
         <id>default</id>
         <attribute xmlns="https://curity.se/ns/ext-conf/attribute">
           <rule-list>
-            <name>employee</name>
+            <name>employees</name>
             <description>A rule list for employee access to customer user information</description>
             <enforcement-restrictions>
               <default-allow-read>true</default-allow-read>
@@ -53,7 +53,7 @@
             <select-rule-list-when>
               <context-requirement>user-management-scim</context-requirement>
               <scope-requirement>
-                <scope>migrations</scope>
+                <scope>accounts_migration</scope>
               </scope-requirement>
             </select-rule-list-when>
           </rule-list>
