@@ -5,7 +5,7 @@ These deployment and automation resources back up the [Operational Training](htt
 
 ## 0. All Roles: Introduction
 
-Newcomers should first complete the [Introduction to the Curity Identity Server](https://curity.io/training/introduction-to-curity/) course.
+Newcomers should first complete the [Introduction to the Curity Identity Server](https://curity.io/training/introduction-to-curity/) course.\
 Learn how to run a quick deployment, run flows with OAuth Tools and process phantom tokens and JWTs.
 
 ## 1. Operator: Configure Deployments
@@ -41,12 +41,12 @@ Learn how to migrate or update customer user accounts and use other administrati
 ## 7. Developer: Manage Customizations
 
 A developer should next complete the [Manage Customizations](https://curity.io/training/manage-customizations) course.\
-Learn operational techniques to customize the login user experience or extend the system with JavaScript or plugins.
+Learn how to customize the login user experience or extend the system with JavaScript or plugins.
 
 ## 8. Operator: Logging and Tracing
 
 An operator should next complete the [Logging and Tracing](https://curity.io/training/logging-and-tracing) course.\
-Learn how to use fast problem resolution during OAuth flows in distributed architectures, to identify problem causes.
+Learn how to use fast problem resolution during OAuth flows in distributed architectures.
 
 ## 9. Operator: Health and Monitoring
 
