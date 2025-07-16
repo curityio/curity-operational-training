@@ -8,7 +8,7 @@ ROOT_CERT_FILE_PREFIX='example.ca'
 ROOT_CERT_DESCRIPTION='Development CA for Curity Identity Server'
 SSL_CERT_FILE_PREFIX='example.ssl'
 SSL_CERT_PASSWORD='Password1'
-WILDCARD_DOMAIN_NAME='*.example'
+WILDCARD_DOMAIN_NAME='*.demo.example'
 
 #
 # Do nothing if files exist already

@@ -12,7 +12,6 @@ services:
     environment:
       ADMIN: 'true'
       SERVICE_NAME: 'Admin'
-      LOGGING_LEVEL: 'DEBUG'
 
   idsvr-runtime1:
     image: custom_idsvr:1.0.0
@@ -25,7 +24,6 @@ services:
       - ./vault/protected-secrets.env
     environment:
       SERVICE_NAME: 'Runtime1'
-      LOGGING_LEVEL: 'DEBUG'
 
   idsvr-runtime2:
     image: custom_idsvr:1.0.0
@@ -38,7 +36,6 @@ services:
       - ./vault/protected-secrets.env
     environment:
       SERVICE_NAME: 'Runtime2'
-      LOGGING_LEVEL: 'DEBUG'
 
   curity-data:
     image: curity_mssql:1.0.0
