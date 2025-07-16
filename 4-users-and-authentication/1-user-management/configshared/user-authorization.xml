@@ -1,0 +1,64 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <processing xmlns="https://curity.se/ns/conf/base">
+    <authorization-managers>
+      <authorization-manager>
+        <id>default</id>
+        <attribute xmlns="https://curity.se/ns/ext-conf/attribute">
+          <rule-list>
+            <name>employee</name>
+            <description>A rule list for employee access to customer user information</description>
+            <enforcement-restrictions>
+              <default-allow-read>true</default-allow-read>
+              <default-allow-write>true</default-allow-write>
+              <require-subject-match>false</require-subject-match>
+            </enforcement-restrictions>
+            <rule>
+              <name>default</name>
+              <access-operation>create</access-operation>
+              <access-operation>read</access-operation>
+              <access-operation>update</access-operation>
+              <access-operation>delete</access-operation>
+              <attribute>account</attribute>
+              <decision>allow</decision>
+            </rule>
+            <select-rule-list-when>
+              <claim-requirement>
+                <name>group</name>
+                <applicability>all-of</applicability>
+                <value>DevOps</value>
+              </claim-requirement>
+              <context-requirement>user-management-graphql</context-requirement>
+              <scope-requirement>
+                <scope>accounts</scope>
+              </scope-requirement>
+            </select-rule-list-when>
+          </rule-list>
+          <rule-list>
+            <name>migrations</name>
+            <description>A rule list for migrations of customer users from other systems</description>
+            <enforcement-restrictions>
+              <default-allow-read>true</default-allow-read>
+              <default-allow-write>true</default-allow-write>
+              <require-subject-match>false</require-subject-match>
+            </enforcement-restrictions>
+            <rule>
+              <name>default</name>
+              <access-operation>create</access-operation>
+              <access-operation>read</access-operation>
+              <access-operation>update</access-operation>
+              <access-operation>delete</access-operation>
+              <attribute>account</attribute>
+              <decision>allow</decision>
+            </rule>
+            <select-rule-list-when>
+              <context-requirement>user-management-scim</context-requirement>
+              <scope-requirement>
+                <scope>migrations</scope>
+              </scope-requirement>
+            </select-rule-list-when>
+          </rule-list>
+        </attribute>
+      </authorization-manager>
+    </authorization-managers>
+  </processing>
+</config>

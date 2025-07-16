@@ -95,4 +95,13 @@ echo "export DB_CONNECTION='$DB_CONNECTION'"                   >> ./protected-se
 echo "export DB_PASSWORD='$DB_PASSWORD'"                       >> ./protected-secrets.env
 echo "export CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY'"   >> ./protected-secrets.env
 echo "export SYMMETRIC_KEY='$SYMMETRIC_KEY'"                   >> ./protected-secrets.env
-echo "export SIGNING_KEY='$SIGNING_KEY'".                      >> ./protected-secrets.env
+echo "export SIGNING_KEY='$SIGNING_KEY'"                       >> ./protected-secrets.env
+
+#
+# Add extra secrets for particular deployments
+#
+if [ "$USER_MANAGEMENT" == 'true' ]; then
+
+  MIGRATION_CLIENT_SECRET=$(openssl passwd -5 "$MIGRATION_CLIENT_SECRET_RAW")
+  echo "export MIGRATION_CLIENT_SECRET='$MIGRATION_CLIENT_SECRET'" >> ./protected-secrets.env
+fi
