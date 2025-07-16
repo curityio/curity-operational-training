@@ -5,8 +5,8 @@ These deployment and automation resources back up the [Operational Training](htt
 
 ## 0. All Roles: Introduction
 
-Some basic deployments for newcomers for a local computer.\
-How to get integrated with OAuth Tools and run some initial flows with phantom tokens and JWTs.
+Newcomers should first complete the [Introduction to the Curity Identity Server](https://curity.io/training/introduction-to-curity/) course.
+Learn how to run a quick deployment, run flows with OAuth Tools and process phantom tokens and JWTs.
 
 ## 1. Operator: Configure Deployments
 
