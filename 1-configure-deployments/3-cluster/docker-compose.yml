@@ -6,7 +6,7 @@ services:
     volumes:
       - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
-      - ./cluster.xml:/opt/idsvr/etc/init/cluster.xml
+      - ./cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       ADMIN: 'true'
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
@@ -20,7 +20,7 @@ services:
     volumes:
       - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
-      - ./cluster.xml:/opt/idsvr/etc/init/cluster.xml
+      - ./cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
@@ -33,7 +33,7 @@ services:
     volumes:
       - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
-      - ./cluster.xml:/opt/idsvr/etc/init/cluster.xml
+      - ./cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'

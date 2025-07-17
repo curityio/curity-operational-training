@@ -90,3 +90,4 @@ if [ $? -ne 0 ]; then
 fi
 
 rm example.ssl.csr
+chmod 644 $SSL_CERT_FILE_PREFIX.key

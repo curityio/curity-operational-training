@@ -12,10 +12,4 @@ infrastructure.env
 job.yml
 admin.yml
 runtime.yml
-*/config/cluster.xml
-1-configure-deployments/5-protect-secrets/config/cluster.xml
-1-configure-deployments/6-service-roles/config/cluster.xml
-2-data-sources/config/cluster.xml
-3-deployments-and-upgrades/config/cluster.xml
-4-users-and-authentication/1-user-management/config/cluster.xml
-4-users-and-authentication/1-user-management/server/server.ext
+cluster.xml

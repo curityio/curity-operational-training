@@ -9,7 +9,7 @@ services:
       - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
       - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml
       - ./config/applications.xml:/opt/idsvr/etc/init/applications.xml
-      - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
+      - ./config/cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       ADMIN: 'true'
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
@@ -26,7 +26,7 @@ services:
       - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
       - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml
       - ./config/applications.xml:/opt/idsvr/etc/init/applications.xml
-      - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
+      - ./config/cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
@@ -42,7 +42,7 @@ services:
       - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
       - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml
       - ./config/applications.xml:/opt/idsvr/etc/init/applications.xml
-      - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
+      - ./config/cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
