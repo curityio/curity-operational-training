@@ -67,6 +67,9 @@
               <claims>website</claims>
               <claims>zoneinfo</claims>
             </scope>
+            <scope>
+              <id>urn:se:curity:scopes:admin:api</id>
+            </scope>
           </scopes>
           <claims>
             <claim>

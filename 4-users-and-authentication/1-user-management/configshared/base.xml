@@ -4,17 +4,26 @@
       <base-url>#{RUNTIME_BASE_URL}</base-url>
       <admin-service>
         <http>
-          <base-url>#{ADMIN_BASE_URL}</base-url>
-          <web-ui>
-          </web-ui>
-          <restconf>
-          </restconf>
+        <base-url>#{ADMIN_BASE_URL}</base-url>
+        <web-ui>
+        </web-ui>
+        <restconf>
+          <oauth xmlns="https://curity.se/ns/conf/profile/oauth">
+            <oauth-profile>token-service</oauth-profile>
+            <client>devops_dashboard_restconf_client</client>
+          </oauth>
+        </restconf>
+        <devops-dashboard xmlns="https://curity.se/ns/conf/profile/oauth">
+          <authorization-manager>default</authorization-manager>
+          <client>devops_dashboard_restconf_client</client>
+        </devops-dashboard>
         </http>
       </admin-service>
       <services>
         <zones>
           <default-zone>
             <symmetric-key>#{SYMMETRIC_KEY}</symmetric-key>
+            <allowed-origins-for-cors>https://admin.demo.example</allowed-origins-for-cors>
           </default-zone>
         </zones>
         <service-role>
