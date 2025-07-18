@@ -9,7 +9,7 @@ The first deployment gets these areas up and running:
 
 - User Management APIs with an Attribute Authorization Manager
 - DevOps Dashboard
-- You can then create customer user accounts with control over user attributes.
+- Employees can then create customer user accounts with control over user attributes.
 
 ## User Authentication
 
