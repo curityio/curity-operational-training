@@ -5,16 +5,16 @@ Extends the local deployment to enable the management of customer and employee u
 
 ## User Administration
 
-This deployment gets these areas up and running:
+The first deployment gets these areas up and running:
 
 - User Management APIs with an Attribute Authorization Manager
 - DevOps Dashboard
+- You can then create customer user accounts with control over user attributes.
 
 ## User Authentication
 
-This deployment gets these areas up and running:
+The second deployment gets these areas up and running:
 
-- Create customer user accounts with control over user attributes.
 - Customer users use email authentication for account recovery.
 - Customer users sign in with passwords or passkeys.
 - Employee users sign in with an external identity provider that provides a corporate login policy.
