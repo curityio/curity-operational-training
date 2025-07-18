@@ -1,5 +1,18 @@
 services:
 
+  api-gateway:
+    image: kong/kong:latest
+    hostname: apigateway
+    ports:
+      - 80:3000
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml
+    environment:
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
+      KONG_PROXY_LISTEN: '0.0.0.0:3000'
+      KONG_LOG_LEVEL: 'info'
+
   idsvr-admin:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-admin
@@ -48,19 +61,6 @@ services:
       - ./vault/protected-secrets.env
     environment:
       SERVICE_NAME: 'Runtime2'
-
-  api-gateway:
-    image: kong/kong:latest
-    hostname: apigateway
-    ports:
-      - 80:3000
-    volumes:
-      - ./kong.yml:/usr/local/kong/declarative/kong.yml
-    environment:
-      KONG_DATABASE: 'off'
-      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
-      KONG_PROXY_LISTEN: '0.0.0.0:3000'
-      KONG_LOG_LEVEL: 'info'
 
   curity-data:
     image: curity_mssql:1.0.0

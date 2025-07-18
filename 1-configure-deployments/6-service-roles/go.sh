@@ -14,6 +14,7 @@ cp ../../hooks/pre-commit ../../.git/hooks
 #
 # You only need to create crypto keys once per stage of your deployment pipeline
 #
+export GENERATE_CLUSTER_KEY='true'
 ../../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1

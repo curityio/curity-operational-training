@@ -39,12 +39,15 @@ echo 'Temporary Docker container running ...'
 # You must do this when upgrading the Curity Identity Server to a new version
 # You can optionally do it whenever you trigger a redeployment of all admin and runtime nodes
 #
-cd "$OUTPUT_FOLDER/config"
-CLUSTER_CONFIG=$(docker exec -i curity bash -c "genclust -c idsvr-admin")
-if [ $? -ne 0 ]; then
-  exit 1
+if [ "$GENERATE_CLUSTER_KEY" == 'true' ]; then
+
+  cd "$OUTPUT_FOLDER/config"
+  CLUSTER_CONFIG=$(docker exec -i curity bash -c "genclust -c idsvr-admin")
+  if [ $? -ne 0 ]; then
+    exit 1
+  fi
+  echo "$CLUSTER_CONFIG" > cluster.xml
 fi
-echo "$CLUSTER_CONFIG" > cluster.xml
 
 #
 # Simulate a CI/CD system downloading secrets from a secure vault

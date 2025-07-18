@@ -1,11 +1,11 @@
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-############################################################################
-# A utility that can create certificates for the admin and runtime workloads
-############################################################################
+######################################################################
+# A utility to create wildcard certificates for local test deployments
+######################################################################
 
 ROOT_CERT_FILE_PREFIX='example.ca'
-ROOT_CERT_DESCRIPTION='Development CA for Curity Identity Server'
+ROOT_CERT_DESCRIPTION='Curity Identity Server Training Courses Local CA'
 SSL_CERT_FILE_PREFIX='example.ssl'
 SSL_CERT_PASSWORD='Password1'
 WILDCARD_DOMAIN_NAME='*.demo.example'

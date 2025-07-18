@@ -1,21 +1,17 @@
 _format_version: '2.1'
 _transform: true
-upstreams:
-  - name: runtime-upstreams
-    targets:
-      - target: idsvr-runtime1:8443
-      - target: idsvr-runtime2:8443
 services:
 - name: runtime
-  host: runtime-upstreams
+  url: http://idsvr:8443
   routes:
   - name: runtime
     hosts:
     - login.demo.example
     paths:
     - /
+
 - name: admin
-  url: http://idsvr-admin:6749
+  url: http://idsvr:6749
   routes:
   - name: admin
     hosts:

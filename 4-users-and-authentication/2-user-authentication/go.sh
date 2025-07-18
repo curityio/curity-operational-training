@@ -9,12 +9,12 @@ if [ ! -f ./license.json ]; then
   echo 'Please provide a license.json file in this folder before deploying'
   exit 1
 fi
-cp ../hooks/pre-commit ../.git/hooks
+cp ../../hooks/pre-commit ../../.git/hooks
 
 #
 # Get the latest MS SQL Server schema creation script
 #
-../utils/sql/get-mssql-script.sh "$(pwd)/database"
+../../utils/sql/get-mssql-script.sh "$(pwd)/database"
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -29,10 +29,26 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Create a custom Docker images for the Curity Identity Server and its shared configuration
+#
+docker build --no-cache -t custom_idsvr:1.0.0 .
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+#
 # Create crypto keys once per stage of your deployment pipeline
 #
-export GENERATE_CLUSTER_KEY='true'
-../utils/crypto/create-crypto-keys.sh "$(pwd)"
+export USER_MANAGEMENT='true'
+../../utils/crypto/create-crypto-keys.sh "$(pwd)"
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+#
+# Create HTTPS certificates for the API gateway if required
+#
+../../utils/ssl-certs/create.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -40,7 +56,7 @@ fi
 #
 # Run crypto tools to create protected secrets
 #
-../utils/crypto/run-crypto-tools.sh "$(pwd)"
+../../utils/crypto/run-crypto-tools.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
 fi
