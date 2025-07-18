@@ -1,0 +1,24 @@
+{
+  "name": "console-client",
+  "version": "1.0.0",
+  "description": "A minimal code flow client to test the login user experience for local deployments",
+  "author": "Curity AB",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "NODE_EXTRA_CA_CERTS=../ssl-certs/example.ca.crt tsx src/index.ts"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "jose": "^6.0.12",
+    "open": "^10.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}

@@ -38,3 +38,13 @@ Also update your `/etc/hosts` file with a line that resolves the test domains:
 ```text
 127.0.0.1 admin.demo.example login.demo.example mail.demo.example
 ```
+
+## Testing
+
+You can run the test client from the `utils/console-client` folder to trigger logins.\
+To do so, ensure that Node.js is installed and run the following commands from that folder:
+
+```bash
+npm install
+npm start
+```

@@ -41,10 +41,10 @@
                   </code>
                 </capabilities>
               </client>
-              <client>
-                <id>web-client</id>
-                <secret>Password1</secret>
-                <redirect-uris>oauth.tools://app/callback/code</redirect-uris>
+               <client>
+                <id>console-client</id>
+                <no-authentication>true</no-authentication>
+                <redirect-uris>http://127.0.0.1/callback</redirect-uris>
                 <proof-key>
                   <require-proof-key>true</require-proof-key>
                 </proof-key>
@@ -54,28 +54,10 @@
                   <allowed-authenticators>passwords</allowed-authenticators>
                 </user-authentication>
                 <capabilities>
-                <code>
-                </code>
+                  <code>
+                  </code>
                 </capabilities>
-                <validate-port-on-loopback-interfaces>true</validate-port-on-loopback-interfaces>
-              </client>
-              <client>
-                <id>web-client</id>
-                <secret>Password1</secret>
-                <redirect-uris>oauth.tools://app/callback/code</redirect-uris>
-                <proof-key>
-                  <require-proof-key>true</require-proof-key>
-                </proof-key>
-                <scope>openid</scope>
-                <user-authentication>
-                  <allowed-authenticators>passkeys</allowed-authenticators>
-                  <allowed-authenticators>passwords</allowed-authenticators>
-                </user-authentication>
-                <capabilities>
-                <code>
-                </code>
-                </capabilities>
-                <validate-port-on-loopback-interfaces>true</validate-port-on-loopback-interfaces>
+                <validate-port-on-loopback-interfaces>false</validate-port-on-loopback-interfaces>
               </client>
             </config-backed>
           </client-store>
