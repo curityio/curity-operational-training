@@ -40,6 +40,7 @@ fi
 # Create crypto keys once per stage of your deployment pipeline
 #
 export USER_MANAGEMENT='true'
+export USER_AUTHENTICATION='true'
 ../../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1

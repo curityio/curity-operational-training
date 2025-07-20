@@ -47,7 +47,7 @@ export async function frontChannelRequest(): Promise<string> {
             return;
         }
 
-        response.write('Console client login completed successfully');
+        response.write('Console client login attempt completed - you can close this window');
         response.end();
     
         eventEmitter.emit('LOGIN_COMPLETE', requestUrl);
@@ -65,9 +65,10 @@ export async function frontChannelRequest(): Promise<string> {
             const args = new URLSearchParams(new URL(responseUrl).search);
             const code = args.get('code') || '';
             const errorCode = args.get('error') || '';
+            const errorDescription = args.get('error_description') || '';
             
             if (errorCode) {
-                reject(new Error(`Authorization response error: ${errorCode}`));
+                reject(new Error(`Authorization response error: ${errorCode}, ${errorDescription}`));
             } else if (!code) {
                 reject(new Error(`Authorization response error: no authorizaton code`));
             } else {

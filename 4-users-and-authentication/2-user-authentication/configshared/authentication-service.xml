@@ -5,15 +5,42 @@
       <type xmlns:auth="https://curity.se/ns/conf/profile/authentication">auth:authentication-service</type>
       <settings>
         <authentication-service xmlns="https://curity.se/ns/conf/profile/authentication">
+          <persisted-sso-session>true</persisted-sso-session>
+          <authentication-actions>
+            <authentication-action>
+              <id>select_factor</id>
+              <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
+                <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
+                <always>
+                  <second-factor>
+                    <id>entraid</id>
+                  </second-factor>
+                </always>
+              </multi-factor-condition>
+            </authentication-action>
+          </authentication-actions>
           <authenticators>
             <authenticator>
               <id>email</id>
+              <description>Email authentication</description>
               <email>
                 <account-manager>default-account-manager</account-manager>
               </email>
             </authenticator>
             <authenticator>
+              <id>entraid</id>
+              <description>Sign in with the employee login policy </description>
+              <oidc xmlns="https://curity.se/ns/conf/authenticators/oidc">
+                <configuration-url>https://login.microsoftonline.com/#{ENTRA_ID_TENANT_ID}/v2.0/.well-known/openid-configuration</configuration-url>
+                <client-id>#{ENTRA_ID_CLIENT_ID}</client-id>
+                <client-secret>#{ENTRA_ID_CLIENT_SECRET}</client-secret>
+                <use-subject-for-login-hint>true</use-subject-for-login-hint>
+                <prompt-login>if-requested-by-client</prompt-login>
+              </oidc>
+            </authenticator>
+            <authenticator>
               <id>passkeys</id>
+              <description>Sign in with a passkey</description>
               <required-authenticator-for-registration>email</required-authenticator-for-registration>
               <passkeys xmlns="https://curity.se/ns/conf/authenticators/passkeys">
                 <allow-registration-during-login>true</allow-registration-during-login>
@@ -25,6 +52,7 @@
             </authenticator>
             <authenticator>
               <id>passwords</id>
+              <description>Sign in with a password</description>
               <html-form xmlns="https://curity.se/ns/conf/authenticators/html-form">
                 <account-manager>default-account-manager</account-manager>
                 <credential-manager>default-credential-manager</credential-manager>
@@ -32,6 +60,10 @@
             </authenticator>
             <authenticator>
               <id>username</id>
+              <authentication-actions>
+                <login>select_factor</login>
+              </authentication-actions>
+              <description>Identify the user</description>
               <username xmlns="https://curity.se/ns/ext-conf/username">
               </username>
             </authenticator>

@@ -50,8 +50,7 @@
                 </proof-key>
                 <scope>openid</scope>
                 <user-authentication>
-                  <allowed-authenticators>passkeys</allowed-authenticators>
-                  <allowed-authenticators>passwords</allowed-authenticators>
+                  <allowed-authenticators>username</allowed-authenticators>
                 </user-authentication>
                 <capabilities>
                   <code>
