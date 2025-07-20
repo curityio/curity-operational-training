@@ -47,3 +47,25 @@ To do so, ensure that Node.js is installed and run the following commands from t
 npm install
 npm start
 ```
+
+## TODO
+
+Articles are:
+
+- External IDPs (to get an employee login action working)
+- Authentication actions (to get the usability right)
+
+Entra ID requires:
+
+- Persisted SSO cookies
+- Second factor check disabled
+
+I need to work out how to get group names issued to ID tokens from Entra ID
+
+- Username authenticator script action to choose user's authenticator(s)
+  Use @yourcompany.com to identify employees
+  Offer a choice of passkeys or passwords to customer users
+
+- Entra ID script authenticator to set subject to email (attributes.subject = attribute.email)
+  Also extract groups for token issuance
+  Also show how to add 'admin' to the groups for DevOps
