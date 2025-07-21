@@ -27,6 +27,7 @@ services:
       - ./vault/protected-secrets.env
     environment:
       ADMIN: 'true'
+      RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
 
   curity-data:
     image: curity_mssql:1.0.0

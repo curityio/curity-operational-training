@@ -37,10 +37,16 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Override these with the values for your employee IDP in order to use it for authentication in OAuth clients
+#
+export EMPLOYEE_IDP_CLIENT_ID='cc55d59b-4c03-4435-9ab3-2c584f079c18'
+export EMPLOYEE_IDP_CLIENT_SECRET='aYg8Q~nt_nECTahpZ-~Fe5GpKknVDUdAPAx6jcW9'
+export EMPLOYEE_IDP_OIDC_METADATA='https://login.microsoftonline.com/7f071fbc-8bf2-4e61-bb48-dabd8e2f5b5a/v2.0/.well-known/openid-configuration'
+
+#
 # Create crypto keys once per stage of your deployment pipeline
 #
 export USER_MANAGEMENT='true'
-export USER_AUTHENTICATION='true'
 ../../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1

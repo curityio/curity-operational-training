@@ -101,7 +101,7 @@ echo "export SYMMETRIC_KEY='$SYMMETRIC_KEY'"                   >> ./protected-se
 echo "export SIGNING_KEY='$SIGNING_KEY'"                       >> ./protected-secrets.env
 
 #
-# Add extra secrets for particular deployments
+# Add extra secrets for deployments that use clients (like the DevOps dashboard) and user authentication
 #
 if [ "$USER_MANAGEMENT" == 'true' ]; then
 
@@ -110,10 +110,4 @@ if [ "$USER_MANAGEMENT" == 'true' ]; then
 
   INTROSPECT_CLIENT_SECRET=$(openssl passwd -5 "$INTROSPECT_CLIENT_SECRET_RAW")
   echo "export INTROSPECT_CLIENT_SECRET='$INTROSPECT_CLIENT_SECRET'" >> ./protected-secrets.env
-fi
-
-if [ "$USER_AUTHENTICATION" == 'true' ]; then
-  
-  ENTRA_ID_CLIENT_SECRET=$(docker exec -i curity bash -c "PLAINTEXT='$ENTRA_ID_CLIENT_SECRET_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-secret.sh")
-  echo "export ENTRA_ID_CLIENT_SECRET='$ENTRA_ID_CLIENT_SECRET'" >> ./protected-secrets.env
 fi
