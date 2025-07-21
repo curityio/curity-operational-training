@@ -32,7 +32,7 @@
                 <scope>urn:se:curity:scopes:admin:api</scope>
                 <scope>openid</scope>
                 <user-authentication>
-                  <allowed-authenticators>username</allowed-authenticators>
+                  <allowed-authenticators>employees</allowed-authenticators>
                   <allowed-post-logout-redirect-uris>#{ADMIN_BASE_URL}/admin/dashboard/assisted.html</allowed-post-logout-redirect-uris>
                 </user-authentication>
                 <allowed-origins>#{ADMIN_BASE_URL}</allowed-origins>
@@ -41,7 +41,14 @@
                   </code>
                 </capabilities>
               </client>
-               <client>
+              <client>
+                <id>introspect-client</id>
+                <secret>#{INTROSPECT_CLIENT_SECRET}</secret>
+                <capabilities>
+                  <introspection/>
+                </capabilities>
+              </client>
+              <client>
                 <id>console-client</id>
                 <no-authentication>true</no-authentication>
                 <redirect-uris>http://127.0.0.1/callback</redirect-uris>
@@ -50,7 +57,8 @@
                 </proof-key>
                 <scope>openid</scope>
                 <user-authentication>
-                  <allowed-authenticators>username</allowed-authenticators>
+                  <allowed-authenticators>passwords</allowed-authenticators>
+                  <allowed-authenticators>passkeys</allowed-authenticators>
                 </user-authentication>
                 <capabilities>
                   <code>

@@ -28,31 +28,22 @@
               </scope-requirement>
             </select-rule-list-when>
           </rule-list>
-          <rule-list>
-            <name>dashboard</name>
-            <description>A rule list for employee access to customer user information via the DevOps dashboard</description>
-            <enforcement-restrictions>
-              <default-allow-read>true</default-allow-read>
-              <default-allow-write>true</default-allow-write>
-              <require-subject-match>false</require-subject-match>
-            </enforcement-restrictions>
-            <rule>
-              <name>default</name>
-              <access-operation>create</access-operation>
-              <access-operation>read</access-operation>
-              <access-operation>update</access-operation>
-              <access-operation>delete</access-operation>
-              <attribute>account</attribute>
-              <decision>allow</decision>
-            </rule>
-            <select-rule-list-when>
-              <context-requirement>user-management-graphql</context-requirement>
-              <scope-requirement>
-                <scope>urn:se:curity:scopes:admin:api</scope>
-              </scope-requirement>
-            </select-rule-list-when>
-          </rule-list>
         </attribute>
+      </authorization-manager>
+      <authorization-manager>
+        <id>dashboard_permissions_authorization_manager</id>
+        <groups xmlns="https://curity.se/ns/conf/authorization-manager/group">
+          <scope>urn:se:curity:scopes:admin:api</scope>
+          <group>
+            <name>admin</name>
+            <allows>
+              <create/>
+              <read/>
+              <update/>
+              <delete/>
+            </allows>
+          </group>
+        </groups>
       </authorization-manager>
     </authorization-managers>
   </processing>

@@ -107,6 +107,9 @@ if [ "$USER_MANAGEMENT" == 'true' ]; then
 
   MIGRATION_CLIENT_SECRET=$(openssl passwd -5 "$MIGRATION_CLIENT_SECRET_RAW")
   echo "export MIGRATION_CLIENT_SECRET='$MIGRATION_CLIENT_SECRET'" >> ./protected-secrets.env
+
+  INTROSPECT_CLIENT_SECRET=$(openssl passwd -5 "$INTROSPECT_CLIENT_SECRET_RAW")
+  echo "export INTROSPECT_CLIENT_SECRET='$INTROSPECT_CLIENT_SECRET'" >> ./protected-secrets.env
 fi
 
 if [ "$USER_AUTHENTICATION" == 'true' ]; then

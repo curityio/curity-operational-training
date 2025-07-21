@@ -14,7 +14,7 @@
           </oauth>
         </restconf>
         <devops-dashboard xmlns="https://curity.se/ns/conf/profile/oauth">
-          <authorization-manager>default</authorization-manager>
+          <authorization-manager>dashboard_permissions_authorization_manager</authorization-manager>
           <client>devops_dashboard_restconf_client</client>
         </devops-dashboard>
         </http>
@@ -121,11 +121,205 @@
       </group>
     </groups>
     <rule-list>
+      <name>dd-devops</name>
+      <group>devops</group>
+      <rule>
+        <name>alarms</name>
+        <path>/al:alarms</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-profile-id</name>
+        <path>/profiles/profile/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-profile-type</name>
+        <path>/profiles/profile/type</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-credential-manager-id</name>
+        <path>/processing/credential-managers/credential-manager/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-signature-verification-key-id</name>
+        <path>/facilities/crypto/signature-verification-keys/signature-verification-key/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-encryption-key-id</name>
+        <path>/facilities/crypto/encryption-keys/encryption-key/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-http-client-id</name>
+        <path>/facilities/http/client/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-android-policy-id</name>
+        <path>/facilities/client-attestation/android-policy/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-web-policy-id</name>
+        <path>/facilities/client-attestation/web-policy/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-ios-policy-id</name>
+        <path>/facilities/client-attestation/ios-policy/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-template-areas</name>
+        <path>/environments/environment/available-template-areas</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-consentor-id</name>
+        <path>/profiles/profile/settings/as:authorization-server/consentors/consentor/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-custom-token-issuer-id</name>
+        <path>/profiles/profile/token-issuers/custom-token-issuer/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-custom-token-issuer-purpose-type</name>
+        <path>/profiles/profile/token-issuers/custom-token-issuer/purpose-type</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-claims</name>
+        <path>/profiles/profile/settings/as:authorization-server/claims</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-client-capabilities</name>
+        <path>/profiles/profile/settings/as:authorization-server/client-capabilities</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-associated-authentication-profile</name>
+        <path>/profiles/profile/settings/as:authorization-server/authentication-service/authentication-profile</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-dynamic-client-registration-templatized</name>
+        <path>/profiles/profile/settings/as:authorization-server/dynamic-client-registration/templatized</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-redirect-policies</name>
+        <path>/profiles/profile/settings/as:authorization-server/redirect-uri-validation-policies</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-db-client-tags</name>
+        <path>/profiles/profile/settings/as:authorization-server/database-client/client-tags/client-tag</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-authenticator-filter-id</name>
+        <path>/profiles/profile/settings/auth:authentication-service/authenticator-filters/authenticator-filter/id</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-authenticators</name>
+        <path>/profiles/profile/settings/auth:authentication-service/authenticators/authenticator</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-backchannel-authenticators</name>
+        <path>/profiles/profile/settings/auth:authentication-service/authenticators/backchannel-authenticator</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>all-clients</name>
+        <path>/profiles/profile/settings/as:authorization-server/as:client-store/as:config-backed/as:client</path>
+        <access-operations>create read update delete</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>scopes</name>
+        <path>/profiles/profile/settings/as:authorization-server/scopes</path>
+        <access-operations>create read update delete</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>deny-access</name>
+        <action>deny</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+    </rule-list>
+    <rule-list>
       <name>admin</name>
       <group>admin</group>
       <rule>
         <name>any-access</name>
         <action>permit</action>
+      </rule>
+    </rule-list>
+    <rule-list>
+      <name>any-dashboard</name>
+      <group>*</group>
+      <rule>
+        <name>deny-all-dashboard-access</name>
+        <path>/</path>
+        <action>deny</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
       </rule>
     </rule-list>
     <rule-list>
