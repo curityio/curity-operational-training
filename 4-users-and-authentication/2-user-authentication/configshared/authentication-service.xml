@@ -34,7 +34,7 @@
                 <configuration-url>#{EMPLOYEE_IDP_OIDC_METADATA}</configuration-url>
                 <client-id>#{EMPLOYEE_IDP_CLIENT_ID}</client-id>
                 <client-secret>#{EMPLOYEE_IDP_CLIENT_SECRET}</client-secret>
-                <scope>openid email https://graph.microsoft.com/.default</scope>
+                <scope>openid email</scope>
                 <use-subject-for-login-hint>true</use-subject-for-login-hint>
                 <prompt-login>if-requested-by-client</prompt-login>
               </oidc>

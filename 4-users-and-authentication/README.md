@@ -48,19 +48,29 @@ npm install
 npm start
 ```
 
-## TODO
+## TODO 1
 
-Entra ID requires:
+Include in write up that Entra ID requires:
 
 - Persisted SSO cookies
 - Second factor check disabled
 
-I need to work out how to get group names issued to ID tokens from Entra ID
+Currently:
+
+- Getting a groups claim in access token but it is an ID not a name
+- Using subject claims provider to issue it to the Curity access token
+
+Next I need to:
+
+- Remove resources associated to XML groups
+- DevOps Dashboard should work for Employee IDP
+- Admin UI should work for plain password in case IDP is not set up correctly
+
+## TODO 2
 
 - Username authenticator script action to choose user's authenticator(s)
   Use @yourcompany.com to identify employees
-  Offer a choice of passkeys or passwords to customer users
+  Offer a selector with passkeys or passwords to customer users
 
 - Entra ID script authenticator to set subject to email (attributes.subject = attribute.email)
-  Also extract groups for token issuance
-  Also show how to add 'admin' to the groups for DevOps
+  Also show how to add 'admin' to the groups for DevOps users

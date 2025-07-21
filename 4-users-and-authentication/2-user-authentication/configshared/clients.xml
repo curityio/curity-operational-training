@@ -55,6 +55,7 @@
                 <proof-key>
                   <require-proof-key>true</require-proof-key>
                 </proof-key>
+                <scope>example</scope>
                 <scope>openid</scope>
                 <user-authentication>
                   <allowed-authenticators>passwords</allowed-authenticators>

@@ -40,6 +40,10 @@
               <claims>email_verified</claims>
             </scope>
             <scope>
+              <id>example</id>
+              <claims>groups</claims>
+            </scope>
+            <scope>
               <id>openid</id>
               <description>Standard OpenID Connect scope</description>
             </scope>
@@ -107,6 +111,14 @@
               <name>given_name</name>
               <description>OpenID Connect given_name claim</description>
               <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>groups</name>
+              <value-provided-by>subject_claims_provider</value-provided-by>
+              <transformation>
+                <input-attribute-names>groups</input-attribute-names>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGF0dHJpYnV0ZXMpIHsKICByZXR1cm4gYXR0cmlidXRlcy5ncm91cHM7Cn0=</value-transformation-procedure>
+              </transformation>
             </claim>
             <claim>
               <name>locale</name>
@@ -188,10 +200,15 @@
               <id>devops_dashboard_admin_groups_claims_provider</id>
               <admin-groups-claims-provider xmlns="https://curity.se/ns/ext-conf/admin-groups-claims-provider"/>
             </claims-value-provider>
+            <claims-value-provider>
+              <id>subject_claims_provider</id>
+              <authentication-subject-claims-provider xmlns="https://curity.se/ns/ext-conf/authentication-subject-claims-provider"/>
+            </claims-value-provider>
             <claims-mappers>
               <claims-mapper>
                 <id>default</id>
                 <access_token>
+                  <claim>groups</claim>
                   <claim>urn:se:curity:claims:admin:groups</claim>
                 </access_token>
                 <id_token>
