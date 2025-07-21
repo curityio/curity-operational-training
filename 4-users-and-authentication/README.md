@@ -50,11 +50,6 @@ npm start
 
 ## TODO
 
-Articles are:
-
-- External IDPs (to get an employee login action working)
-- Authentication actions (to get the usability right)
-
 Entra ID requires:
 
 - Persisted SSO cookies

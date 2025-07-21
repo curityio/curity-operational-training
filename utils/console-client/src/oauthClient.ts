@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 import crypto from 'crypto'
 import http from 'http';
 import EventEmitter from 'node:events';
@@ -7,13 +7,13 @@ import open from 'open';
 const port = 3333;
 const eventEmitter = new EventEmitter();
 let metadata: any;
+let codeVerifier: string | null = null;
 let httpServer: http.Server | null = null;
 
 /*
  * Point to the local deployment or adjust it to point to a remote system
  */
 const configuration = {
-    
     clientId: 'console-client',
     redirectUri: `http://127.0.0.1:${port}/callback`,
     scope: 'openid',
@@ -27,7 +27,7 @@ export async function frontChannelRequest(): Promise<string> {
 
     await getMetadata();
 
-    const codeVerifier = generateRandomString();
+    codeVerifier = generateRandomString();
     const codeChallenge = generateHash(codeVerifier);
     
     let requestUrl = metadata.authorization_endpoint;
@@ -76,6 +76,68 @@ export async function frontChannelRequest(): Promise<string> {
             }
         });
     });
+}
+
+/*
+ * Redeem the code for tokens
+ */
+export async function backChannelRequest(code: string): Promise<string> {
+
+    const formData = new URLSearchParams();
+    formData.append('grant_type', 'authorization_code');
+    formData.append('client_id', configuration.clientId);
+    formData.append('redirect_uri', configuration.redirectUri);
+    formData.append('code', code);
+    formData.append('code_verifier', codeVerifier!);
+
+    const options = {
+        url: metadata.token_endpoint,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Accept: 'application/json',
+        },
+        data: formData,
+    } as AxiosRequestConfig;
+
+    try {
+
+        const response = await axios(options);
+        return response.data.access_token;
+
+    } catch (e: any) {
+
+        let status: number | null = null;
+        if (e.response?.status) {
+            status = e.response.status;
+        }
+        
+        let code = '';
+        let description = '';
+        if (e.response.data) {
+            
+            if (e.response.data.error) {
+                code = e.response.data.error;
+            }
+
+            if (e.response.data.error_description) {
+                description += `: ${e.response.data.error_description}`;
+            }
+        }
+        
+        let message = 'Authorization code grant failed';
+        if (status) {
+            message += `, status: ${status}`;
+        }
+        if (code) {
+            message += `, code: ${code}`;
+        }
+        if (description) {
+            message += `, description: ${description}`;
+        }
+        
+        throw new Error(message);
+    }
 }
 
 /*

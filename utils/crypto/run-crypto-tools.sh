@@ -111,3 +111,12 @@ if [ "$USER_MANAGEMENT" == 'true' ]; then
   INTROSPECT_CLIENT_SECRET=$(openssl passwd -5 "$INTROSPECT_CLIENT_SECRET_RAW")
   echo "export INTROSPECT_CLIENT_SECRET='$INTROSPECT_CLIENT_SECRET'" >> ./protected-secrets.env
 fi
+
+if [ "$USER_AUTHENTICATION" == 'true' ]; then
+
+  EMPLOYEE_IDP_CLIENT_SECRET=$(docker exec -i curity bash -c "PLAINTEXT='$EMPLOYEE_IDP_CLIENT_SECRET_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-secret.sh")
+  if [ $? -ne 0 ]; then
+    exit 1
+  fi
+  echo "export EMPLOYEE_IDP_CLIENT_SECRET='$EMPLOYEE_IDP_CLIENT_SECRET'" >> ./protected-secrets.env
+fi

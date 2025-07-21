@@ -27,7 +27,8 @@ services:
       - ./vault/protected-secrets.env
     environment:
       ADMIN: 'true'
-      RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
+      EMPLOYEE_IDP_CLIENT_ID: '${EMPLOYEE_IDP_CLIENT_ID}'
+      EMPLOYEE_IDP_OIDC_METADATA: '${EMPLOYEE_IDP_OIDC_METADATA}'
 
   curity-data:
     image: curity_mssql:1.0.0

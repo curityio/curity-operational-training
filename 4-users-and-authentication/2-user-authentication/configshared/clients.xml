@@ -59,6 +59,7 @@
                 <user-authentication>
                   <allowed-authenticators>passwords</allowed-authenticators>
                   <allowed-authenticators>passkeys</allowed-authenticators>
+                  <allowed-authenticators>employees</allowed-authenticators>
                 </user-authentication>
                 <capabilities>
                   <code>
