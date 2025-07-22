@@ -38,29 +38,46 @@ Also update your `/etc/hosts` file to include the domain for the test email inbo
 127.0.0.1 admin.demo.example login.demo.example mail.demo.example
 ```
 
-## Testing
+## Test Logins
 
-You can run a test client from the `utils/console-client` folder to test all types of logins.\
+You can run a test client from the `utils/console-client` folder to test various authenticators.\
 To do so, ensure that Node.js is installed and run the following commands from that folder:
 
 ```bash
-npm install
+npm run login
 npm start
 ```
 
-## TODO 1
+## Test Tokens
 
-Include in write up that Entra ID requires:
+You can run a test client from the `utils/console-client` folder to test logins and token issuance.\
+To do so, run the following commands from the `utils/console-client` folder:
 
-- Persisted SSO cookies
+```bash
+npm run token
+npm start
+```
 
-## TODO 2
+## TODO - Integrate External IDPs
 
-- Second factor check disabled
+- Add Persisted SSO cookies for Entra ID
+- More about troubleshooting and `npm run login` in console-client
+- Follow its README instructions
+
+## TODO - Manage Employee Authorization with Groups
+
+- More about example deployment and its script transformer action
+- More about troubleshooting and `npm run token` in console-client
+
+## TODO - Apply Authentication Policies Write Up
+
+- Second factor check disabled in MFA condition action
 
 - Username authenticator script action to choose user's authenticator(s)
   Use @yourcompany.com to identify employees
   Offer a selector with passkeys or passwords to customer users
 
-- Entra ID script authenticator to set subject to email (attributes.subject = attribute.email)
-  Also show how to add 'admin' to the groups for DevOps users
+# TODO - Multi-Tenancy
+
+Say a few points for user attributes and reference existing HOWTOs.
+Mention Service Roles and Authentication Service settings for tenant ID.
