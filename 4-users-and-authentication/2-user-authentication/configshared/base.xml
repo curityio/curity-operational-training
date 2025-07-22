@@ -14,7 +14,7 @@
           </oauth>
         </restconf>
         <devops-dashboard xmlns="https://curity.se/ns/conf/profile/oauth">
-          <authorization-manager>dashboard_permissions_authorization_manager</authorization-manager>
+          <authorization-manager>default</authorization-manager>
           <client>devops_dashboard_restconf_client</client>
         </devops-dashboard>
         </http>
