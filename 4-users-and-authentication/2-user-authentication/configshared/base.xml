@@ -94,6 +94,12 @@
     </email-providers>
   </facilities>
   <processing xmlns="https://curity.se/ns/conf/base">
+    <procedures>
+      <transformation-procedure>
+        <id>set-subject-procedure</id>
+        <script>LyoqCiAqIFRoaXMgaXMgYW4gZXhhbXBsZSBwcm9jZWR1cmUgdGhhdCBwZXJmb3JtcyBubyB0cmFuc2Zvcm1hdGlvbgogKiBAcGFyYW0ge3NlLmN1cml0eS5pZGVudGl0eXNlcnZlci5wcm9jZWR1cmVzLmNvbnRleHQuVHJhbnNmb3JtYXRpb25Qcm9jZWR1cmVDb250ZXh0fSBjb250ZXh0CiAqIEByZXR1cm5zIHsqfQogKi8KZnVuY3Rpb24gcmVzdWx0KGNvbnRleHQpIHsKICB2YXIgYXR0cmlidXRlcyA9IGNvbnRleHQuYXR0cmlidXRlTWFwOwogIGF0dHJpYnV0ZXMuc3ViamVjdCA9IGF0dHJpYnV0ZXMuZW1haWw7CgogIGlmIChhdHRyaWJ1dGVzLmdyb3VwcykgewogICAgYXR0cmlidXRlcy5ncm91cHMgPSBbImFkbWluIl07CiAgfQoKICByZXR1cm4gYXR0cmlidXRlczsKfQ==</script>
+      </transformation-procedure>
+    </procedures>
     <account-managers>
       <account-manager>
         <id>default-account-manager</id>
@@ -118,7 +124,6 @@
       <group>
         <name>admin</name>
         <user-name>admin</user-name>
-        <user-name>uRdGl0rarLdx3w48_g8eOWv0rYFp81ymlLqrHn2mNYg</user-name>
       </group>
     </groups>
     <rule-list>
@@ -304,7 +309,6 @@
         <action>deny</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
       </rule>
-      <ui-metadata xmlns="https://curity.se/ns/conf/base">eyJhbGxvdy1hbGFybXMtYWNjZXNzIjp0cnVlLCJhbGxvdy1jbGllbnRzLWFjY2VzcyI6dHJ1ZSwiYWxsb3ctZHluYW1pYy1jbGllbnRzLWFjY2VzcyI6dHJ1ZSwicHJvZmlsZXMtYWxsLW9yLXNlbGVjdGVkIjowLCJwcm9maWxlcyI6WyJ0b2tlbi1zZXJ2aWNlIl0sImNsaWVudHMtYWxsLW9yLXNlbGVjdGVkIjowLCJjbGllbnRzIjpbXSwicHJvZmlsZS1jbGllbnRzLXNlbGVjdGlvbiI6eyJ0b2tlbi1zZXJ2aWNlIjp7InNlbGVjdGlvbi10eXBlIjoxfX0sImFsbG93LXNjb3Blcy13cml0ZS1hY2Nlc3MiOnRydWUsImFsbG93LWNsaWVudHMtd3JpdGUtYWNjZXNzIjp0cnVlLCJhbGxvdy1keW5hbWljLWNsaWVudHMtcmVhZC1hY2Nlc3MiOnRydWUsImFsbG93LWR5bmFtaWMtY2xpZW50cy13cml0ZS1hY2Nlc3MiOnRydWV9</ui-metadata>
     </rule-list>
     <rule-list>
       <name>admin</name>

@@ -8,6 +8,12 @@
           <persisted-sso-session>true</persisted-sso-session>
           <authentication-actions>
             <authentication-action>
+              <id>set-subject</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <transformation-procedure>set-subject-procedure</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
               <id>select_factor</id>
               <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
                 <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
@@ -29,6 +35,9 @@
             </authenticator>
             <authenticator>
               <id>employees</id>
+              <authentication-actions>
+                <login>set-subject</login>
+              </authentication-actions>
               <description>Sign in with the employee login policy </description>
               <oidc xmlns="https://curity.se/ns/conf/authenticators/oidc">
                 <configuration-url>#{EMPLOYEE_IDP_OIDC_METADATA}</configuration-url>

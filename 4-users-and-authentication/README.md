@@ -53,22 +53,10 @@ npm start
 Include in write up that Entra ID requires:
 
 - Persisted SSO cookies
-- Second factor check disabled
-
-Cannot get an Entra ID group name so hard code claims issuance and write arounf it, e.g. paid plan needed.
-
-Attribute Authorization Manager does not handle groups array claim correctly.
-So leaving the Groups Authorization Manager in place feels better.
-
-But it seems to require the external user to be added to the admin group.
-Try admin2 next and relook at token.
-
-Next I need to:
-
-- Remove resources associated to XML groups as much as I can
-- But admin UI should still work for plain password in case IDP is not set up correctly
 
 ## TODO 2
+
+- Second factor check disabled
 
 - Username authenticator script action to choose user's authenticator(s)
   Use @yourcompany.com to identify employees

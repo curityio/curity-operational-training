@@ -74,7 +74,6 @@
             <scope>
               <id>urn:se:curity:scopes:admin:api</id>
               <claims>groups</claims>
-              <claims>urn:se:curity:claims:admin:groups</claims>
             </scope>
           </scopes>
           <claims>
@@ -118,7 +117,7 @@
               <value-provided-by>subject_claims_provider</value-provided-by>
               <transformation>
                 <input-attribute-names>groups</input-attribute-names>
-                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGF0dHJpYnV0ZXMpIHsKICAKICBpZiAoIWF0dHJpYnV0ZXMuZ3JvdXBzKSB7CiAgICByZXR1cm4gbnVsbDsKICB9CiAgCiAgcmV0dXJuIFsiYWRtaW4iXTsKfQ==</value-transformation-procedure>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGF0dHJpYnV0ZXMpIHsKICByZXR1cm4gYXR0cmlidXRlcy5ncm91cHM7Cn0=</value-transformation-procedure>
               </transformation>
             </claim>
             <claim>
@@ -172,14 +171,6 @@
               <value-provided-by>account-manager-claims-provider</value-provided-by>
             </claim>
             <claim>
-              <name>urn:se:curity:claims:admin:groups</name>
-              <value-provided-by>devops_dashboard_admin_groups_claims_provider</value-provided-by>
-              <transformation>
-                <input-attribute-names>groups</input-attribute-names>
-                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGF0dHJpYnV0ZXMpIHsKICByZXR1cm4gYXR0cmlidXRlcy5ncm91cHM7Cn0=</value-transformation-procedure>
-              </transformation>
-            </claim>
-            <claim>
               <name>website</name>
               <description>OpenID Connect website claim</description>
               <value-provided-by>account-manager-claims-provider</value-provided-by>
@@ -198,10 +189,6 @@
               </account-manager-claims-provider>
             </claims-value-provider>
             <claims-value-provider>
-              <id>devops_dashboard_admin_groups_claims_provider</id>
-              <admin-groups-claims-provider xmlns="https://curity.se/ns/ext-conf/admin-groups-claims-provider"/>
-            </claims-value-provider>
-            <claims-value-provider>
               <id>subject_claims_provider</id>
               <authentication-subject-claims-provider xmlns="https://curity.se/ns/ext-conf/authentication-subject-claims-provider"/>
             </claims-value-provider>
@@ -210,7 +197,6 @@
                 <id>default</id>
                 <access_token>
                   <claim>groups</claim>
-                  <claim>urn:se:curity:claims:admin:groups</claim>
                 </access_token>
                 <id_token>
                   <claim>address</claim>
