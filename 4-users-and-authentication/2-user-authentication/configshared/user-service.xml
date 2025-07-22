@@ -8,7 +8,7 @@
           <api-authentication>
             <oauth-service>token-service</oauth-service>
           </api-authentication>
-          <authorization-manager>dashboard_groups_authorization_manager</authorization-manager>
+          <authorization-manager>default</authorization-manager>
           <user-account-data-source>default-datasource</user-account-data-source>
           <token-data-source>default-datasource</token-data-source>
           <credential-management>
