@@ -29,8 +29,8 @@
                 <refresh-token-ttl>disabled</refresh-token-ttl>
                 <audience>urn:se:curity:audiences:admin:api</audience>
                 <audience>devops_dashboard_restconf_client</audience>
-                <scope>urn:se:curity:scopes:admin:api</scope>
                 <scope>openid</scope>
+                <scope>urn:se:curity:scopes:admin:api</scope>
                 <user-authentication>
                   <allowed-authenticators>employees</allowed-authenticators>
                   <allowed-post-logout-redirect-uris>#{ADMIN_BASE_URL}/admin/dashboard/assisted.html</allowed-post-logout-redirect-uris>

@@ -73,6 +73,7 @@
             </scope>
             <scope>
               <id>urn:se:curity:scopes:admin:api</id>
+              <claims>groups</claims>
               <claims>urn:se:curity:claims:admin:groups</claims>
             </scope>
           </scopes>
@@ -117,7 +118,7 @@
               <value-provided-by>subject_claims_provider</value-provided-by>
               <transformation>
                 <input-attribute-names>groups</input-attribute-names>
-                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGF0dHJpYnV0ZXMpIHsKICByZXR1cm4gYXR0cmlidXRlcy5ncm91cHM7Cn0=</value-transformation-procedure>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGF0dHJpYnV0ZXMpIHsKICAKICBpZiAoIWF0dHJpYnV0ZXMuZ3JvdXBzKSB7CiAgICByZXR1cm4gbnVsbDsKICB9CiAgCiAgcmV0dXJuIFsiYWRtaW4iXTsKfQ==</value-transformation-procedure>
               </transformation>
             </claim>
             <claim>

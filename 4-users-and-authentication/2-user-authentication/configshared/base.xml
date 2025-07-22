@@ -121,8 +121,8 @@
       </group>
     </groups>
     <rule-list>
-      <name>dd-devops</name>
-      <group>devops</group>
+      <name>dd-admin</name>
+      <group>admin</group>
       <rule>
         <name>alarms</name>
         <path>/al:alarms</path>
@@ -208,6 +208,13 @@
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
       </rule>
       <rule>
+        <name>read-claims</name>
+        <path>/profiles/profile/settings/as:authorization-server/claims</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
         <name>read-custom-token-issuer-id</name>
         <path>/profiles/profile/token-issuers/custom-token-issuer/id</path>
         <access-operations>read</access-operations>
@@ -222,8 +229,8 @@
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
       </rule>
       <rule>
-        <name>read-claims</name>
-        <path>/profiles/profile/settings/as:authorization-server/claims</path>
+        <name>read-associated-authentication-profile</name>
+        <path>/profiles/profile/settings/as:authorization-server/authentication-service/authentication-profile</path>
         <access-operations>read</access-operations>
         <action>permit</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
@@ -231,13 +238,6 @@
       <rule>
         <name>read-client-capabilities</name>
         <path>/profiles/profile/settings/as:authorization-server/client-capabilities</path>
-        <access-operations>read</access-operations>
-        <action>permit</action>
-        <context xmlns="http://tail-f.com/yang/acm">rest</context>
-      </rule>
-      <rule>
-        <name>read-associated-authentication-profile</name>
-        <path>/profiles/profile/settings/as:authorization-server/authentication-service/authentication-profile</path>
         <access-operations>read</access-operations>
         <action>permit</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
@@ -303,6 +303,7 @@
         <action>deny</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
       </rule>
+      <ui-metadata xmlns="https://curity.se/ns/conf/base">eyJhbGxvdy1hbGFybXMtYWNjZXNzIjp0cnVlLCJhbGxvdy1jbGllbnRzLWFjY2VzcyI6dHJ1ZSwiYWxsb3ctZHluYW1pYy1jbGllbnRzLWFjY2VzcyI6dHJ1ZSwicHJvZmlsZXMtYWxsLW9yLXNlbGVjdGVkIjowLCJwcm9maWxlcyI6WyJ0b2tlbi1zZXJ2aWNlIl0sImNsaWVudHMtYWxsLW9yLXNlbGVjdGVkIjowLCJjbGllbnRzIjpbXSwicHJvZmlsZS1jbGllbnRzLXNlbGVjdGlvbiI6eyJ0b2tlbi1zZXJ2aWNlIjp7InNlbGVjdGlvbi10eXBlIjoxfX0sImFsbG93LXNjb3Blcy13cml0ZS1hY2Nlc3MiOnRydWUsImFsbG93LWNsaWVudHMtd3JpdGUtYWNjZXNzIjp0cnVlLCJhbGxvdy1keW5hbWljLWNsaWVudHMtcmVhZC1hY2Nlc3MiOnRydWUsImFsbG93LWR5bmFtaWMtY2xpZW50cy13cml0ZS1hY2Nlc3MiOnRydWV9</ui-metadata>
     </rule-list>
     <rule-list>
       <name>admin</name>

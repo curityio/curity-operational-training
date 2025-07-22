@@ -61,9 +61,6 @@
             </authenticator>
             <authenticator>
               <id>username</id>
-              <authentication-actions>
-                <login>select_factor</login>
-              </authentication-actions>
               <description>Identify the user</description>
               <username xmlns="https://curity.se/ns/ext-conf/username">
               </username>
