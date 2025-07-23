@@ -8,24 +8,71 @@
           <persisted-sso-session>true</persisted-sso-session>
           <authentication-actions>
             <authentication-action>
-              <id>transform_employee_attributes</id>
+              <id>user_type_set</id>
               <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
-                <transformation-procedure>transform_employee_attributes_procedure</transformation-procedure>
+                <attributes-location>action-attributes</attributes-location>
+                <transformation-procedure>user_type_set_procedure</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
+              <id>user_type_switch</id>
+              <switch xmlns="https://curity.se/ns/ext-conf/switch">
+                <case>
+                  <name>employee_users</name>
+                  <condition-script>YXR0cmlidXRlcy5hY3Rpb24uaXNFbXBsb3llZT09PXRydWU=</condition-script>
+                  <action>employee_sequence</action>
+                </case>
+              </switch>
+            </authentication-action>
+            <authentication-action>
+              <id>employee_sequence</id>
+              <sequence xmlns="https://curity.se/ns/ext-conf/sequence">
+                <action>employee_login</action>
+                <action>employee_set_subject</action>
+                <action>employee_set_groups</action>
+              </sequence>
+            </authentication-action>
+            <authentication-action>
+              <id>employee_login</id>
+              <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
+                <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
+                <always>
+                  <second-factor>
+                    <id>employees</id>
+                  </second-factor>
+                  <allow-authentication-with-sso-for-second-factor>false</allow-authentication-with-sso-for-second-factor>
+                </always>
+              </multi-factor-condition>
+            </authentication-action>
+            <authentication-action>
+              <id>employee_set_subject</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <transformation-procedure>employee_set_subject_procedure</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
+              <id>employee_set_groups</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <transformation-procedure>employee_set_groups_procedure</transformation-procedure>
               </script-transformer>
             </authentication-action>
           </authentication-actions>
           <authenticators>
             <authenticator>
-              <id>email</id>
-              <description>Email authentication</description>
-              <email>
-                <account-manager>default-account-manager</account-manager>
-              </email>
+              <id>username</id>
+              <authentication-actions>
+                <login>user_type_set</login>
+                <login>user_type_switch</login>
+              </authentication-actions>
+              <description>Identify the user</description>
+              <username xmlns="https://curity.se/ns/ext-conf/username">
+              </username>
             </authenticator>
             <authenticator>
               <id>employees</id>
               <authentication-actions>
-                <login>transform_employee_attributes</login>
+                <login>employee_set_subject</login>
+                <login>employee_set_groups</login>
               </authentication-actions>
               <description>Sign in with the employee login policy </description>
               <oidc xmlns="https://curity.se/ns/conf/authenticators/oidc">
@@ -58,10 +105,11 @@
               </html-form>
             </authenticator>
             <authenticator>
-              <id>username</id>
-              <description>Identify the user</description>
-              <username xmlns="https://curity.se/ns/ext-conf/username">
-              </username>
+              <id>email</id>
+              <description>Email authentication</description>
+              <email>
+                <account-manager>default-account-manager</account-manager>
+              </email>
             </authenticator>
           </authenticators>
           <protocols>

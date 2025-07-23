@@ -121,8 +121,16 @@
   <processing xmlns="https://curity.se/ns/conf/base">
     <procedures>
       <transformation-procedure>
-        <id>transform_employee_attributes_procedure</id>
-        <script>LyoqCiAqIFRoaXMgaXMgYW4gZXhhbXBsZSBwcm9jZWR1cmUgdGhhdCBwZXJmb3JtcyBubyB0cmFuc2Zvcm1hdGlvbgogKiBAcGFyYW0ge3NlLmN1cml0eS5pZGVudGl0eXNlcnZlci5wcm9jZWR1cmVzLmNvbnRleHQuVHJhbnNmb3JtYXRpb25Qcm9jZWR1cmVDb250ZXh0fSBjb250ZXh0CiAqIEByZXR1cm5zIHsqfQogKi8KZnVuY3Rpb24gcmVzdWx0KGNvbnRleHQpIHsKICB2YXIgYXR0cmlidXRlcyA9IGNvbnRleHQuYXR0cmlidXRlTWFwOwogIGF0dHJpYnV0ZXMuc3ViamVjdCA9IGF0dHJpYnV0ZXMuZW1haWw7CgogIGlmIChhdHRyaWJ1dGVzLmdyb3VwcykgewogICAgYXR0cmlidXRlcy5ncm91cHMgPSBbImFkbWluIl07CiAgfQoKICByZXR1cm4gYXR0cmlidXRlczsKfQ==</script>
+        <id>employee_set_subject_procedure</id>
+        <script>LyoqCiAqIFRoaXMgaXMgYW4gZXhhbXBsZSBwcm9jZWR1cmUgdGhhdCBwZXJmb3JtcyBubyB0cmFuc2Zvcm1hdGlvbgogKiBAcGFyYW0ge3NlLmN1cml0eS5pZGVudGl0eXNlcnZlci5wcm9jZWR1cmVzLmNvbnRleHQuVHJhbnNmb3JtYXRpb25Qcm9jZWR1cmVDb250ZXh0fSBjb250ZXh0CiAqIEByZXR1cm5zIHsqfQogKi8KZnVuY3Rpb24gcmVzdWx0KGNvbnRleHQpIHsKICB2YXIgYXR0cmlidXRlcyA9IGNvbnRleHQuYXR0cmlidXRlTWFwOwogIGF0dHJpYnV0ZXMuc3ViamVjdCA9IGF0dHJpYnV0ZXMuZW1haWw7CiAgcmV0dXJuIGF0dHJpYnV0ZXM7Cn0=</script>
+      </transformation-procedure>
+      <transformation-procedure>
+        <id>employee_set_groups_procedure</id>
+        <script>ZnVuY3Rpb24gcmVzdWx0KGNvbnRleHQpIHsKICB2YXIgYXR0cmlidXRlcyA9IGNvbnRleHQuYXR0cmlidXRlTWFwOwogIGlmIChhdHRyaWJ1dGVzLmdyb3VwcykgewogICAgYXR0cmlidXRlcy5ncm91cHMgPSBbImFkbWluIl07CiAgfQogIHJldHVybiBhdHRyaWJ1dGVzOwp9</script>
+      </transformation-procedure>
+      <transformation-procedure>
+        <id>user_type_set_procedure</id>
+        <script>LyoqCiAqIFRoaXMgaXMgYW4gZXhhbXBsZSBwcm9jZWR1cmUgdGhhdCBwZXJmb3JtcyBubyB0cmFuc2Zvcm1hdGlvbgogKiBAcGFyYW0ge3NlLmN1cml0eS5pZGVudGl0eXNlcnZlci5wcm9jZWR1cmVzLmNvbnRleHQuVHJhbnNmb3JtYXRpb25Qcm9jZWR1cmVDb250ZXh0fSBjb250ZXh0CiAqIEByZXR1cm5zIHsqfQogKi8KZnVuY3Rpb24gcmVzdWx0KGNvbnRleHQpIHsKICB2YXIgYXR0cmlidXRlcyA9IGNvbnRleHQuYXR0cmlidXRlTWFwOwogIGF0dHJpYnV0ZXMuaXNFbXBsb3llZSA9IGNvbnRleHQuc3ViamVjdEF0dHJpYnV0ZU1hcC5zdWJqZWN0LmluZGV4T2YoJ29ubWljcm9zb2Z0LmNvbScpICE9PSAtMTsKICByZXR1cm4gYXR0cmlidXRlczsKfQ==</script>
       </transformation-procedure>
     </procedures>
     <account-managers>
