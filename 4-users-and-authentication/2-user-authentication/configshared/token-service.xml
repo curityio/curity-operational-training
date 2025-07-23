@@ -5,6 +5,11 @@
       <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
       <settings>
         <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
+          <client-authentication>
+            <symmetrically-signed-jwt>
+              <signature-algorithm>HS512</signature-algorithm>
+            </symmetrically-signed-jwt>
+          </client-authentication>
           <authentication-service>
             <authentication-profile>authentication-service</authentication-profile>
           </authentication-service>
@@ -40,12 +45,9 @@
               <claims>email_verified</claims>
             </scope>
             <scope>
-              <id>example</id>
-              <claims>groups</claims>
-            </scope>
-            <scope>
               <id>openid</id>
               <description>Standard OpenID Connect scope</description>
+              <claims>groups</claims>
             </scope>
             <scope>
               <id>phone</id>

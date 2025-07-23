@@ -8,21 +8,10 @@
           <persisted-sso-session>true</persisted-sso-session>
           <authentication-actions>
             <authentication-action>
-              <id>set-subject</id>
+              <id>transform_employee_attributes</id>
               <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
-                <transformation-procedure>set-subject-procedure</transformation-procedure>
+                <transformation-procedure>transform_employee_attributes_procedure</transformation-procedure>
               </script-transformer>
-            </authentication-action>
-            <authentication-action>
-              <id>select_factor</id>
-              <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
-                <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
-                <always>
-                  <second-factor>
-                    <id>employees</id>
-                  </second-factor>
-                </always>
-              </multi-factor-condition>
             </authentication-action>
           </authentication-actions>
           <authenticators>
@@ -36,7 +25,7 @@
             <authenticator>
               <id>employees</id>
               <authentication-actions>
-                <login>set-subject</login>
+                <login>transform_employee_attributes</login>
               </authentication-actions>
               <description>Sign in with the employee login policy </description>
               <oidc xmlns="https://curity.se/ns/conf/authenticators/oidc">
@@ -45,7 +34,7 @@
                 <client-secret>#{EMPLOYEE_IDP_CLIENT_SECRET}</client-secret>
                 <scope>openid email</scope>
                 <use-subject-for-login-hint>true</use-subject-for-login-hint>
-                <prompt-login>if-requested-by-client</prompt-login>
+                <prompt-login>always</prompt-login>
               </oidc>
             </authenticator>
             <authenticator>

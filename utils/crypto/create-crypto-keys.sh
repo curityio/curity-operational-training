@@ -26,14 +26,6 @@ cd "$OUTPUT_FOLDER/vault"
 . "$OUTPUT_FOLDER/vault/secrets.env"
 
 #
-# Create crypto keys, like those to sign tokens, once per stage of the deployment pipeline
-# On subsequent redeployments, reuse the existing keys
-#
-if [ -f ./signing.p12 ]; then
-  exit 0
-fi
-
-#
 # You can optionally create a new config encryption key on every full redeployment of admin and runtime nodes
 #
 openssl rand 32 | xxd -p -c 64 > encryption.key
@@ -62,3 +54,10 @@ openssl pkcs12 -export -inkey signing.key -in signing.crt -name curity.signing -
 rm signing.csr
 rm signing.crt
 rm signing.key
+
+#
+# Generate extra keys when particular deployments require them
+#
+if [ "$USER_MANAGEMENT" == 'true' ]; then
+  openssl rand 32 | xxd -p -c 64 > admin-client-symmetric.key
+fi

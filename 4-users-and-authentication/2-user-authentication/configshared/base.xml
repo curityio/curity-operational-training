@@ -6,6 +6,13 @@
         <http>
         <base-url>#{ADMIN_BASE_URL}</base-url>
         <web-ui>
+          <admin-federated-login>
+            <using-oauth-profile xmlns="https://curity.se/ns/conf/profile/oauth">
+              <http-client>internal_http_client</http-client>
+              <oauth-profile>token-service</oauth-profile>
+              <client>admin_ui_client</client>
+            </using-oauth-profile>
+          </admin-federated-login>
         </web-ui>
         <restconf>
           <oauth xmlns="https://curity.se/ns/conf/profile/oauth">
@@ -50,6 +57,14 @@
     </environment>
   </environments>
   <facilities xmlns="https://curity.se/ns/conf/base">
+    <http>
+      <client>
+        <id>internal_http_client</id>
+        <tls>
+          <use-truststore>true</use-truststore>
+        </tls>
+      </client>
+    </http>
     <data-sources>
       <data-source>
         <id>default-datasource</id>
@@ -64,6 +79,16 @@
       </data-source>
     </data-sources>
     <crypto>
+      <ssl>
+        <server-truststore>
+          <server-certificate>
+            <id>Training_Course_Local_CA</id>
+            <curve-name>P-256</curve-name>
+            <keystore>#{SSL_TRUST_STORE}</keystore>
+            <type>elliptic-curve</type>
+          </server-certificate>
+        </server-truststore>
+      </ssl>
       <signing-keys>
         <signing-key>
           <id>default-signing-key</id>
@@ -96,7 +121,7 @@
   <processing xmlns="https://curity.se/ns/conf/base">
     <procedures>
       <transformation-procedure>
-        <id>set-subject-procedure</id>
+        <id>transform_employee_attributes_procedure</id>
         <script>LyoqCiAqIFRoaXMgaXMgYW4gZXhhbXBsZSBwcm9jZWR1cmUgdGhhdCBwZXJmb3JtcyBubyB0cmFuc2Zvcm1hdGlvbgogKiBAcGFyYW0ge3NlLmN1cml0eS5pZGVudGl0eXNlcnZlci5wcm9jZWR1cmVzLmNvbnRleHQuVHJhbnNmb3JtYXRpb25Qcm9jZWR1cmVDb250ZXh0fSBjb250ZXh0CiAqIEByZXR1cm5zIHsqfQogKi8KZnVuY3Rpb24gcmVzdWx0KGNvbnRleHQpIHsKICB2YXIgYXR0cmlidXRlcyA9IGNvbnRleHQuYXR0cmlidXRlTWFwOwogIGF0dHJpYnV0ZXMuc3ViamVjdCA9IGF0dHJpYnV0ZXMuZW1haWw7CgogIGlmIChhdHRyaWJ1dGVzLmdyb3VwcykgewogICAgYXR0cmlidXRlcy5ncm91cHMgPSBbImFkbWluIl07CiAgfQoKICByZXR1cm4gYXR0cmlidXRlczsKfQ==</script>
       </transformation-procedure>
     </procedures>

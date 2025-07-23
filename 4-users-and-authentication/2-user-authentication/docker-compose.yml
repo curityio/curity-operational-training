@@ -20,6 +20,8 @@ services:
   curity-idsvr:
     image: custom_idsvr:1.0.0
     hostname: idsvr
+    extra_hosts:
+      - login.demo.example:host-gateway
     volumes:
       - ./license.json:/opt/idsvr/etc/init/license/license.json
     env_file:
@@ -27,8 +29,6 @@ services:
       - ./vault/protected-secrets.env
     environment:
       ADMIN: 'true'
-      EMPLOYEE_IDP_CLIENT_ID: '${EMPLOYEE_IDP_CLIENT_ID}'
-      EMPLOYEE_IDP_OIDC_METADATA: '${EMPLOYEE_IDP_OIDC_METADATA}'
 
   curity-data:
     image: curity_mssql:1.0.0

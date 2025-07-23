@@ -101,7 +101,7 @@ echo "export SYMMETRIC_KEY='$SYMMETRIC_KEY'"                   >> ./protected-se
 echo "export SIGNING_KEY='$SIGNING_KEY'"                       >> ./protected-secrets.env
 
 #
-# Add extra secrets for deployments that use clients (like the DevOps dashboard) and user authentication
+# The first Users and Authentication deployment uses extra secrets for basic user management
 #
 if [ "$USER_MANAGEMENT" == 'true' ]; then
 
@@ -112,6 +112,9 @@ if [ "$USER_MANAGEMENT" == 'true' ]; then
   echo "export INTROSPECT_CLIENT_SECRET='$INTROSPECT_CLIENT_SECRET'" >> ./protected-secrets.env
 fi
 
+#
+# The second Users and Authentication deployment uses extra secrets related to external IDPs and user authentication
+#
 if [ "$USER_AUTHENTICATION" == 'true' ]; then
 
   EMPLOYEE_IDP_CLIENT_SECRET=$(docker exec -i curity bash -c "PLAINTEXT='$EMPLOYEE_IDP_CLIENT_SECRET_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-secret.sh")
@@ -119,4 +122,18 @@ if [ "$USER_AUTHENTICATION" == 'true' ]; then
     exit 1
   fi
   echo "export EMPLOYEE_IDP_CLIENT_SECRET='$EMPLOYEE_IDP_CLIENT_SECRET'" >> ./protected-secrets.env
+
+  ADMIN_CLIENT_SYMMETRIC_KEY_RAW="$(cat ./admin-client-symmetric.key)"
+  ADMIN_CLIENT_SYMMETRIC_KEY=$(docker exec -i curity bash -c "PLAINTEXT='$ADMIN_CLIENT_SYMMETRIC_KEY_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-secret.sh")
+  if [ $? -ne 0 ]; then
+    exit 1
+  fi
+  echo "export ADMIN_CLIENT_SYMMETRIC_KEY='$ADMIN_CLIENT_SYMMETRIC_KEY'" >> ./protected-secrets.env
+
+  SSL_TRUST_STORE_RAW=$(openssl base64 -in ../../../utils/ssl-certs/example.ca.crt | tr -d '\n')
+  SSL_TRUST_STORE=$(docker exec -i curity bash -c "PLAINTEXT='$SSL_TRUST_STORE_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-keystore.sh")
+  if [ $? -ne 0 ]; then
+    exit 1
+  fi
+  echo "export SSL_TRUST_STORE='$SSL_TRUST_STORE'" >> ./protected-secrets.env
 fi
