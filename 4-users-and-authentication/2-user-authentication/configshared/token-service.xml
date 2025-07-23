@@ -208,6 +208,7 @@
                   <claim>family_name</claim>
                   <claim>gender</claim>
                   <claim>given_name</claim>
+                  <claim>groups</claim>
                   <claim>locale</claim>
                   <claim>middle_name</claim>
                   <claim>name</claim>
