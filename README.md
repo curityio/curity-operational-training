@@ -1,7 +1,7 @@
 # Operational Training
 
-Training for operators, administrators and developers who operate the Curity Identity Server.\
-These deployment and automation resources back up the [Operational Training](https://curity.io/training/) theory.
+Training for operators, administrators and developers who manage the Curity Identity Server.\
+This repository's deployment and automation resources back up the [Operational Training](https://curity.io/training/) theory.
 
 ## 0. All Roles: Introduction
 
@@ -26,7 +26,7 @@ Learn how to provide internet endpoints and integrate with real infrastructure.
 ## 4. Administrator: Users and Authentication
 
 An administrator should first complete the [Users and Administration](https://curity.io/training/users-and-authentication) course.\
-Learn how to enable customer user management and employee logins with your corporate login policy.
+Learn how to administer and authenticate both customer users and employee users.
 
 ## Further Information
 
