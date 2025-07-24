@@ -4,7 +4,6 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-admin
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./config/base.xml:/opt/idsvr/etc/init/base.xml
       - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
       - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml
@@ -13,6 +12,7 @@ services:
     environment:
       ADMIN: 'true'
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
       SERVICE_NAME: 'Admin'
@@ -21,7 +21,6 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime1
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./config/base.xml:/opt/idsvr/etc/init/base.xml
       - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
       - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml
@@ -29,6 +28,7 @@ services:
       - ./config/cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
       SERVICE_NAME: 'Runtime1'
@@ -37,7 +37,6 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime2
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./config/base.xml:/opt/idsvr/etc/init/base.xml
       - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
       - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml
@@ -45,6 +44,7 @@ services:
       - ./config/cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
       SERVICE_NAME: 'Runtime2'

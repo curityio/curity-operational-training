@@ -16,7 +16,6 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-admin
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
       - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
       - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
@@ -28,12 +27,12 @@ services:
     environment:
       ADMIN: 'true'
       SERVICE_NAME: 'Admin'
+      LICENSE_KEY: '${LICENSE_KEY}'
 
   idsvr-runtime1:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime1
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
       - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
       - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
@@ -44,12 +43,12 @@ services:
       - ./vault/protected-secrets.env
     environment:
       SERVICE_NAME: 'Runtime1'
+      LICENSE_KEY: '${LICENSE_KEY}'
 
   idsvr-runtime2:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime2
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
       - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
       - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
@@ -60,6 +59,7 @@ services:
       - ./vault/protected-secrets.env
     environment:
       SERVICE_NAME: 'Runtime2'
+      LICENSE_KEY: '${LICENSE_KEY}'
 
   curity-data:
     image: curity_mssql:1.0.0

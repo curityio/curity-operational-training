@@ -21,13 +21,12 @@ services:
     hostname: idsvr
     extra_hosts:
       - login.demo.example:host-gateway
-    volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
     env_file:
       - ./config/parameters.env
       - ./vault/protected-secrets.env
     environment:
       ADMIN: 'true'
+      LICENSE_KEY: '${LICENSE_KEY}'
 
   curity-data:
     image: curity_mssql:1.0.0

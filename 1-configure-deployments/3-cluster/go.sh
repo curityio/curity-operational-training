@@ -3,13 +3,20 @@
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 #
-# Validate and prevent accidental checkins of license files
+# Manage license details
 #
 if [ ! -f ./license.json ]; then
   echo 'Please provide a license.json file in this folder before deploying'
   exit 1
 fi
+
 cp ../../hooks/pre-commit ../../.git/hooks
+
+export LICENSE_KEY=$(cat ./license.json | jq -r .License)
+if [ "$LICENSE_KEY" == '' ]; then
+  echo 'An invalid license file was provided for the Curity Identity Server'
+  exit 1
+fi
 
 #
 # Use the config encryption key generated on the first deployment

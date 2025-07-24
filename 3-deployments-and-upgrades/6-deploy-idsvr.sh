@@ -15,7 +15,7 @@ if [ ! -f ./license.json ]; then
 fi
 export LICENSE_KEY=$(cat ./license.json | jq -r .License)
 if [ "$LICENSE_KEY" == '' ]; then
-  echo '*** An invalid license file was provided for the Curity Identity Server'
+  echo 'An invalid license file was provided for the Curity Identity Server'
   exit 1
 fi
 

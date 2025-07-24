@@ -39,11 +39,9 @@ case "$(uname -s)" in
 	;;
 esac
 
-
-
 openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:prime256v1 -out $ROOT_CERT_FILE_PREFIX.key
 if [ $? -ne 0 ]; then
-  echo '*** Problem encountered creating the Root CA key'
+  echo 'Problem encountered creating the Root CA key'
   exit 1
 fi
 
@@ -56,13 +54,13 @@ openssl req \
     -addext 'basicConstraints=critical,CA:TRUE' \
     -days 3650
 if [ $? -ne 0 ]; then
-  echo '*** Problem encountered creating the Root CA'
+  echo 'Problem encountered creating the Root CA'
   exit 1
 fi
 
 openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:prime256v1 -out $SSL_CERT_FILE_PREFIX.key
 if [ $? -ne 0 ]; then
-  echo '*** Problem encountered creating the SSL key'
+  echo 'Problem encountered creating the SSL key'
   exit 1
 fi
 
@@ -73,7 +71,7 @@ openssl req \
     -subj "/CN=$WILDCARD_DOMAIN_NAME" \
     -addext 'basicConstraints=critical,CA:FALSE'
 if [ $? -ne 0 ]; then
-  echo '*** Problem encountered creating the SSL certificate signing request'
+  echo 'Problem encountered creating the SSL certificate signing request'
   exit 1
 fi
 
@@ -85,7 +83,7 @@ openssl x509 -req \
     -days 365 \
     -extfile server.ext
 if [ $? -ne 0 ]; then
-  echo '*** Problem encountered creating the SSL certificate'
+  echo 'Problem encountered creating the SSL certificate'
   exit 1
 fi
 

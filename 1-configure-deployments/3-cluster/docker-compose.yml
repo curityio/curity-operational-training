@@ -4,12 +4,12 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-admin
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
       - ./cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       ADMIN: 'true'
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
       SERVICE_NAME: 'Admin'
@@ -18,11 +18,11 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime1
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
       - ./cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
       SERVICE_NAME: 'Runtime1'
@@ -31,11 +31,11 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime2
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
       - ./cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
     environment:
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
       SERVICE_NAME: 'Runtime2'

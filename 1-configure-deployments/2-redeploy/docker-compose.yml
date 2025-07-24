@@ -6,10 +6,10 @@ services:
       - 6749:6749
       - 80:8443
     volumes:
-      - ./license.json:/opt/idsvr/etc/init/license/license.json
       - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
     environment:
       ADMIN: 'true'
       CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
