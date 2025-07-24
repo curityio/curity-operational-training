@@ -18,11 +18,75 @@
               <id>user_type_switch</id>
               <switch xmlns="https://curity.se/ns/ext-conf/switch">
                 <case>
+                  <name>customer_users</name>
+                  <condition-script>YXR0cmlidXRlcy5hY3Rpb24uaXNFbXBsb3llZT09PWZhbHNl</condition-script>
+                  <action>customer_sequence</action>
+                </case>
+                <case>
                   <name>employee_users</name>
                   <condition-script>YXR0cmlidXRlcy5hY3Rpb24uaXNFbXBsb3llZT09PXRydWU=</condition-script>
                   <action>employee_sequence</action>
                 </case>
               </switch>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_sequence</id>
+              <sequence xmlns="https://curity.se/ns/ext-conf/sequence">
+                <action>customer_selector</action>
+                <action>customer_switch</action>
+              </sequence>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_selector</id>
+              <selector xmlns="https://curity.se/ns/ext-conf/selector">
+                <attribute-name>customer_login_method</attribute-name>
+                <option>
+                  <title>Passkey</title>
+                  <string-attribute-value>passkey</string-attribute-value>
+                </option>
+                <option>
+                  <title>Password</title>
+                  <string-attribute-value>password</string-attribute-value>
+                </option>
+                <title>Choose your Login Method</title>
+              </selector>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_switch</id>
+              <switch xmlns="https://curity.se/ns/ext-conf/switch">
+                <case>
+                  <name>passkey</name>
+                  <condition-script>YXR0cmlidXRlcy5hY3Rpb24uY3VzdG9tZXJfbG9naW5fbWV0aG9kPT09J3Bhc3NrZXkn</condition-script>
+                  <action>customer_login_passkeys</action>
+                </case>
+                <case>
+                  <name>password</name>
+                  <condition-script>YXR0cmlidXRlcy5hY3Rpb24uY3VzdG9tZXJfbG9naW5fbWV0aG9kPT09J3Bhc3N3b3JkJw==</condition-script>
+                  <action>customer_login_passwords</action>
+                </case>
+              </switch>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_login_passkeys</id>
+              <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
+                <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
+                <always>
+                  <second-factor>
+                    <id>passkeys</id>
+                  </second-factor>
+                </always>
+              </multi-factor-condition>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_login_passwords</id>
+              <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
+                <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
+                <always>
+                  <second-factor>
+                    <id>passwords</id>
+                  </second-factor>
+                </always>
+              </multi-factor-condition>
             </authentication-action>
             <authentication-action>
               <id>employee_sequence</id>
