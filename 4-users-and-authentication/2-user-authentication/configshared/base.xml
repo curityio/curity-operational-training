@@ -119,6 +119,7 @@
     </email-providers>
   </facilities>
   <processing xmlns="https://curity.se/ns/conf/base">
+    <license-key>#{LICENSE_KEY}</license-key>
     <procedures>
       <transformation-procedure>
         <id>employee_set_subject_procedure</id>

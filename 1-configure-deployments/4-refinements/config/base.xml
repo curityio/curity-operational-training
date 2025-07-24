@@ -68,6 +68,7 @@
     </caching-services>
   </facilities>
   <processing xmlns="https://curity.se/ns/conf/base">
+    <license-key>#{LICENSE_KEY}</license-key>
     <account-managers>
       <account-manager>
         <id>default-account-manager</id>

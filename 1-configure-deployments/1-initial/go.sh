@@ -24,17 +24,14 @@ export PASSWORD='Password1'
 # Ensure that there is no leftover data from an existing Docker image
 # Share the configuration database and remove it to force the installer to run
 #
-Share the configuration database to the host computer and make
-#
 rm -rf cdb 
 mkdir cdb
 chmod 777 cdb
+
 #
 # Run the deployment
 #
 docker pull curity.azurecr.io/curity/idsvr
-
-
 docker compose up
 if [ $? -ne 0 ]; then
   exit 1
