@@ -45,6 +45,7 @@
                 <user-authentication>
                   <allowed-authenticators>employees</allowed-authenticators>
                   <allowed-post-logout-redirect-uris>#{ADMIN_BASE_URL}/admin/dashboard/assisted.html</allowed-post-logout-redirect-uris>
+                  <force-authn>true</force-authn>
                 </user-authentication>
                 <allowed-origins>#{ADMIN_BASE_URL}</allowed-origins>
                 <capabilities>
@@ -69,9 +70,7 @@
                 </proof-key>
                 <scope>openid</scope>
                 <user-authentication>
-                  <allowed-authenticators>passwords</allowed-authenticators>
-                  <allowed-authenticators>passkeys</allowed-authenticators>
-                  <allowed-authenticators>employees</allowed-authenticators>
+                  <allowed-authenticators>username</allowed-authenticators>
                 </user-authentication>
                 <capabilities>
                   <code>

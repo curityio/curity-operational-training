@@ -11,7 +11,6 @@ services:
       KONG_DATABASE: 'off'
       KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
       KONG_PROXY_LISTEN: '0.0.0.0:3000'
-      KONG_LOG_LEVEL: 'info'
 
   idsvr-admin:
     image: curity.azurecr.io/curity/idsvr:latest
