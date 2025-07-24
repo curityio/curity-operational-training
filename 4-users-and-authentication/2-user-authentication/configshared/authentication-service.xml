@@ -28,8 +28,6 @@
               <id>employee_sequence</id>
               <sequence xmlns="https://curity.se/ns/ext-conf/sequence">
                 <action>employee_login</action>
-                <action>employee_set_subject</action>
-                <action>employee_set_groups</action>
               </sequence>
             </authentication-action>
             <authentication-action>
@@ -48,12 +46,6 @@
               <id>employee_set_subject</id>
               <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
                 <transformation-procedure>employee_set_subject_procedure</transformation-procedure>
-              </script-transformer>
-            </authentication-action>
-            <authentication-action>
-              <id>employee_set_groups</id>
-              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
-                <transformation-procedure>employee_set_groups_procedure</transformation-procedure>
               </script-transformer>
             </authentication-action>
             <authentication-action>
@@ -79,7 +71,6 @@
               <id>employees</id>
               <authentication-actions>
                 <login>employee_set_subject</login>
-                <login>employee_set_groups</login>
               </authentication-actions>
               <description>Sign in with the employee login policy </description>
               <oidc xmlns="https://curity.se/ns/conf/authenticators/oidc">
