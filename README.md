@@ -6,7 +6,7 @@ The courses are targeted at operators, administrators and developers who manage 
 ## Example Deployments
 
 You can run deployments from a macOS, Linux or Windows (with Git bash) host computer.\
-Compare XML configuration to your own system if you get stuck and need a working deployment to compare against.
+Compare configuration settings to your own system if you need a working deployment to compare against.
 
 ## Prerequisites
 
