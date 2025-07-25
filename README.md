@@ -1,7 +1,21 @@
-# Operational Training
+# Operational Training Resources
 
-Training for operators, administrators and developers who manage the Curity Identity Server.\
-This repository's deployment and automation resources back up the [Operational Training](https://curity.io/training/) theory.
+These resources provide some concrete resources to complement the [Operational Training](https://curity.io/training/) courses.\
+The courses are targeted at operators, administrators and developers who manage the Curity Identity Server.
+
+## Example Deployments
+
+You can run deployments from a macOS, Linux or Windows (with Git bash) host computer.\
+Compare XML configuration to your own system if you get stuck and need a working deployment to compare against.
+
+## Prerequisites
+
+Most example deployments use simple bash scripts and may require these local prerequisites:
+
+- Docker
+- jq
+- OpenSSL
+- A license file for the Curity Identity Server
 
 ## 0. All Roles: Introduction
 

@@ -16,6 +16,13 @@ if [ "$OUTPUT_FOLDER" == '' ]; then
 fi
 
 #
+# Ensure the correct OpenSSL behavior on Windows with Git bash
+#
+if [[ "$(uname -s)" == MINGW64* ]]; then
+  export MSYS_NO_PATHCONV=1
+fi
+
+#
 # Simulate saving crypto keys to a secure vault
 #
 cd "$OUTPUT_FOLDER/vault"

@@ -13,6 +13,17 @@ if [ "$OUTPUT_FOLDER" == '' ]; then
 fi
 
 #
+# Fix newline issues on Windows with Git bash, including for bash scripts downloaded from GitHub
+#
+LINE_SEPARATOR='\n';
+if [[ "$(uname -s)" == MINGW64* ]]; then
+ 
+  LINE_SEPARATOR='\r\n';
+  sed -i 's/\r$//' ./encrypt-secret.sh
+  sed -i 's/\r$//' ./encrypt-keystore.sh
+fi
+
+#
 # Running a utility Docker container provides one way to invoke Curity crypto tools
 #
 echo 'Deploying temporary Docker container ...'
@@ -79,7 +90,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-SIGNING_KEY_BASE64=$(openssl base64 -in "$SIGNING_KEY_PATH" | tr -d '\n')
+SIGNING_KEY_BASE64=$(openssl base64 -in "$SIGNING_KEY_PATH" | tr -d "$LINE_SEPARATOR")
 SIGNING_KEY_RAW=$(docker exec -i curity bash -c "convertks --in-password '$SIGNING_KEY_PASSWORD' --in-alias curity.signing --in-entry-password '$SIGNING_KEY_PASSWORD' --in-keystore '$SIGNING_KEY_BASE64'")
 if [ $? -ne 0 ]; then
   exit 1
@@ -130,7 +141,7 @@ if [ "$USER_AUTHENTICATION" == 'true' ]; then
   fi
   echo "export ADMIN_CLIENT_SYMMETRIC_KEY='$ADMIN_CLIENT_SYMMETRIC_KEY'" >> ./protected-secrets.env
 
-  SSL_TRUST_STORE_RAW=$(openssl base64 -in ../../../utils/ssl-certs/example.ca.crt | tr -d '\n')
+  SSL_TRUST_STORE_RAW=$(openssl base64 -in ../../../utils/ssl-certs/example.ca.crt | tr -d "$LINE_SEPARATOR")
   SSL_TRUST_STORE=$(docker exec -i curity bash -c "PLAINTEXT='$SSL_TRUST_STORE_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-keystore.sh")
   if [ $? -ne 0 ]; then
     exit 1

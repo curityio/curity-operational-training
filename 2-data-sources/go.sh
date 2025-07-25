@@ -10,7 +10,7 @@ if [ ! -f ./license.json ]; then
   exit 1
 fi
 
-cp ../hooks/pre-commit ../../.git/hooks
+cp ../hooks/pre-commit ../.git/hooks
 
 export LICENSE_KEY=$(cat ./license.json | jq -r .License)
 if [ "$LICENSE_KEY" == '' ]; then
@@ -24,6 +24,14 @@ fi
 ../utils/sql/get-mssql-script.sh "$(pwd)/database"
 if [ $? -ne 0 ]; then
   exit 1
+fi
+
+#
+# Fix newline issues on Windows with Git bash for bash scripts downloaded from GitHub
+#
+if [[ "$(uname -s)" == MINGW64* ]]; then
+  sed -i 's/\r$//' ./database/entrypoint.sh
+  sed -i 's/\r$//' ./database/initdb.sh
 fi
 
 #

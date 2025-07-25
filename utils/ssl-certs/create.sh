@@ -11,34 +11,22 @@ SSL_CERT_PASSWORD='Password1'
 WILDCARD_DOMAIN_NAME='*.demo.example'
 
 #
-# Do nothing if files exist already
+# Do nothing if files exist already, to prevent the user needing to reconfigure trust for the root CA
 #
 if [ -f $SSL_CERT_FILE_PREFIX.crt ]; then
   exit 0
 fi
 
 #
-# Point to the OpenSSL configuration file for the platform
+# Ensure the correct OpenSSL behavior on Windows with Git bash
 #
-case "$(uname -s)" in
+if [[ "$(uname -s)" == MINGW64* ]]; then
+  export MSYS_NO_PATHCONV=1
+fi
 
-  # macOS
-  Darwin)
-    export OPENSSL_CONF='/System/Library/OpenSSL/openssl.cnf'
- 	;;
-
-  # Windows with Git Bash
-  MINGW64*)
-    export OPENSSL_CONF='C:/Program Files/Git/usr/ssl/openssl.cnf';
-    export MSYS_NO_PATHCONV=1;
-	;;
-
-  # Linux
-  Linux*)
-    export OPENSSL_CONF='/usr/lib/ssl/openssl.cnf';
-	;;
-esac
-
+#
+# Run the Open SSL commands
+#
 openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:prime256v1 -out $ROOT_CERT_FILE_PREFIX.key
 if [ $? -ne 0 ]; then
   echo 'Problem encountered creating the Root CA key'

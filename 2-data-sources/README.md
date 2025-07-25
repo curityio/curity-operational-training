@@ -45,3 +45,14 @@ Or query operational data:
 select * from delegations;
 GO
 ```
+
+## Redeployments and Existing Data
+
+By default, redeployments clear all existing SQL data for the Curity Identity Server.\
+The deployment shares a data volume locally and clears it.\
+To maintain existing SQL data, comment out the above statements before running the redeployment.
+
+```bash
+rm -rf data
+mkdir data
+```
