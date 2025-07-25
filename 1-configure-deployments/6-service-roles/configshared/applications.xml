@@ -1,0 +1,20 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+      <id>Applications</id>
+      <type xmlns:apps="https://curity.se/ns/conf/profile/apps">apps:apps-service</type>
+      <settings>
+        <apps-service xmlns="https://curity.se/ns/conf/profile/apps">
+          <oauth-profile-id>token-service</oauth-profile-id>
+        </apps-service>
+      </settings>
+      <endpoints>
+        <endpoint>
+          <id>applications</id>
+          <uri>/apps</uri>
+          <endpoint-kind>apps-anonymous</endpoint-kind>
+        </endpoint>
+      </endpoints>
+    </profile>
+  </profiles>
+</config>

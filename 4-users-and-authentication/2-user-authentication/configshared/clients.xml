@@ -1,0 +1,94 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+      <id>token-service</id>
+      <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
+      <expose-detailed-error-messages />
+      <settings>
+        <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
+          <client-store>
+            <config-backed>
+              <client>
+                <id>admin_ui_client</id>
+                <client-name>Admin UI Federated Login Client</client-name>
+                <description>The OAuth client that is used for Admin UI federated login.</description>
+                <logo>data:image/svg+xml;base64,CjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2MHB4IgoJIGhlaWdodD0iMTYwcHgiIHZpZXdCb3g9IjAgMCA0My42IDQzLjYiIHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlO2VuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDMuNiA0My42OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0ZGRkZGRjtzdHJva2U6IzYyNkM4NztzdHJva2Utd2lkdGg6MS4xMDQ1O3N0cm9rZS1taXRlcmxpbWl0OjEwO30KCS5zdDF7ZmlsbDojNjM2RDg2O30KCS5zdDJ7ZmlsbDojNjI2Qzg3O30KCS5zdDN7ZmlsbDpub25lO3N0cm9rZTojNjI2Qzg3O3N0cm9rZS13aWR0aDoxLjEwNDU7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQo8L3N0eWxlPgo8ZGVmcz4KPC9kZWZzPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzksNDNINC42Yy0yLjIsMC00LTEuOC00LTRWNC42YzAtMi4yLDEuOC00LDQtNEgzOWMyLjIsMCw0LDEuOCw0LDRWMzlDNDMsNDEuMiw0MS4yLDQzLDM5LDQzeiIvPgo8Y2lyY2xlIGNsYXNzPSJzdDEiIGN4PSI2LjQiIGN5PSI0LjQiIHI9IjEuNCIvPgo8Y2lyY2xlIGNsYXNzPSJzdDEiIGN4PSIxMi4yIiBjeT0iNC40IiByPSIxLjQiLz4KPGNpcmNsZSBjbGFzcz0ic3QxIiBjeD0iMTcuOSIgY3k9IjQuNCIgcj0iMS40Ii8+CjxnPgoJPGc+CgkJPHBhdGggY2xhc3M9InN0MiIgZD0iTTMxLjksMjZsLTAuMywwLjNjLTEuNSwxLjUtMy4zLDIuMy01LDIuM2MtMi43LDAtNC43LTItNC43LTQuOGMwLTIuOCwxLjktNC44LDQuNi00LjhjMS42LDAsMy40LDAuNyw0LjcsMS44CgkJCWwwLjMsMC4ybDIuNi0yLjdsLTAuMy0wLjJjLTItMS43LTQuOC0yLjctNy41LTIuN2MtMywwLTUuNSwxLjQtNywzLjVoLTQuN2wtMC4zLDIuM2gzLjljLTAuMSwwLjQtMC4yLDAuOS0wLjMsMS4zSDEybC0wLjMsMi4zCgkJCWg2LjFjMC4xLDAuNSwwLjEsMC45LDAuMywxLjNoMGgtMC4zSDkuM2wtMC4zLDIuM2g4LjdoMC4zaDEuMWMxLjUsMi4yLDQuMSwzLjUsNy4yLDMuNWMzLjksMCw2LjYtMiw3LjktMy4ybDAuMy0wLjNMMzEuOSwyNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjExLjQsMjIuNiA5LjYsMjIuNiA5LjQsMjQuOSAxMS4xLDI0LjkgCQkiLz4KCTwvZz4KPC9nPgo8bGluZSBjbGFzcz0ic3QzIiB4MT0iMC42IiB5MT0iOC4zIiB4Mj0iNDMiIHkyPSI4LjMiLz4KPC9zdmc+Cg==</logo>
+                <symmetric-key>#{ADMIN_CLIENT_SYMMETRIC_KEY}</symmetric-key>
+                <redirect-uris>#{ADMIN_BASE_URL}/admin/login/handler</redirect-uris>
+                <audience>admin_ui_client</audience>
+                <scope>openid</scope>
+                <scope>email</scope>
+                <user-authentication>
+                  <allowed-authenticators>employees</allowed-authenticators>
+                  <force-authn>true</force-authn>
+                </user-authentication>
+                <capabilities>
+                  <code>
+                  </code>
+                </capabilities>
+              </client>
+              <client>
+                <id>devops_dashboard_restconf_client</id>
+                <client-name>DevOps Dashboard Client</client-name>
+                <description>The OAuth client that is used to login to the DevOps dashboard.</description>
+                <logo>data:image/svg+xml;base64,CjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2MHB4IgoJIGhlaWdodD0iMTYwcHgiIHZpZXdCb3g9IjAgMCA0My42IDQzLjYiIHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlO2VuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDMuNiA0My42OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0ZGRkZGRjtzdHJva2U6IzYyNkM4NztzdHJva2Utd2lkdGg6MS4xMDQ1O3N0cm9rZS1taXRlcmxpbWl0OjEwO30KCS5zdDF7ZmlsbDojNjM2RDg2O30KCS5zdDJ7ZmlsbDojNjI2Qzg3O30KCS5zdDN7ZmlsbDpub25lO3N0cm9rZTojNjI2Qzg3O3N0cm9rZS13aWR0aDoxLjEwNDU7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQo8L3N0eWxlPgo8ZGVmcz4KPC9kZWZzPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzksNDNINC42Yy0yLjIsMC00LTEuOC00LTRWNC42YzAtMi4yLDEuOC00LDQtNEgzOWMyLjIsMCw0LDEuOCw0LDRWMzlDNDMsNDEuMiw0MS4yLDQzLDM5LDQzeiIvPgo8Y2lyY2xlIGNsYXNzPSJzdDEiIGN4PSI2LjQiIGN5PSI0LjQiIHI9IjEuNCIvPgo8Y2lyY2xlIGNsYXNzPSJzdDEiIGN4PSIxMi4yIiBjeT0iNC40IiByPSIxLjQiLz4KPGNpcmNsZSBjbGFzcz0ic3QxIiBjeD0iMTcuOSIgY3k9IjQuNCIgcj0iMS40Ii8+CjxnPgoJPGc+CgkJPHBhdGggY2xhc3M9InN0MiIgZD0iTTMxLjksMjZsLTAuMywwLjNjLTEuNSwxLjUtMy4zLDIuMy01LDIuM2MtMi43LDAtNC43LTItNC43LTQuOGMwLTIuOCwxLjktNC44LDQuNi00LjhjMS42LDAsMy40LDAuNyw0LjcsMS44CgkJCWwwLjMsMC4ybDIuNi0yLjdsLTAuMy0wLjJjLTItMS43LTQuOC0yLjctNy41LTIuN2MtMywwLTUuNSwxLjQtNywzLjVoLTQuN2wtMC4zLDIuM2gzLjljLTAuMSwwLjQtMC4yLDAuOS0wLjMsMS4zSDEybC0wLjMsMi4zCgkJCWg2LjFjMC4xLDAuNSwwLjEsMC45LDAuMywxLjNoMGgtMC4zSDkuM2wtMC4zLDIuM2g4LjdoMC4zaDEuMWMxLjUsMi4yLDQuMSwzLjUsNy4yLDMuNWMzLjksMCw2LjYtMiw3LjktMy4ybDAuMy0wLjNMMzEuOSwyNnoiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjExLjQsMjIuNiA5LjYsMjIuNiA5LjQsMjQuOSAxMS4xLDI0LjkgCQkiLz4KCTwvZz4KPC9nPgo8bGluZSBjbGFzcz0ic3QzIiB4MT0iMC42IiB5MT0iOC4zIiB4Mj0iNDMiIHkyPSI4LjMiLz4KPC9zdmc+Cg==</logo>
+                <no-authentication>true</no-authentication>
+                <redirect-uris>#{ADMIN_BASE_URL}/admin/dashboard/assisted.html</redirect-uris>
+                <proof-key>
+                  <require-proof-key>true</require-proof-key>
+                </proof-key>
+                <refresh-token-ttl>disabled</refresh-token-ttl>
+                <audience>urn:se:curity:audiences:admin:api</audience>
+                <audience>devops_dashboard_restconf_client</audience>
+                <scope>openid</scope>
+                <scope>urn:se:curity:scopes:admin:api</scope>
+                <user-authentication>
+                  <allowed-authenticators>employees</allowed-authenticators>
+                  <allowed-post-logout-redirect-uris>#{ADMIN_BASE_URL}/admin/dashboard/assisted.html</allowed-post-logout-redirect-uris>
+                  <force-authn>true</force-authn>
+                </user-authentication>
+                <allowed-origins>#{ADMIN_BASE_URL}</allowed-origins>
+                <capabilities>
+                  <code>
+                  </code>
+                </capabilities>
+              </client>
+              <client>
+                <id>migration-client</id>
+                <secret>#{MIGRATION_CLIENT_SECRET}</secret>
+                <scope>accounts_migration</scope>
+                <capabilities>
+                  <client-credentials />
+                </capabilities>
+              </client>
+              <client>
+                <id>console-client</id>
+                <no-authentication>true</no-authentication>
+                <redirect-uris>http://127.0.0.1/callback</redirect-uris>
+                <proof-key>
+                  <require-proof-key>true</require-proof-key>
+                </proof-key>
+                <scope>openid</scope>
+                <user-authentication>
+                  <allowed-authenticators>username</allowed-authenticators>
+                </user-authentication>
+                <capabilities>
+                  <code>
+                  </code>
+                </capabilities>
+                <validate-port-on-loopback-interfaces>false</validate-port-on-loopback-interfaces>
+              </client>
+              <client>
+                <id>introspect-client</id>
+                <secret>#{INTROSPECT_CLIENT_SECRET}</secret>
+                <capabilities>
+                  <introspection/>
+                </capabilities>
+              </client>
+            </config-backed>
+          </client-store>
+        </authorization-server>
+      </settings>
+    </profile>
+  </profiles>
+</config>

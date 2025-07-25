@@ -1,0 +1,73 @@
+services:
+
+  api-gateway:
+    image: kong/kong:latest
+    hostname: apigateway
+    ports:
+      - 80:3000
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml
+    environment:
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
+      KONG_PROXY_LISTEN: '0.0.0.0:3000'
+
+  idsvr-admin:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: idsvr-admin
+    volumes:
+      - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
+      - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
+      - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
+      - ./configshared/token-service.xml:/opt/idsvr/etc/init/token-service.xml
+      - ./configshared/applications.xml:/opt/idsvr/etc/init/applications.xml
+    env_file:
+      - ./config/parameters.env
+      - ./vault/protected-secrets.env
+    environment:
+      ADMIN: 'true'
+      SERVICE_NAME: 'Admin'
+      LICENSE_KEY: '${LICENSE_KEY}'
+
+  idsvr-runtime1:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: idsvr-runtime1
+    volumes:
+      - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
+      - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
+      - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
+      - ./configshared/token-service.xml:/opt/idsvr/etc/init/token-service.xml
+      - ./configshared/applications.xml:/opt/idsvr/etc/init/applications.xml
+    env_file:
+      - ./config/parameters.env
+      - ./vault/protected-secrets.env
+    environment:
+      SERVICE_NAME: 'Runtime1'
+      LICENSE_KEY: '${LICENSE_KEY}'
+
+  idsvr-runtime2:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: idsvr-runtime2
+    volumes:
+      - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
+      - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
+      - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
+      - ./configshared/token-service.xml:/opt/idsvr/etc/init/token-service.xml
+      - ./configshared/applications.xml:/opt/idsvr/etc/init/applications.xml
+    env_file:
+      - ./config/parameters.env
+      - ./vault/protected-secrets.env
+    environment:
+      SERVICE_NAME: 'Runtime2'
+      LICENSE_KEY: '${LICENSE_KEY}'
+
+  curity-data:
+    image: curity_mssql:1.0.0
+    hostname: dbserver
+    volumes:
+    - ./data:/var/opt/mssql/data
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Password1
+      MSSQL_COLLATION: Latin1_General_100_CI_AS_SC_UTF8
+      MSSQL_AGENT_ENABLED: true
