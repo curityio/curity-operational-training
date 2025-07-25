@@ -19,18 +19,9 @@ if [ "$LICENSE_KEY" == '' ]; then
 fi
 
 #
-# Get the latest MS SQL Server schema creation script
+# Build a SQL database Docker image
 #
-../../utils/sql/get-mssql-script.sh "$(pwd)/database"
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-#
-# Create a custom Docker image that deploys a SQL Server instance
-# For local setups this also automates the creation of the schema for the Curity Identity Server
-#
-docker build -f database/Dockerfile -t curity_mssql:1.0.0 .
+../../utils/sqldatabase/build.sh
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -49,17 +40,17 @@ fi
 export USER_MANAGEMENT='true'
 
 #
-# Create crypto keys once per stage of your deployment pipeline
+# If required, create HTTPS certificates that the API gateway uses for external URLs
 #
-../../utils/crypto/create-crypto-keys.sh "$(pwd)"
+../../utils/ssl-certs/create.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
 fi
 
 #
-# Create HTTPS certificates for the API gateway if required
+# Create crypto keys once per stage of your deployment pipeline
 #
-../../utils/ssl-certs/create.sh "$(pwd)"
+../../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -74,7 +65,6 @@ fi
 
 #
 # Store SQL Server data on a local volume as opposed to the external volumes that real deployments use
-# To redeploy and keep existing data, delete the 'rm -rf' line from the below commands
 #
 rm -rf data
 mkdir data

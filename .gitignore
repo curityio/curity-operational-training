@@ -9,6 +9,7 @@ protected-secrets.env
 data
 mssql-create_database.sql
 infrastructure.env
+download
 job.yml
 admin.yml
 runtime.yml

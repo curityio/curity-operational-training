@@ -19,26 +19,9 @@ if [ "$LICENSE_KEY" == '' ]; then
 fi
 
 #
-# Get the latest MS SQL Server schema creation script
+# Build a SQL database Docker image
 #
-../utils/sql/get-mssql-script.sh "$(pwd)/database"
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-#
-# Fix newline issues on Windows with Git bash for bash scripts downloaded from GitHub
-#
-if [[ "$(uname -s)" == MINGW64* ]]; then
-  sed -i 's/\r$//' ./database/entrypoint.sh
-  sed -i 's/\r$//' ./database/initdb.sh
-fi
-
-#
-# Create a custom Docker image that deploys a SQL Server instance
-# For local setups this also automates the creation of the schema for the Curity Identity Server
-#
-docker build -f database/Dockerfile -t curity_mssql:1.0.0 .
+../utils/sqldatabase/build.sh
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -62,7 +45,6 @@ fi
 
 #
 # Store SQL Server data on a local volume as opposed to the external volumes that real deployments use
-# To redeploy and keep existing data, delete the 'rm -rf' line from the below commands
 #
 rm -rf data
 mkdir data

@@ -65,28 +65,52 @@ Received JWT access token:
 
 ### OAuth Configuration Settings
 
-The console client uses configuration settings like those shown below.
+The console client uses two OAuth clients and you can import the following file to configure them.
 
 ```xml
-<client>
-    <id>console-client</id>
-    <no-authentication>true</no-authentication>
-    <redirect-uris>http://127.0.0.1/callback</redirect-uris>
-    <proof-key>
-        <require-proof-key>true</require-proof-key>
-    </proof-key>
-    <scope>openid</scope>
-    <user-authentication>
-        <allowed-authenticators>passwords</allowed-authenticators>
-        <allowed-authenticators>passkeys</allowed-authenticators>
-        <allowed-authenticators>employees</allowed-authenticators>
-    </user-authentication>
-    <capabilities>
-        <code>
-        </code>
-    </capabilities>
-    <validate-port-on-loopback-interfaces>false</validate-port-on-loopback-interfaces>
-</client>
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+      <id>token-service</id>
+      <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
+      <expose-detailed-error-messages />
+      <settings>
+        <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
+          <client-store>
+            <config-backed>
+              <client>
+                <id>console-client</id>
+                <no-authentication>true</no-authentication>
+                <redirect-uris>http://127.0.0.1/callback</redirect-uris>
+                <proof-key>
+                  <require-proof-key>true</require-proof-key>
+                </proof-key>
+                <scope>openid</scope>
+                <user-authentication>
+                  <allowed-authenticators>passwords</allowed-authenticators>
+                  <allowed-authenticators>passkeys</allowed-authenticators>
+                  <allowed-authenticators>employees</allowed-authenticators>
+                </user-authentication>
+                <capabilities>
+                  <code>
+                  </code>
+                </capabilities>
+                <validate-port-on-loopback-interfaces>false</validate-port-on-loopback-interfaces>
+              </client>
+              <client>
+                <id>introspect-client</id>
+                <secret>Password1</secret>
+                <capabilities>
+                  <introspection />
+                </capabilities>
+              </client>
+            </config-backed>
+          </client-store>
+        </authorization-server>
+      </settings>
+    </profile>
+  </profiles>
+</config>
 ```
 
 By default, the console client points to OAuth endpoints for this repository's local deployments.\
