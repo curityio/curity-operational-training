@@ -77,27 +77,32 @@ ADMIN_PASSWORD=$(openssl passwd -5 "$ADMIN_PASSWORD_RAW")
 
 DB_CONNECTION=$(docker exec -i curity bash -c "PLAINTEXT='$DB_CONNECTION_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-secret.sh")
 if [ $? -ne 0 ]; then
+  echo "$DB_CONNECTION"
   exit 1
 fi
 
 DB_PASSWORD=$(docker exec -i curity bash -c "PLAINTEXT='$DB_PASSWORD_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-secret.sh")
 if [ $? -ne 0 ]; then
+  echo "$DB_PASSWORD"
   exit 1
 fi
 
 SYMMETRIC_KEY=$(docker exec -i curity bash -c "PLAINTEXT='$SYMMETRIC_KEY_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-secret.sh")
 if [ $? -ne 0 ]; then
+  echo "$SYMMETRIC_KEY"
   exit 1
 fi
 
 SIGNING_KEY_BASE64=$(openssl base64 -in "$SIGNING_KEY_PATH" | tr -d "$LINE_SEPARATOR")
 SIGNING_KEY_RAW=$(docker exec -i curity bash -c "convertks --in-password '$SIGNING_KEY_PASSWORD' --in-alias curity.signing --in-entry-password '$SIGNING_KEY_PASSWORD' --in-keystore '$SIGNING_KEY_BASE64'")
 if [ $? -ne 0 ]; then
+  echo "$SIGNING_KEY_RAW"
   exit 1
 fi
 
 SIGNING_KEY=$(docker exec -i curity bash -c "PLAINTEXT='$SIGNING_KEY_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-keystore.sh")
 if [ $? -ne 0 ]; then
+  echo "$SIGNING_KEY"
   exit 1
 fi
 
