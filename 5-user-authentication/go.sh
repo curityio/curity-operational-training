@@ -10,7 +10,7 @@ if [ ! -f ./license.json ]; then
   exit 1
 fi
 
-cp ../../hooks/pre-commit ../../.git/hooks
+cp ../hooks/pre-commit ../.git/hooks
 
 export LICENSE_KEY=$(cat ./license.json | jq -r .License)
 if [ "$LICENSE_KEY" == '' ]; then
@@ -21,7 +21,7 @@ fi
 #
 # Build a SQL database Docker image
 #
-../../utils/sqldatabase/build.sh
+../utils/sqldatabase/build.sh
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -43,7 +43,7 @@ export USER_AUTHENTICATION='true'
 #
 # If required, create HTTPS certificates that the API gateway uses for external URLs
 #
-../../utils/ssl-certs/create.sh "$(pwd)"
+../utils/ssl-certs/create.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -51,7 +51,7 @@ fi
 #
 # Create crypto keys once per stage of your deployment pipeline
 #
-../../utils/crypto/create-crypto-keys.sh "$(pwd)"
+../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -59,7 +59,7 @@ fi
 #
 # Run crypto tools to create protected secrets
 #
-../../utils/crypto/run-crypto-tools.sh "$(pwd)"
+../utils/crypto/run-crypto-tools.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
 fi

@@ -16,7 +16,7 @@ let httpServer: http.Server | null = null;
 const configuration = {
     clientId: 'console-client',
     redirectUri: `http://127.0.0.1:${port}/callback`,
-    scope: 'openid example',
+    scope: 'openid purchases',
     issuer: 'https://login.demo.example/~',
 };
 

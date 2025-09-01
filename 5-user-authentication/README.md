@@ -1,4 +1,13 @@
 
+## User Authentication
+
+The deployment uses some advanced settings to highlight the following behaviors:
+
+- Customer users can sign in with either passwords or passkeys, with email-based account recovery.
+- Employees can sign in with an external identity provider like Microsoft Entra ID.
+- The DevOps Dashboard and Admin UI can integrate with the IDP to meet your corporate employee login policy.
+- In your applications, you can present tailored authentication options to both customer users and employees.
+
 ## Deployment Instructions
 
 First, update your `/etc/hosts` file to include the domain for the test email inbox:

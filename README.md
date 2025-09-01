@@ -37,10 +37,15 @@ Learn how to use the Curity Identity Server schema for durable storage of identi
 An operator should next complete the [Deployments and Upgrades](https://curity.io/training/deployments-and-upgrades) course.\
 Learn how to provide internet endpoints and integrate with real infrastructure.
 
-## 4. Administrator: Users and Authentication
+## 4. Administrator: User Management
 
-An administrator should first complete the [Users and Administration](https://curity.io/training/users-and-authentication) course.\
-Learn how to administer and authenticate both customer users and employee users.
+An administrator should first complete the [User Management](https://curity.io/training/user-management) course.\
+Learn how to administer both customer users and employee users.
+
+## 5. Administrator: User Authentication
+
+An administrator should next complete the [User Authentication](https://curity.io/training/user-authentication) course.\
+Learn how to authenticate both customer users and employee users.
 
 ## Further Information
 
