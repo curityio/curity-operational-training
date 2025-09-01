@@ -1,7 +1,8 @@
 
 ## User Authentication
 
-The deployment uses some advanced settings to highlight the following behaviors:
+These resources accompany the lessons from the [User Authentication](https://curity.io/training/user-authentication) course.\
+The deployment highlights the following example behaviors:
 
 - Customer users can sign in with either passwords or passkeys, with email-based account recovery.
 - Employees can sign in with an external identity provider like Microsoft Entra ID.
@@ -24,8 +25,7 @@ utils/ssl-certs/example.ca.crt
 ```
 
 Copy a `license.json` file to this folder and run `./go.sh` to perform the deployment.\
-Once the system is up and running, sign in to the DevOps Dashboard and the Admin UI with the IDP.\
-To understand and troubleshoot the deployment, see content for the [Users and Administration](https://curity.io/training/users-and-authentication) training course.
+Once the system is up and running, sign in to the DevOps Dashboard and the Admin UI with the IDP.
 
 ## IDP Configuration
 
@@ -46,4 +46,4 @@ To get your IDP working with the DevOps Dashboard you may need to change the fol
 ## Query Data
 
 As you run OAuth flows you can also get to see how the Curity Identity Server uses data.\
-See the [Data Sources README](../../2-data-sources/README.md) to get connected to the local database and run queries.
+See the [Data Sources README](../2-data-sources/README.md) to get connected to the local database and run queries.
