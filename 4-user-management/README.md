@@ -27,3 +27,8 @@ Once the system is up and running, perform these actions:
 
 - Sign in to the DevOps Dashboard as user `admin`.
 - Sign in to the Admin UI as user `admin` with an initial credential of `Password1`.
+
+## Query Data
+
+As you create user accounts you can also see how the Curity Identity Server stores them.\
+See the [Data Sources README](../2-data-sources/README.md) to get connected to the local database and run queries.
