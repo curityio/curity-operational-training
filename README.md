@@ -45,7 +45,12 @@ Learn how to administer both customer users and employee users.
 ## 5. Administrator: User Authentication
 
 An administrator should next complete the [User Authentication](https://curity.io/training/user-authentication) course.\
-Learn how to authenticate both customer users and employee users.
+Learn how to take full control over user authentication for both customers and employees.
+
+## 6. Administrator: Token Issuance
+
+An administrator should next complete the [Token Issuance](https://curity.io/training/token-issuance) course.\
+Learn how to take full control over identity data delivered to APIs and applications in tokens.
 
 ## Further Information
 
