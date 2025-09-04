@@ -4,6 +4,10 @@
 
 Use example to show results and finish first lesson.
 
+## Re-Browse Authentication
+
+In the light of newer changes, see how this feels, re-embedded tokens etc.
+
 ## Claims Resolution
 
 Do this properly.
