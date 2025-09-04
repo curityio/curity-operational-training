@@ -53,7 +53,7 @@ To get your IDP working with the DevOps Dashboard you may need to change the fol
 After deployment you can use the following script to create a test user account:
 
 ```bash
-./testuser/create.sh
+../utils/testuser/create.sh
 ```
 
 The user has an email of `test.user@demo.example` that you can use for authentication purposes.\

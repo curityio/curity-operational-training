@@ -1,15 +1,15 @@
-import {introspectionRequest} from './introspectClient.js';
-import {backChannelRequest, frontChannelRequest} from './oauthClient.js';
+import {introspectionRequest} from './security/introspectClient.js';
+import {backChannelRequest, frontChannelRequest} from './security/oauthClient.js';
 
 console.log('Logging in and getting access token ...')
 try {
 
     const code = await frontChannelRequest();
-    const opaqueAccessToken = await backChannelRequest(code);
-    console.log(`Received opaque access token: ${opaqueAccessToken}`);
+    const tokens = await backChannelRequest(code);
+    console.log(`Received opaque access token: ${tokens.access_token}`);
 
-    const claims = await introspectionRequest(opaqueAccessToken);
-    console.log('Received JWT access token:');
+    const claims = await introspectionRequest(tokens.access_token);
+    console.log('Visualizing JWT access token:');
     console.log(JSON.stringify(claims, null, 2));
 
 } catch (e: any) {

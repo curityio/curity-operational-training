@@ -1,4 +1,4 @@
-import {frontChannelRequest} from './oauthClient.js';
+import {frontChannelRequest} from './security/oauthClient.js';
 
 console.log('Starting login ...')
 try {

@@ -16,13 +16,9 @@
           <client-capabilities>
             <code>
             </code>
-            <implicit/>
-            <resource-owner-password-credentials>
-              <credential-manager>default-credential-manager</credential-manager>
-            </resource-owner-password-credentials>
             <client-credentials/>
             <introspection/>
-            <token-exchange/>
+             <oauth-token-exchange/>
             <assisted-token>
             </assisted-token>
           </client-capabilities>
@@ -58,20 +54,15 @@
             <scope>
               <id>profile</id>
               <description>OpenId Connect profile scope</description>
-              <claims>birthdate</claims>
               <claims>family_name</claims>
-              <claims>gender</claims>
               <claims>given_name</claims>
-              <claims>locale</claims>
-              <claims>middle_name</claims>
-              <claims>name</claims>
-              <claims>nickname</claims>
-              <claims>picture</claims>
-              <claims>preferred_username</claims>
-              <claims>profile</claims>
-              <claims>updated_at</claims>
-              <claims>website</claims>
-              <claims>zoneinfo</claims>
+            </scope>
+            <scope>
+              <id>sales</id>
+              <claims>age</claims>
+              <claims>country_code</claims>
+              <claims>has_mfa</claims>
+              <claims>user_id</claims>
             </scope>
             <scope>
               <id>urn:se:curity:scopes:admin:api</id>
@@ -85,9 +76,23 @@
               <value-provided-by>account-manager-claims-provider</value-provided-by>
             </claim>
             <claim>
+              <name>age</name>
+              <no-source/>
+              <transformation>
+                <value-transformation-procedure>ZnVuY3Rpb24gZ2VuZXJhdGUoKSB7CiAgcmV0dXJuIDM1Cn0=</value-transformation-procedure>
+              </transformation>
+            </claim>
+            <claim>
               <name>birthdate</name>
               <description>OpenID Connect birthdate claim</description>
               <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>country_code</name>
+              <no-source/>
+              <transformation>
+                <value-transformation-procedure>ZnVuY3Rpb24gZ2VuZXJhdGUoKSB7CiAgcmV0dXJuICJVU0EiCn0=</value-transformation-procedure>
+              </transformation>
             </claim>
             <claim>
               <name>email</name>
@@ -120,6 +125,13 @@
               <transformation>
                 <input-attribute-names>groups</input-attribute-names>
                 <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGF0dHJpYnV0ZXMpIHsKICByZXR1cm4gYXR0cmlidXRlcy5ncm91cHM7Cn0=</value-transformation-procedure>
+              </transformation>
+            </claim>
+            <claim>
+              <name>has_mfa</name>
+              <no-source/>
+              <transformation>
+                <value-transformation-procedure>ZnVuY3Rpb24gZ2VuZXJhdGUoKSB7CiAgcmV0dXJuIGZhbHNlCn0=</value-transformation-procedure>
               </transformation>
             </claim>
             <claim>
@@ -173,6 +185,13 @@
               <value-provided-by>account-manager-claims-provider</value-provided-by>
             </claim>
             <claim>
+              <name>user_id</name>
+              <no-source/>
+              <transformation>
+                <value-transformation-procedure>ZnVuY3Rpb24gZ2VuZXJhdGUoKSB7CiAgcmV0dXJuICIxOTI2NzQ4OTIiCn0=</value-transformation-procedure>
+              </transformation>
+            </claim>
+            <claim>
               <name>website</name>
               <description>OpenID Connect website claim</description>
               <value-provided-by>account-manager-claims-provider</value-provided-by>
@@ -198,50 +217,18 @@
               <claims-mapper>
                 <id>default</id>
                 <access_token>
+                  <claim>age</claim>
+                  <claim>country_code</claim>
                   <claim>groups</claim>
+                  <claim>user_id</claim>
                 </access_token>
                 <id_token>
-                  <claim>address</claim>
-                  <claim>birthdate</claim>
-                  <claim>email</claim>
-                  <claim>email_verified</claim>
-                  <claim>family_name</claim>
-                  <claim>gender</claim>
-                  <claim>given_name</claim>
-                  <claim>groups</claim>
-                  <claim>locale</claim>
-                  <claim>middle_name</claim>
-                  <claim>name</claim>
-                  <claim>nickname</claim>
-                  <claim>phone_number</claim>
-                  <claim>phone_number_verified</claim>
-                  <claim>picture</claim>
-                  <claim>preferred_username</claim>
-                  <claim>profile</claim>
-                  <claim>updated_at</claim>
-                  <claim>website</claim>
-                  <claim>zoneinfo</claim>
+                  <claim>has_mfa</claim>
                 </id_token>
                 <userinfo>
-                  <claim>address</claim>
-                  <claim>birthdate</claim>
-                  <claim>email</claim>
-                  <claim>email_verified</claim>
+                  <claim>country_code</claim>
                   <claim>family_name</claim>
-                  <claim>gender</claim>
                   <claim>given_name</claim>
-                  <claim>locale</claim>
-                  <claim>middle_name</claim>
-                  <claim>name</claim>
-                  <claim>nickname</claim>
-                  <claim>phone_number</claim>
-                  <claim>phone_number_verified</claim>
-                  <claim>picture</claim>
-                  <claim>preferred_username</claim>
-                  <claim>profile</claim>
-                  <claim>updated_at</claim>
-                  <claim>website</claim>
-                  <claim>zoneinfo</claim>
                 </userinfo>
               </claims-mapper>
               <default-claims-mapper>default</default-claims-mapper>

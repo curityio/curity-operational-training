@@ -32,7 +32,7 @@ Then sign in to the Admin UI as user `admin` with an initial credential of `Pass
 After deployment you can use the following script to create a test user account:
 
 ```bash
-./testuser/create.sh
+../utils/testuser/create.sh
 ```
 
 The user has an email of `test.user@demo.example` that you can use for authentication purposes.\

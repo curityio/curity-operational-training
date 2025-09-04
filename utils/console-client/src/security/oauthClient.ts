@@ -1,8 +1,8 @@
 import axios, {AxiosRequestConfig} from 'axios';
-import crypto from 'crypto'
 import http from 'http';
 import EventEmitter from 'node:events';
 import open from 'open';
+import {generateHash, generateRandomString} from './utils.js';
 
 const port = 3333;
 const eventEmitter = new EventEmitter();
@@ -16,7 +16,7 @@ let httpServer: http.Server | null = null;
 const configuration = {
     clientId: 'console-client',
     redirectUri: `http://127.0.0.1:${port}/callback`,
-    scope: 'openid',
+    scope: process.env.SCOPE || 'openid profile',
     issuer: 'https://login.demo.example/~',
 };
 
@@ -81,7 +81,7 @@ export async function frontChannelRequest(): Promise<string> {
 /*
  * Redeem the code for tokens
  */
-export async function backChannelRequest(code: string): Promise<string> {
+export async function backChannelRequest(code: string): Promise<any> {
 
     const formData = new URLSearchParams();
     formData.append('grant_type', 'authorization_code');
@@ -103,11 +103,57 @@ export async function backChannelRequest(code: string): Promise<string> {
     try {
 
         const response = await axios(options);
-        return response.data.access_token;
+        return response.data;
 
     } catch (e: any) {
 
-        let status: number | null = null;
+        throw new Error(readOAuthResponseBodyError('Authorization code grant', e));
+    }
+}
+
+/*
+ * Use the access token to download OpenID Connect user info
+ */
+export async function downloadUserInfo(accessToken: string): Promise<any> {
+
+    try {
+        const options = {
+            url: metadata.userinfo_endpoint,
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                Accept: 'application/json',
+            }
+        } as AxiosRequestConfig;
+        
+        const response = await axios(options);
+        return response.data;
+
+    }  catch (e: any) {
+        throw new Error(readOAuthResponseBodyError('Userinfo download', e));
+    }
+}
+
+/*
+ * Download OpenID Connect metadata
+ */
+async function getMetadata(): Promise<void> {
+
+    try {
+        const response = await axios(`${configuration.issuer}/.well-known/openid-configuration`);
+        metadata = response.data;
+
+    }  catch (e: any) {
+        throw new Error('Unable to get metadata', e);
+    }
+}
+
+/*
+ * Handle error responses
+ */
+function readOAuthResponseBodyError(operation: string, e: any): string {
+
+     let status: number | null = null;
         if (e.response?.status) {
             status = e.response.status;
         }
@@ -125,7 +171,7 @@ export async function backChannelRequest(code: string): Promise<string> {
             }
         }
         
-        let message = 'Authorization code grant failed';
+        let message = `${operation} failed`;
         if (status) {
             message += `, status: ${status}`;
         }
@@ -137,37 +183,5 @@ export async function backChannelRequest(code: string): Promise<string> {
         }
         
         throw new Error(message);
-    }
-}
 
-/*
- * Utility functions
- */
-async function getMetadata(): Promise<void> {
-
-    try {
-        const response = await axios(`${configuration.issuer}/.well-known/openid-configuration`);
-        metadata = response.data;
-
-    }  catch (e: any) {
-        throw new Error('Unable to get metadata', e);
-    }
-}
-
-function generateRandomString(): string {
-    return urlEncode(crypto.randomBytes(32).toString('base64'));
-}
-
-function generateHash(data: string): string {
-    
-    const hash = crypto.createHash('sha256');
-    hash.update(data);
-    return urlEncode(hash.digest('base64'));
-}
-
-function urlEncode(data: string): string {
-    return data
-        .replace(/=/g, '')
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_');
 }

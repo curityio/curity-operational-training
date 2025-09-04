@@ -37,7 +37,7 @@ Completed login and received authorization code: CRZ8st9cccPGtQZrP0cBJigmOkNcrLJ
 
 ### View Access Tokens
 
-Use the `npm run login` command to trigger a login and then get an access token.\
+Use the `npm run token` command to trigger a login and then get an access token.\
 The flow outputs token details, which enables you to quickly verify the claims issued to access tokens.
 
 ```text
@@ -62,6 +62,11 @@ Received JWT access token:
   "iat": 1753280007
 }
 ```
+
+### View All Tokens
+
+Use the `npm run all` command to trigger a login and view all tokens.\
+This includes the introspected access token, the ID token payload and the userinfo response.
 
 ### OAuth Configuration Settings
 
@@ -117,6 +122,6 @@ By default, the console client points to OAuth endpoints for this repository's l
 You can edit the following files to point to a remote system instead.
 
 ```text
-src/oauthClient.ts
-src/introspectClient.ts
+src/security/oauthClient.ts
+src/security/introspectClient.ts
 ```

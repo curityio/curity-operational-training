@@ -68,7 +68,13 @@
                 <proof-key>
                   <require-proof-key>true</require-proof-key>
                 </proof-key>
+                <access-token-ttl>900</access-token-ttl>
+                <refresh-token-ttl>7200</refresh-token-ttl>
+                <audience>console-client</audience>
+                <audience>https://api.product1.com</audience>
                 <scope>openid</scope>
+                <scope>sales</scope>
+                <scope>profile</scope>
                 <user-authentication>
                   <allowed-authenticators>username</allowed-authenticators>
                 </user-authentication>
