@@ -115,7 +115,7 @@
             </claim>
             <claim>
               <name>groups</name>
-              <value-provided-by>subject_claims_provider</value-provided-by>
+              <value-provided-by>subject-claims-provider</value-provided-by>
               <transformation>
                 <input-attribute-names>groups</input-attribute-names>
                 <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGF0dHJpYnV0ZXMpIHsKICByZXR1cm4gYXR0cmlidXRlcy5ncm91cHM7Cn0=</value-transformation-procedure>
@@ -123,9 +123,9 @@
             </claim>
             <claim>
               <name>has_mfa</name>
-              <no-source/>
+              <value-provided-by>context-claims-provider</value-provided-by>
               <transformation>
-                <value-transformation-procedure>ZnVuY3Rpb24gZ2VuZXJhdGUoKSB7CiAgcmV0dXJuIGZhbHNlCn0=</value-transformation-procedure>
+                <input-attribute-names>has_mfa</input-attribute-names>
               </transformation>
             </claim>
             <claim>
@@ -181,7 +181,7 @@
               <value-provided-by>datasource-claims-provider</value-provided-by>
               <transformation>
                 <input-attribute-names>attributes</input-attribute-names>
-                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICB2YXIgZGF0YSA9IEpTT04ucGFyc2UoYWNjb3VudC5hdHRyaWJ1dGVzKTsKICByZXR1cm4gZGF0YS5yZWdpb247Cn0=</value-transformation-procedure>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICAKICBpZiAoIWFjY291bnQuYXR0cmlidXRlcykgewogICAgcmV0dXJuIG51bGw7CiAgfQogIAogIHZhciBkYXRhID0gSlNPTi5wYXJzZShhY2NvdW50LmF0dHJpYnV0ZXMpOwogIHJldHVybiBkYXRhLnJlZ2lvbjsKfQ==</value-transformation-procedure>
               </transformation>
             </claim>
             <claim>
@@ -225,6 +225,10 @@
               </account-manager-claims-provider>
             </claims-value-provider>
             <claims-value-provider>
+              <id>context-claims-provider</id>
+              <authentication-context-claims-provider xmlns="https://curity.se/ns/ext-conf/authentication-context-claims-provider"/>
+            </claims-value-provider>
+            <claims-value-provider>
               <id>datasource-claims-provider</id>
               <data-source-claims-provider xmlns="https://curity.se/ns/ext-conf/data-source-claims-provider">
                 <data-source>
@@ -233,7 +237,7 @@
               </data-source-claims-provider>
             </claims-value-provider>
             <claims-value-provider>
-              <id>subject_claims_provider</id>
+              <id>subject-claims-provider</id>
               <authentication-subject-claims-provider xmlns="https://curity.se/ns/ext-conf/authentication-subject-claims-provider"/>
             </claims-value-provider>
             <claims-mappers>

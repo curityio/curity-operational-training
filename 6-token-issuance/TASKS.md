@@ -7,11 +7,17 @@
 - Embedded token screenshot - update user authentication and re-reference it
 - Check question - on user identities
 - Mention that claims can be objects and arrays when I use transformation and show roles
+- Return null to not issue claim
+
+Resource identities to survive database user recreation.
+E.g. a unique index.
 
 ## Lesson 1
 
 - Show how user consent looks and say you can customize consent 
 - Mention the refresh token
+- Larger setups and multiple user records
+- Default scope
 
 ## Lesson 3: Scaling
 
@@ -22,6 +28,10 @@
 ### Tokens End to End
 
 Mention token sharing and the need for end to end.
+
+### Resource indicators
+
+Token procedure that does it and what the client does
 
 ### Token Exchange
 
@@ -35,15 +45,24 @@ Link to tutorial.
 End with scopes and claims best practices.
 Dependencies at a technical and people level.
 
+Scenrio with 'experience' audience and scopes:
+/orders
+/reservations
+/benefits
+/payments
+
 ## General
 
 ### Scripting
 
-- Point to scripting tutorial
+- Point to scripting tutorial in bvoth authentication and token issuance courses.
 
 ### User Authentication Course
 
 - Better explain Azure groups hack in order for the deployment to support any OIDC provider.
+- Different types of action attributes.
+- Linked to JavaScript customizations and ghow we say more in the customizations course.
+- subject_claims_provider -> subeject-claims-provider?
 
 ### Console Client
 
@@ -54,6 +73,11 @@ Better improve its README to explain its role.
 Use SSL from cluster onwards.
 Explain in READMEs how to trust it, in a common setup page, on macOS and Windows.
 Make sure Windows support is clear.
+
+## SQL Server
+
+Do wait on startup properly according to MSSQL.
+Maybe a brief wait if needed.
 
 ### README Consolidation
 

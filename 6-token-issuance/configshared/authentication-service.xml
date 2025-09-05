@@ -118,6 +118,27 @@
                 <transformation-procedure>set_final_subject_procedure</transformation-procedure>
               </script-transformer>
             </authentication-action>
+            <authentication-action>
+              <id>passwords_claims</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <attributes-location>context-attributes</attributes-location>
+                <transformation-procedure>passwords_claims_proc</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
+              <id>passkeys_claims</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <attributes-location>context-attributes</attributes-location>
+                <transformation-procedure>passkeys_claims_proc</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
+              <id>employee_claims</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <attributes-location>context-attributes</attributes-location>
+                <transformation-procedure>employee_claims_proc</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
           </authentication-actions>
           <authenticators>
             <authenticator>
@@ -135,6 +156,7 @@
               <id>employees</id>
               <authentication-actions>
                 <login>employee_set_subject</login>
+                <login>employee_claims</login>
               </authentication-actions>
               <description>Sign in with the employee login policy </description>
               <oidc xmlns="https://curity.se/ns/conf/authenticators/oidc">
@@ -148,6 +170,9 @@
             </authenticator>
             <authenticator>
               <id>passkeys</id>
+              <authentication-actions>
+                <login>passkeys_claims</login>
+              </authentication-actions>
               <description>Sign in with a passkey</description>
               <required-authenticator-for-registration>email</required-authenticator-for-registration>
               <passkeys xmlns="https://curity.se/ns/conf/authenticators/passkeys">
@@ -160,6 +185,9 @@
             </authenticator>
             <authenticator>
               <id>passwords</id>
+              <authentication-actions>
+                <login>passwords_claims</login>
+              </authentication-actions>
               <description>Sign in with a password</description>
               <html-form xmlns="https://curity.se/ns/conf/authenticators/html-form">
                 <account-manager>default-account-manager</account-manager>
