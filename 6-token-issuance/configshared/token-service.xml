@@ -80,7 +80,7 @@
               <value-provided-by>datasource-claims-provider</value-provided-by>
               <transformation>
                 <input-attribute-names>attributes</input-attribute-names>
-                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICAgIHZhciBkYXRhID0gSlNPTi5wYXJzZShhY2NvdW50LmF0dHJpYnV0ZXMpOwogICAgcmV0dXJuIGRhdGEuYWdlOwp9</value-transformation-procedure>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICAgIAogICAgaWYgKCFhY2NvdW50LmF0dHJpYnV0ZXMpIHsKICAgICAgICByZXR1cm4gbnVsbDsKICAgIH0KCiAgICB2YXIgZGF0YSA9IEpTT04ucGFyc2UoYWNjb3VudC5hdHRyaWJ1dGVzKTsKICAgIHJldHVybiBkYXRhLmFnZTsKfQ==</value-transformation-procedure>
               </transformation>
             </claim>
             <claim>
@@ -168,10 +168,13 @@
               <description>OpenID Connect preferred_username claim</description>
               <value-provided-by>account-manager-claims-provider</value-provided-by>
             </claim>
-            <claim>
-              <name>profile</name>
-              <description>OpenID Connect profile claim</description>
-              <value-provided-by>account-manager-claims-provider</value-provided-by>
+             <claim>
+              <name>region</name>
+              <value-provided-by>datasource-claims-provider</value-provided-by>
+              <transformation>
+                <input-attribute-names>attributes</input-attribute-names>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICAKICBpZiAoIWFjY291bnQuYXR0cmlidXRlcykgewogICAgcmV0dXJuIG51bGw7CiAgfQoKICB2YXIgZGF0YSA9IEpTT04ucGFyc2UoYWNjb3VudC5hdHRyaWJ1dGVzKTsKICByZXR1cm4gZGF0YS5yZWdpb247Cn0=</value-transformation-procedure>
+              </transformation>
             </claim>
             <claim>
               <name>region</name>
