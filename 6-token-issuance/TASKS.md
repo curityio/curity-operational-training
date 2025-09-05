@@ -1,6 +1,23 @@
 # Deployment Tasks
 
-## Re-Browse Authentication
+## Claims Resolution
+
+Implement this and make it work for customers and employees.
+
+### Account ID as Subject
+
+Say how to use PPIDs and read the spec.\
+Say how to do that.\
+Update the example to use the account ID.
+
+## Scaling
+
+### Embedded Token
+
+Update user attributes screenshot and say how to get an embedded token.\
+Show that as JSON.
+
+## Check User Authentication Course
 
 In the light of newer changes, see how this feels in terms of using a client and other aspects.\
 Update the screenshot with the embedded token.\
@@ -15,20 +32,8 @@ Say that you can customize consent.
 
 Briefly mention, but not relevant to this tutorial.
 
-## Claims Resolution
 
-Implement this and make it work for customers and employees.
 
-### Account ID as Subject
-
-Say how to use PPIDs and read the spec.\
-Say how to do that.\
-Update the example to use the account ID.
-
-### Embedded Token
-
-Refer back to user authentication, show its user attributes screenshot and say how to get an embedded token.\
-Show that as JSON.
 
 ## Scale
 

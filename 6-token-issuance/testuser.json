@@ -14,5 +14,8 @@
         }
     ],
     "password": "Password1",
+    "externalId": "192674892",
+    "region": "USA",
+    "age": 35,
     "active": true
 }

@@ -60,7 +60,7 @@
             <scope>
               <id>sales</id>
               <claims>age</claims>
-              <claims>country_code</claims>
+              <claims>region</claims>
               <claims>has_mfa</claims>
               <claims>user_id</claims>
             </scope>
@@ -77,22 +77,16 @@
             </claim>
             <claim>
               <name>age</name>
-              <no-source/>
+              <value-provided-by>datasource-claims-provider</value-provided-by>
               <transformation>
-                <value-transformation-procedure>ZnVuY3Rpb24gZ2VuZXJhdGUoKSB7CiAgcmV0dXJuIDM1Cn0=</value-transformation-procedure>
+                <input-attribute-names>attributes</input-attribute-names>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICAgIHZhciBkYXRhID0gSlNPTi5wYXJzZShhY2NvdW50LmF0dHJpYnV0ZXMpOwogICAgcmV0dXJuIGRhdGEuYWdlOwp9</value-transformation-procedure>
               </transformation>
             </claim>
             <claim>
               <name>birthdate</name>
               <description>OpenID Connect birthdate claim</description>
               <value-provided-by>account-manager-claims-provider</value-provided-by>
-            </claim>
-            <claim>
-              <name>country_code</name>
-              <no-source/>
-              <transformation>
-                <value-transformation-procedure>ZnVuY3Rpb24gZ2VuZXJhdGUoKSB7CiAgcmV0dXJuICJVU0EiCn0=</value-transformation-procedure>
-              </transformation>
             </claim>
             <claim>
               <name>email</name>
@@ -180,15 +174,23 @@
               <value-provided-by>account-manager-claims-provider</value-provided-by>
             </claim>
             <claim>
+              <name>region</name>
+              <value-provided-by>datasource-claims-provider</value-provided-by>
+              <transformation>
+                <input-attribute-names>attributes</input-attribute-names>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICB2YXIgZGF0YSA9IEpTT04ucGFyc2UoYWNjb3VudC5hdHRyaWJ1dGVzKTsKICByZXR1cm4gZGF0YS5yZWdpb247Cn0=</value-transformation-procedure>
+              </transformation>
+            </claim>
+            <claim>
               <name>updated_at</name>
               <description>OpenID Connect updated_at claim</description>
               <value-provided-by>account-manager-claims-provider</value-provided-by>
             </claim>
             <claim>
               <name>user_id</name>
-              <no-source/>
+              <value-provided-by>scim-claims-provider</value-provided-by>
               <transformation>
-                <value-transformation-procedure>ZnVuY3Rpb24gZ2VuZXJhdGUoKSB7CiAgcmV0dXJuICIxOTI2NzQ4OTIiCn0=</value-transformation-procedure>
+                <input-attribute-names>externalId</input-attribute-names>
               </transformation>
             </claim>
             <claim>
@@ -202,12 +204,30 @@
               <value-provided-by>account-manager-claims-provider</value-provided-by>
             </claim>
             <claims-value-provider>
+              <id>scim-claims-provider</id>
+              <account-manager-claims-provider xmlns="https://curity.se/ns/ext-conf/account-manager-claims-provider">
+                <account-manager>
+                  <id>default-account-manager</id>
+                </account-manager>
+                <map-account-to-openid-connect-claims>false</map-account-to-openid-connect-claims>
+              </account-manager-claims-provider>
+            </claims-value-provider>
+            <claims-value-provider>
               <id>account-manager-claims-provider</id>
               <account-manager-claims-provider xmlns="https://curity.se/ns/ext-conf/account-manager-claims-provider">
                 <account-manager>
                   <id>default-account-manager</id>
                 </account-manager>
+                <map-account-to-openid-connect-claims>true</map-account-to-openid-connect-claims>
               </account-manager-claims-provider>
+            </claims-value-provider>
+            <claims-value-provider>
+              <id>datasource-claims-provider</id>
+              <data-source-claims-provider xmlns="https://curity.se/ns/ext-conf/data-source-claims-provider">
+                <data-source>
+                  <data-source>default-datasource</data-source>
+                </data-source>
+              </data-source-claims-provider>
             </claims-value-provider>
             <claims-value-provider>
               <id>subject_claims_provider</id>
@@ -218,17 +238,17 @@
                 <id>default</id>
                 <access_token>
                   <claim>age</claim>
-                  <claim>country_code</claim>
                   <claim>groups</claim>
+                  <claim>region</claim>
                   <claim>user_id</claim>
                 </access_token>
                 <id_token>
                   <claim>has_mfa</claim>
                 </id_token>
                 <userinfo>
-                  <claim>country_code</claim>
                   <claim>family_name</claim>
                   <claim>given_name</claim>
+                  <claim>region</claim>
                 </userinfo>
               </claims-mapper>
               <default-claims-mapper>default</default-claims-mapper>
