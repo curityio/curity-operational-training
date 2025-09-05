@@ -9,6 +9,3 @@ They demonstrate how you should enable deployment pipelines and evolve your conf
 - Integrate refinements like split configuration.
 - Create protected stage-specific secrets on every deploymeent.
 - Use service roles for greater control over OAuth endpoints.
-
-Each deployment uses a local Docker Compose environment so that you get fast feedback.\
-For each lesson, copy in a `license.json` file and run `./go.sh` to perform the deployment.

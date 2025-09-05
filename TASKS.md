@@ -1,18 +1,14 @@
 # Course Tasks
 
+
+
 ## Finish Lesson 2
 
-- Issue has_mfa claim
 - Finish doc
-- Embedded token screenshot - update user authentication and re-reference it
-- Check question - on user identities
 - Mention that claims can be objects and arrays when I use transformation and show roles
 - Return null to not issue claim
 
-Resource identities to survive database user recreation.
-E.g. a unique index.
-
-## Lesson 1
+## Refine Lesson 1
 
 - Show how user consent looks and say you can customize consent 
 - Mention the refresh token
@@ -20,7 +16,9 @@ E.g. a unique index.
 - Default scope
 - Use customer.example for customer users and demo.example for employee users
 
-## Lesson 3: Scaling
+## Lesson 3: Scaling Tokens
+
+TODO
 
 ### Token Issuers
 
@@ -70,7 +68,8 @@ Scenrio with 'experience' audience and scopes:
 
 ### User Management Course
 
-Mention multiple user records are possible.
+- Mention multiple user records are possible.
+- Survive database migrations, e.g. a unique index.
 
 ### Console Client
 
@@ -98,6 +97,15 @@ Add a common SETUP page, e.g. precreate certs.\
 - Add some forward references to deployment tutorials
 - Mention health / readiness / logs
 
-### Self-Servioce Portal
+### Self-Service Portal
 
 I think I already mention this when I cover the Applications profile - but double check.
+
+### Introductory Course
+
+Introduce roles and explain:
+
+- Company / people stuff
+- Technical level expected of students
+  Use of curl tool etc
+  Supported environments

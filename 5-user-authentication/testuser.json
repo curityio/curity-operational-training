@@ -2,14 +2,14 @@
     "schemas": [
         "urn:ietf:params:scim:schemas:core:2.0:User"
     ],
-    "userName": "test.user@demo.example",
+    "userName": "test.user@customer.example",
     "name": {
         "givenName": "Test",
         "familyName": "User"
     },
     "emails": [
         {
-            "value": "test.user@demo.example",
+            "value": "test.user@customer.example",
             "primary": true
         }
     ],

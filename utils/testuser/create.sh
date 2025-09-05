@@ -13,7 +13,7 @@ fi
 # In the example deployment this allows SCIM access.
 #
 echo 'Getting an access token with SCIM privileges ...'
-HTTP_STATUS=$(curl -s -X POST https://login.demo.example/oauth/v2/oauth-token \
+HTTP_STATUS=$(curl -k -s -X POST https://login.demo.example/oauth/v2/oauth-token \
      -H 'Content-Type: application/x-www-form-urlencoded' \
      -d 'grant_type=client_credentials' \
      -d 'client_id=migration-client' \
@@ -35,7 +35,7 @@ fi
 # Use SCIM to insert the test user account from JSON data
 #
 echo 'Calling SCIM endpoint to create a test user ...'
-HTTP_STATUS=$(curl -s -k -X POST 'https://login.demo.example/users/Users' \
+HTTP_STATUS=$(curl -k -s -X POST 'https://login.demo.example/users/Users' \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     -H 'Accept: application/scim+json' \
     -H 'Content-Type: application/scim+json' \

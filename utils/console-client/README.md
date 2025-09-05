@@ -1,76 +1,49 @@
 # Minimal Console Client
 
-When possible, use [OAuth Tools](https://curity.io/oauth-tools/) as a client to test OAuth flows:
+The minimal console client enables you to quickly run a code flow and view tokens.\
 
-- Run a code flow to test user authentication.
-- Receive an opaque access token.
-- Introspect the access token to view its claims.
+## Usape
 
-## OAuth Tools and Local Deployments
+To run the console client, first install Node.js 22 or later.\
+Then open a command shell in this folder and run `npm install`.
 
-If you run a local deployment of the Curity Identity Server, you may run into some issues with the [Web OAuth Tools Client](https://oauth.tools/):
+### Run a Login
 
-- You need to expose the local deployment to the internet with a tool like ngrok.
-- ngrok may be blocked by IT restrictions in some corporate environments.
-- ngrok uses generated URLs which can make the meaning of URLs in OAuth flows less clear.
-- When a local deployment uses SSL, you may run into trust issues.
+You can test logins with the following command:
 
-You can solve some of these problems with Desktop OAuth Tools, but that still has some issues:
-
-- It uses the Chromium browser and logins with passkeys are not supported.
-
-## Console Client
-
-You can use this simple Node.js console client as an alternative to OAuth Tools.\
-You must first have a deployment with working users, clients and authenticators.\
-To prepare the console client, first run `npm install`.
-
-### Test Logins
-
-Use the `npm run login` command to focus on logins and the user experience.\
-On success, the console client outputs an authorization code:
-
-```text
-Starting login ...
-Completed login and received authorization code: CRZ8st9cccPGtQZrP0cBJigmOkNcrLJg
+```bash
+npm run login
 ```
 
-### View Access Tokens
+### View Access Token Claims
 
-Use the `npm run token` command to trigger a login and then get an access token.\
-The flow outputs token details, which enables you to quickly verify the claims issued to access tokens.
+You can run a login and then view access token claims with the following command.\
+The client acts as an API gateway and introspect tokens.
 
-```text
-Logging in and getting access token ...
-Received opaque access token: _0XBPWQQ_82b0301e-2c4f-44ac-b7c2-d7fec79c9b14
-Received JWT access token:
-{
-  "sub": "testuser@demo.example",
-  "purpose": "access_token",
-  "iss": "https://login.demo.example/~",
-  "active": true,
-  "groups": [
-    "admin"
-  ],
-  "token_type": "bearer",
-  "client_id": "console-client",
-  "aud": "console-client",
-  "nbf": 1753280007,
-  "scope": "openid",
-  "exp": 1753280307,
-  "delegationId": "1b6f0ac7-c234-45d3-a1d5-1007e6bd9449",
-  "iat": 1753280007
-}
+```bash
+npm run token
 ```
 
 ### View All Tokens
 
-Use the `npm run all` command to trigger a login and view all tokens.\
-This includes the introspected access token, the ID token payload and the userinfo response.
+You can run a login and then view all tokens with the following command.\
+This also shows the client's ID token and the OAuth userinfo it is entitled to.
 
-### OAuth Configuration Settings
+```bash
+npm run token
+```
 
-The console client uses two OAuth clients and you can import the following file to configure them.
+### Configuration
+
+By default, the console client points to OAuth endpoints for this repository's local deployments.\
+You can edit the following files to point to a remote system instead.
+
+- [OAuth Client Settings](src/security/oauthClient.ts)
+- [Introspection Settings](src/security/introspectClient.ts)
+
+Each lesson has XML configuration for the console client that you can import into your system.\
+For example, save the following XML to a `client.xml` file, then upload it in the Admin UI.\
+Choose the merge option and commit changes, after which you can run the client.
 
 ```xml
 <config xmlns="http://tail-f.com/ns/config/1.0">
@@ -91,11 +64,6 @@ The console client uses two OAuth clients and you can import the following file 
                   <require-proof-key>true</require-proof-key>
                 </proof-key>
                 <scope>openid</scope>
-                <user-authentication>
-                  <allowed-authenticators>passwords</allowed-authenticators>
-                  <allowed-authenticators>passkeys</allowed-authenticators>
-                  <allowed-authenticators>employees</allowed-authenticators>
-                </user-authentication>
                 <capabilities>
                   <code>
                   </code>
@@ -118,10 +86,11 @@ The console client uses two OAuth clients and you can import the following file 
 </config>
 ```
 
-By default, the console client points to OAuth endpoints for this repository's local deployments.\
-You can edit the following files to point to a remote system instead.
+## Advantages
 
-```text
-src/security/oauthClient.ts
-src/security/introspectClient.ts
-```
+The minimal client has some advantages over OAuth Tools:
+
+- It is tailored to the teaching material.
+- It does not require an ngrok tunnel, which may not be possible in some environments.
+- It maintains the course's preferred local URLs.
+- Desktop OAuth Tools does not currently support logins with passkeys.
