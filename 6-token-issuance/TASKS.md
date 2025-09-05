@@ -1,45 +1,23 @@
-# Deployment Tasks
+# Course Tasks
 
-## Claims Resolution
+## Finish Lesson 2
 
-Implement this and make it work for customers and employees.
+- Issue has_mfa claim
+- Finish doc
+- Embedded token screenshot - update user authentication and re-reference it
+- Check question - on user identities
+- Mention that claims can be objects and arrays when I use transformation and show roles
 
-### Account ID as Subject
+## Lesson 1
 
-Say how to use PPIDs and read the spec.\
-Say how to do that.\
-Update the example to use the account ID.
+- Show how user consent looks and say you can customize consent 
+- Mention the refresh token
 
-## Scaling
-
-### Embedded Token
-
-Update user attributes screenshot and say how to get an embedded token.\
-Show that as JSON.
-
-## Check User Authentication Course
-
-In the light of newer changes, see how this feels in terms of using a client and other aspects.\
-Update the screenshot with the embedded token.\
-Explain Azure groups hack in order for the deployment to support any OIDC provider.
-
-## Use Consent
-
-Add a note to issuance on what consent would look like.\
-Say that you can customize consent.
-
-## Mention Refresh Token
-
-Briefly mention, but not relevant to this tutorial.
-
-
-
-
-## Scale
+## Lesson 3: Scaling
 
 ### Token Issuers
 
-Use the working with claims technique to use client properties.
+- Use the working with claims technique to use client properties.
 
 ### Tokens End to End
 
@@ -54,20 +32,40 @@ Link to tutorial.
 
 ### Manageability
 
-Refer to scopes and claims best practices.
+End with scopes and claims best practices.
+Dependencies at a technical and people level.
 
-## README Consolidation
+## General
+
+### Scripting
+
+- Point to scripting tutorial
+
+### User Authentication Course
+
+- Better explain Azure groups hack in order for the deployment to support any OIDC provider.
+
+### Console Client
+
+Better improve its README to explain its role.
+
+### HTTPS
+
+Use SSL from cluster onwards.
+Explain in READMEs how to trust it, in a common setup page, on macOS and Windows.
+Make sure Windows support is clear.
+
+### README Consolidation
 
 Admin UI, /etc/hosts to add to all READMEs.\
 Make sure Docker is configured to use sufficient at least 8GB+ of RAM.
 Add a common SETUP page, e.g. precreate certs.\
-Use SSL from cluster onwards.\
-That will make specific pages nicer to read.
 
-## Logging and Monitoring
+### Logging and Monitoring
 
-Add some forward references to HOWTOs and logs.
+- Add some forward references to deployment tutorials
+- Mention health / readiness / logs
 
-## Self-Servioce Portal
+### Self-Servioce Portal
 
 I think I already mention this when I cover the Applications profile - but double check.

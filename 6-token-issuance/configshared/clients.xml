@@ -78,6 +78,9 @@
                 <user-authentication>
                   <allowed-authenticators>username</allowed-authenticators>
                 </user-authentication>
+                <use-pairwise-subject-identifiers>
+                  <sector-identifier>product1</sector-identifier>
+                </use-pairwise-subject-identifiers>
                 <capabilities>
                   <code>
                   </code>
