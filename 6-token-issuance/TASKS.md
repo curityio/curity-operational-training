@@ -18,6 +18,7 @@ E.g. a unique index.
 - Mention the refresh token
 - Larger setups and multiple user records
 - Default scope
+- Use customer.example for customer users and demo.example for employee users
 
 ## Lesson 3: Scaling
 
@@ -63,6 +64,13 @@ Scenrio with 'experience' audience and scopes:
 - Different types of action attributes.
 - Linked to JavaScript customizations and ghow we say more in the customizations course.
 - subject_claims_provider -> subeject-claims-provider?
+
+- Test user must be test.user@customer.example - update user creation script
+  Mention the script in the user authentication course.
+
+### User Management Course
+
+Mention multiple user records are possible.
 
 ### Console Client
 
