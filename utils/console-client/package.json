@@ -1,7 +1,7 @@
 {
   "name": "console-client",
   "version": "1.0.0",
-  "description": "A minimal code flow client to test the login user experience for local deployments",
+  "description": "A minimal code flow client to test logins and tokens for local deployments",
   "author": "Curity AB",
   "license": "Apache-2.0",
   "type": "module",

@@ -20,6 +20,10 @@
 
 TODO
 
+- Currently the user_id claim is issued under openid.
+- Add the user_id to the default scope - and test it.
+- Make sure it works for employees and explain missing source values.
+
 ### Token Issuers
 
 - Use the working with claims technique to use client properties.

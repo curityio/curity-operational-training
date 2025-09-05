@@ -1,6 +1,6 @@
 # Minimal Console Client
 
-The minimal console client enables you to quickly run a code flow and view tokens.\
+The minimal console client enables you to quickly run a code flow and view tokens.
 
 ## Usape
 
@@ -18,7 +18,7 @@ npm run login
 ### View Access Token Claims
 
 You can run a login and then view access token claims with the following command.\
-The client acts as an API gateway and introspect tokens.
+The client acts as an API gateway and introspects access tokens to show their claims.
 
 ```bash
 npm run token
