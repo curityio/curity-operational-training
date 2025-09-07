@@ -73,11 +73,6 @@ Scenrio with 'experience' audience and scopes:
 - Mention multiple user records are possible.
 - Survive database migrations, e.g. a unique index.
 
-## SQL Server
-
-Do wait on startup properly according to MSSQL.
-Maybe a brief wait if needed.
-
 ### Logging and Monitoring
 
 - Add some forward references to deployment tutorials

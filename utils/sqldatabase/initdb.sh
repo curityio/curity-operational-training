@@ -2,10 +2,21 @@
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
+#####################################################################
+# Set up the Curity Identity Server database with the sqlcmd tool
+# - https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility
+#####################################################################
+
 #
-# A basic way to wait for the database server to come online
+# Wait for all databases to reach an online state
 #
-sleep 30
+DBSTATUS=''
+while [ -z $DBSTATUS ] || [ $DBSTATUS -ne 0 ]; do
+	DBSTATUS=$(/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -h -1 -t 1 -C -Q 'SET NOCOUNT ON; SELECT COUNT(1) FROM sys.databases WHERE state <> 0')
+  if [ -z $DBSTATUS ] || [ $DBSTATUS -ne 0 ]; then
+    sleep 1
+  fi
+done
 
 #
 # Create base resources
