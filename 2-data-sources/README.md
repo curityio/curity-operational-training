@@ -6,7 +6,7 @@ Extends the existing deployment to use durable storage for identity data.
 ## Deploy the System
 
 The deployment uses a local Docker Compose environment and a Microsoft SQL Server database.\
-Copy a `license.json` file to this folder and run `./go.sh` to perform the deployment.
+Copy a `license.json` file to this folder and run `./deploy.sh` to perform the deployment.
 
 ## Connect to the Database
 

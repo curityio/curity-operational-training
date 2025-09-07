@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
@@ -26,12 +26,13 @@ export CONFIG_ENCRYPTION_KEY='e3b860830de04cc47214d3363d00ed4b1d8d9fb8c9ec7c9877
 #
 # Supply parameters to control URLs
 #
-export RUNTIME_BASE_URL='http://login.demo.example'
-export ADMIN_BASE_URL='http://admin.demo.example:6749'
+export RUNTIME_BASE_URL='https://login.demo.example'
+export ADMIN_BASE_URL='https://admin.demo.example'
 
 #
 # Run the deployment
 #
+docker pull kong/kong:latest
 docker compose up
 if [ $? -ne 0 ]; then
   exit 1

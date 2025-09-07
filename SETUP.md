@@ -58,7 +58,7 @@ Trust the certificate by importing it into the local computer's trust store, for
 ## 5. Run a Deployment
 
 To run most deployments, open a Linux terminal it ita folder.\
-Then, copy in a `license.json` file and run `./go.sh` to perform the deployment.
+Then, copy in a `license.json` file and run `./deploy.sh` to perform the deployment.
 
 ## 6. Run the Admin UI
 

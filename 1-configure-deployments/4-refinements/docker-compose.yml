@@ -1,5 +1,21 @@
 services:
 
+  api-gateway:
+    image: kong/kong:latest
+    hostname: apigateway
+    ports:
+      - 443:3000
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml
+      - ../../utils/ssl-certs/example.ssl.key:/usr/local/share/certs/example.ssl.key
+      - ../../utils/ssl-certs/example.ssl.crt:/usr/local/share/certs/example.ssl.crt
+    environment:
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
+      KONG_PROXY_LISTEN: '0.0.0.0:3000 http2 ssl'
+      KONG_SSL_CERT: '/usr/local/share/certs/example.ssl.crt'
+      KONG_SSL_CERT_KEY: '/usr/local/share/certs/example.ssl.key'
+
   idsvr-admin:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-admin
@@ -48,15 +64,3 @@ services:
       ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
       RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
       SERVICE_NAME: 'Runtime2'
-
-  api-gateway:
-    image: kong/kong:latest
-    hostname: apigateway
-    ports:
-      - 80:3000
-    volumes:
-      - ./kong.yml:/usr/local/kong/declarative/kong.yml
-    environment:
-      KONG_DATABASE: 'off'
-      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
-      KONG_PROXY_LISTEN: '0.0.0.0:3000'

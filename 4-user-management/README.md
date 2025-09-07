@@ -22,7 +22,7 @@ For example, on macOS, import it into Keychain Access under System / Certificate
 utils/ssl-certs/example.ca.crt
 ```
 
-Copy a `license.json` file to this folder and run `./go.sh` to perform the deployment.\
+Copy a `license.json` file to this folder and run `./deploy.sh` to perform the deployment.\
 Once the system is up and running, perform these actions:
 
 - Sign in to the DevOps Dashboard as user `admin`.

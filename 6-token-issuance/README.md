@@ -24,7 +24,7 @@ For example, on macOS, import it into Keychain Access under System / Certificate
 utils/ssl-certs/example.ca.crt
 ```
 
-Copy a `license.json` file to this folder and run `./go.sh` to perform the deployment.\
+Copy a `license.json` file to this folder and run `./deploy.sh` to perform the deployment.\
 Then sign in to the Admin UI as user `admin` with an initial credential of `Password1`.
 
 ## Create a Test Customer User

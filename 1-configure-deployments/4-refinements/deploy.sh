@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
@@ -19,21 +19,15 @@ if [ "$LICENSE_KEY" == '' ]; then
 fi
 
 #
-# You only need to create crypto keys once per stage of your deployment pipeline
+# Use the config encryption key generated on the first deployment
 #
-export GENERATE_CLUSTER_KEY='true'
-../../utils/crypto/create-crypto-keys.sh "$(pwd)"
-if [ $? -ne 0 ]; then
-  exit 1
-fi
+export CONFIG_ENCRYPTION_KEY='e3b860830de04cc47214d3363d00ed4b1d8d9fb8c9ec7c9877046c35665ac68c'
 
 #
-# Run crypto tools to create protected secrets
+# Supply parameters to control URLs
 #
-../../utils/crypto/run-crypto-tools.sh "$(pwd)"
-if [ $? -ne 0 ]; then
-  exit 1
-fi
+export RUNTIME_BASE_URL='https://login.demo.example'
+export ADMIN_BASE_URL='https://admin.demo.example'
 
 #
 # Run the deployment

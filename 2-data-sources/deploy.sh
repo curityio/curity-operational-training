@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
@@ -27,20 +27,6 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Create a custom Docker images for the Curity Identity Server and its shared configuration
-#
-docker build --no-cache -t custom_idsvr:1.0.0 .
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-#
-# Set variables that activate the use of additional secrets
-#
-export USER_MANAGEMENT='true'
-export USER_AUTHENTICATION='true'
-
-#
 # If required, create HTTPS certificates that the API gateway uses for external URLs
 #
 ../utils/ssl-certs/create.sh "$(pwd)"
@@ -51,6 +37,7 @@ fi
 #
 # Create crypto keys once per stage of your deployment pipeline
 #
+export GENERATE_CLUSTER_KEY='true'
 ../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
@@ -66,7 +53,6 @@ fi
 
 #
 # Store SQL Server data on a local volume as opposed to the external volumes that real deployments use
-# To redeploy and keep existing data, delete the 'rm -rf' line from the below commands
 #
 rm -rf data
 mkdir data

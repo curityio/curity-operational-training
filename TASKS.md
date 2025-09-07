@@ -1,7 +1,5 @@
 # Course Tasks
 
-
-
 ## Finish Lesson 2
 
 - Finish doc
@@ -21,7 +19,7 @@
 TODO
 
 - Currently the user_id claim is issued under openid.
-- Add the user_id to the default scope - and test it.
+- Maybe add the user_id to the default scope - and test it.
 - Make sure it works for employees and explain missing source values.
 
 ### Token Issuers
@@ -75,26 +73,10 @@ Scenrio with 'experience' audience and scopes:
 - Mention multiple user records are possible.
 - Survive database migrations, e.g. a unique index.
 
-### Console Client
-
-Better improve its README to explain its role.
-
-### HTTPS
-
-Use SSL from cluster onwards.
-Explain in READMEs how to trust it, in a common setup page, on macOS and Windows.
-Make sure Windows support is clear.
-
 ## SQL Server
 
 Do wait on startup properly according to MSSQL.
 Maybe a brief wait if needed.
-
-### README Consolidation
-
-Admin UI, /etc/hosts to add to all READMEs.\
-Make sure Docker is configured to use sufficient at least 8GB+ of RAM.
-Add a common SETUP page, e.g. precreate certs.\
 
 ### Logging and Monitoring
 
