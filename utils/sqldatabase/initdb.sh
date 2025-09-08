@@ -63,7 +63,6 @@ done
 #
 JOB_COUNT=$(/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d msdb -h -1 -t 1 -C -Q 'SET NOCOUNT ON; SELECT COUNT(1) FROM sysjobs WHERE name="idsvr_maintenance"')
 if [ $? -ne 0 ]; then
-  echo "$JOB_COUNT"
   exit 1
 fi
 
