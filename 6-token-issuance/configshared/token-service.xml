@@ -43,6 +43,7 @@
             <scope>
               <id>openid</id>
               <description>Standard OpenID Connect scope</description>
+              <claims>user_id</claims>
               <claims>groups</claims>
             </scope>
             <scope>
@@ -62,7 +63,6 @@
               <claims>age</claims>
               <claims>region</claims>
               <claims>has_mfa</claims>
-              <claims>user_id</claims>
             </scope>
             <scope>
               <id>urn:se:curity:scopes:admin:api</id>

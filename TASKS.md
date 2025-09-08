@@ -1,38 +1,15 @@
 # Course Tasks
 
-## Finish Lesson 2
+## Lesson 2
 
-- Finish doc
-- Mention that claims can be objects and arrays when I use transformation and show roles
-- Return null to not issue claim
-
-## Refine Lesson 1
-
-- Show how user consent looks and say you can customize consent 
-- Mention the refresh token
-- Larger setups and multiple user records
-- Default scope
-- Use customer.example for customer users and demo.example for employee users
+Mention database recreations and new account records.
 
 ## Lesson 3: Scaling Tokens
 
-TODO
-
-- Currently the user_id claim is issued under openid.
-- Maybe add the user_id to the default scope - and test it.
-- Make sure it works for employees and explain missing source values.
-
-### Token Issuers
-
-- Use the working with claims technique to use client properties.
-
-### Tokens End to End
-
-Mention token sharing and the need for end to end.
-
-### Resource indicators
-
-Token procedure that does it and what the client does
+- Mention the default scope - and test it.
+- Use the working with claims technique to use client properties and get different token formats.
+- Mention token sharing and the need for end to end.
+- Token procedure that does it and what the client does
 
 ### Token Exchange
 
@@ -58,6 +35,11 @@ Scenrio with 'experience' audience and scopes:
 
 - Point to scripting tutorial in bvoth authentication and token issuance courses.
 
+### User Management Course
+
+- Mention multiple user records are possible.
+- Survive database migrations, e.g. a unique index.
+
 ### User Authentication Course
 
 - Better explain Azure groups hack in order for the deployment to support any OIDC provider.
@@ -67,11 +49,6 @@ Scenrio with 'experience' audience and scopes:
 
 - Test user must be test.user@customer.example - update user creation script
   Mention the script in the user authentication course.
-
-### User Management Course
-
-- Mention multiple user records are possible.
-- Survive database migrations, e.g. a unique index.
 
 ### Logging and Monitoring
 
@@ -90,3 +67,7 @@ Introduce roles and explain:
 - Technical level expected of students
   Use of curl tool etc
   Supported environments
+
+### SSL for Early Deployments
+
+Take a look and optionally update screenshots, since I now use HTTPS since cluster deployment.

@@ -8,12 +8,12 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #####################################################################
 
 #
-# Wait for all databases to reach an online state
+# Wait for system databases to come online
 #
 DBSTATUS=''
-while [ -z $DBSTATUS ] || [ $DBSTATUS -ne 0 ]; do
-	DBSTATUS=$(/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -h -1 -t 1 -C -Q 'SET NOCOUNT ON; SELECT COUNT(1) FROM sys.databases WHERE state <> 0')
-  if [ -z $DBSTATUS ] || [ $DBSTATUS -ne 0 ]; then
+while [[ $DBSTATUS -ne 1 ]]; do
+	DBSTATUS=$(/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -h -1 -t 1 -C -Q "SET NOCOUNT ON; SELECT 1 FROM sys.databases WHERE name='msdb' and state = 0")
+  if [[ $DBSTATUS -ne 1 ]]; then
     sleep 1
   fi
 done
@@ -46,6 +46,17 @@ if [ $TABLE_COUNT -eq 0 ]; then
     exit 1
   fi
 fi
+
+#
+# Wait for the Agent process to come up
+#
+AGENTSTATUS=''
+while [[ $AGENTSTATUS -ne 1 ]]; do
+	AGENTSTATUS=$(/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -h -1 -t 1 -C -Q "SET NOCOUNT ON; SELECT 1 FROM sysprocesses WHERE program_name=''SQLAgent - Generic Refresher''")
+  if [[ $AGENTSTATUS -ne 1 ]]; then
+    sleep 1
+  fi
+done
 
 #
 # See if the maintenance job already exists in the msdb database
