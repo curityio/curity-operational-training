@@ -65,6 +65,9 @@
               <claims>has_mfa</claims>
             </scope>
             <scope>
+              <id>sales:reports</id>
+            </scope>
+            <scope>
               <id>urn:se:curity:scopes:admin:api</id>
               <claims>groups</claims>
             </scope>
@@ -302,6 +305,10 @@
           <id>token-service-token</id>
           <uri>/oauth/v2/oauth-token</uri>
           <endpoint-kind>oauth-token</endpoint-kind>
+          <token-endpoint-procedures>
+            <flow>oauth-token-client-credentials</flow>
+            <procedure>custom-client-credentials</procedure>
+          </token-endpoint-procedures>
         </endpoint>
         <endpoint>
           <id>token-service-userinfo</id>

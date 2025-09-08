@@ -117,7 +117,7 @@ echo "export SYMMETRIC_KEY='$SYMMETRIC_KEY'"                   >> ./protected-se
 echo "export SIGNING_KEY='$SIGNING_KEY'"                       >> ./protected-secrets.env
 
 #
-# The first Users and Authentication deployment uses extra secrets for basic user management
+# The User Management deployment adds extra clients with secrets
 #
 if [ "$USER_MANAGEMENT" == 'true' ]; then
 
@@ -129,7 +129,7 @@ if [ "$USER_MANAGEMENT" == 'true' ]; then
 fi
 
 #
-# The second Users and Authentication deployment uses extra secrets related to external IDPs and user authentication
+# The Users and Authentication deployment adds extra secrets used by external IDPs and for Admin UI IDP integration
 #
 if [ "$USER_AUTHENTICATION" == 'true' ]; then
 
@@ -152,4 +152,16 @@ if [ "$USER_AUTHENTICATION" == 'true' ]; then
     exit 1
   fi
   echo "export SSL_TRUST_STORE='$SSL_TRUST_STORE'" >> ./protected-secrets.env
+fi
+
+#
+# The Token Issuance deployment adds extra clients with secrets
+#
+if [ "$TOKEN_ISSUANCE" == 'true' ]; then
+
+  BACKEND_JOB_CLIENT_SECRET=$(openssl passwd -5 "$BACKEND_JOB_CLIENT_SECRET_RAW")
+  echo "export BACKEND_JOB_CLIENT_SECRET='$BACKEND_JOB_CLIENT_SECRET'" >> ./protected-secrets.env
+
+  TOKEN_EXCHANGE_CLIENT_SECRET=$(openssl passwd -5 "$TOKEN_EXCHANGE_CLIENT_SECRET_RAW")
+  echo "export TOKEN_EXCHANGE_CLIENT_SECRET='$TOKEN_EXCHANGE_CLIENT_SECRET'" >> ./protected-secrets.env
 fi

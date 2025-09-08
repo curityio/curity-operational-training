@@ -91,6 +91,34 @@
                   <introspection/>
                 </capabilities>
               </client>
+              <client>
+                <id>backend-job-client</id>
+                <secret>#{BACKEND_JOB_CLIENT_SECRET}</secret>
+                <scope>sales:reports</scope>
+                <capabilities>
+                  <client-credentials/>
+                </capabilities>
+                <properties>
+                  <property>
+                    <key>access_token_type</key>
+                    <value>jwt</value>
+                  </property>
+                </properties>
+              </client>
+              <client>
+                <id>token-exchange-client</id>
+                <secret>#{TOKEN_EXCHANGE_CLIENT_SECRET}</secret>
+                <scope>sales:reports</scope>
+                <capabilities>
+                  <client-credentials/>
+                </capabilities>
+                <properties>
+                  <property>
+                    <key>access_token_type</key>
+                    <value>jwt</value>
+                  </property>
+                </properties>
+              </client>
             </config-backed>
           </client-store>
         </authorization-server>

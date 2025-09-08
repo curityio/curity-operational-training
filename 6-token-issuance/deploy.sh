@@ -39,6 +39,7 @@ fi
 #
 export USER_MANAGEMENT='true'
 export USER_AUTHENTICATION='true'
+export TOKEN_ISSUANCE='true'
 
 #
 # If required, create HTTPS certificates that the API gateway uses for external URLs

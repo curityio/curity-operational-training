@@ -7,7 +7,7 @@ try {
 
     const code = await frontChannelRequest();
     const tokens = await backChannelRequest(code);
-    console.log('Received opaque access token');
+    console.log('Received opaque access token ...');
 
     const accessTokenClaims = await introspectionRequest(tokens.access_token);
     console.log('Visualizing JWT access token:');
