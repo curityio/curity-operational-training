@@ -1,15 +1,12 @@
 #!/bin/bash
 
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
 RESPONSE_FILE='response.txt'
 INPUT_FILE='testuser.json'
 
-if [ ! -f "$INPUT_FILE" ]; then
-  echo "There is no input file $INPUT_FILE"
-  exit 1
-fi
-
 #
-# Get an access token with the 'accounts_migration' scope.
+# Get an access token with the 'accounts:migration' scope.
 # In the example deployment this allows SCIM access.
 #
 echo 'Getting an access token with SCIM privileges ...'
@@ -18,7 +15,7 @@ HTTP_STATUS=$(curl -k -s -X POST https://login.demo.example/oauth/v2/oauth-token
      -d 'grant_type=client_credentials' \
      -d 'client_id=migration-client' \
      -d "client_secret=Password1" \
-     -d 'scope=accounts_migration' \
+     -d 'scope=accounts:migration' \
      -o "$RESPONSE_FILE" -w '%{http_code}')
 if [ "$HTTP_STATUS" != '200' ]; then \
   echo "Problem encountered getting a SCIM access token, HTTP status: $HTTP_STATUS"
@@ -35,7 +32,7 @@ fi
 # Use SCIM to insert the test user account from JSON data
 #
 echo 'Calling SCIM endpoint to create a test user ...'
-HTTP_STATUS=$(curl -k -s -X POST 'https://login.demo.example/users/Users' \
+HTTP_STATUS=$(curl -k -s -X POST 'https://login.demo.example/scim/Users' \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     -H 'Accept: application/scim+json' \
     -H 'Content-Type: application/scim+json' \

@@ -25,7 +25,7 @@
         </endpoint>
         <endpoint>
           <id>user-service</id>
-          <uri>/users</uri>
+          <uri>/scim</uri>
           <endpoint-kind>um-api</endpoint-kind>
         </endpoint>
       </endpoints>

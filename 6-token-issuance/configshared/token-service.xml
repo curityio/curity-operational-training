@@ -27,7 +27,7 @@
               <id>accounts</id>
             </scope>
             <scope>
-              <id>accounts_migration</id>
+              <id>accounts:migration</id>
             </scope>
             <scope>
               <id>address</id>

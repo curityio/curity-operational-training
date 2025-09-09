@@ -1,12 +1,14 @@
 import axios, {AxiosRequestConfig} from 'axios';
+import getPort from 'get-port';
 import http from 'http';
 import EventEmitter from 'node:events';
 import open from 'open';
 import {generateHash, generateRandomString, readOAuthResponseBodyError} from './utils.js';
 
-const port = 3333;
+const defaultPort = 3333;
 const eventEmitter = new EventEmitter();
 let metadata: any;
+let redirectUri: string | null = null;
 let codeVerifier: string | null = null;
 let httpServer: http.Server | null = null;
 
@@ -15,7 +17,6 @@ let httpServer: http.Server | null = null;
  */
 const configuration = {
     clientId: 'console-client',
-    redirectUri: `http://127.0.0.1:${port}/callback`,
     scope: process.env.SCOPE || 'openid profile sales',
     issuer: 'https://login.demo.example/~',
 };
@@ -29,10 +30,13 @@ export async function frontChannelRequest(): Promise<string> {
 
     codeVerifier = generateRandomString();
     const codeChallenge = generateHash(codeVerifier);
-    
+
+    const port = await getPort({port: defaultPort});
+    redirectUri = `http://127.0.0.1:${port}/callback`;
+
     let requestUrl = metadata.authorization_endpoint;
     requestUrl += `?client_id=${encodeURIComponent(configuration.clientId)}`;
-    requestUrl += `&redirect_uri=${encodeURIComponent(configuration.redirectUri)}`;
+    requestUrl += `&redirect_uri=${encodeURIComponent(redirectUri)}`;
     requestUrl += '&response_type=code';
     requestUrl += `&scope=${encodeURIComponent(configuration.scope)}`;
     requestUrl += `&code_challenge=${codeChallenge}`;
@@ -86,7 +90,7 @@ export async function backChannelRequest(code: string): Promise<any> {
     const formData = new URLSearchParams();
     formData.append('grant_type', 'authorization_code');
     formData.append('client_id', configuration.clientId);
-    formData.append('redirect_uri', configuration.redirectUri);
+    formData.append('redirect_uri', redirectUri!);
     formData.append('code', code);
     formData.append('code_verifier', codeVerifier!);
 
