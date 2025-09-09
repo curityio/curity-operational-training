@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig} from 'axios';
 import http from 'http';
 import EventEmitter from 'node:events';
 import open from 'open';
-import {generateHash, generateRandomString} from './utils.js';
+import {generateHash, generateRandomString, readOAuthResponseBodyError} from './utils.js';
 
 const port = 3333;
 const eventEmitter = new EventEmitter();
@@ -16,7 +16,7 @@ let httpServer: http.Server | null = null;
 const configuration = {
     clientId: 'console-client',
     redirectUri: `http://127.0.0.1:${port}/callback`,
-    scope: process.env.SCOPE || 'openid profile',
+    scope: process.env.SCOPE || 'openid profile sales',
     issuer: 'https://login.demo.example/~',
 };
 
@@ -146,42 +146,4 @@ async function getMetadata(): Promise<void> {
     }  catch (e: any) {
         throw new Error('Unable to get metadata', e);
     }
-}
-
-/*
- * Handle error responses
- */
-function readOAuthResponseBodyError(operation: string, e: any): string {
-
-     let status: number | null = null;
-        if (e.response?.status) {
-            status = e.response.status;
-        }
-        
-        let code = '';
-        let description = '';
-        if (e.response.data) {
-            
-            if (e.response.data.error) {
-                code = e.response.data.error;
-            }
-
-            if (e.response.data.error_description) {
-                description += `: ${e.response.data.error_description}`;
-            }
-        }
-        
-        let message = `${operation} failed`;
-        if (status) {
-            message += `, status: ${status}`;
-        }
-        if (code) {
-            message += `, code: ${code}`;
-        }
-        if (description) {
-            message += `, description: ${description}`;
-        }
-        
-        throw new Error(message);
-
 }

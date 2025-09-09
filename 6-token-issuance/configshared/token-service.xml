@@ -309,6 +309,10 @@
             <flow>oauth-token-client-credentials</flow>
             <procedure>custom-client-credentials</procedure>
           </token-endpoint-procedures>
+          <token-endpoint-procedures>
+            <flow>oauth-token-oauth-token-exchange</flow>
+            <procedure>custom-oauth-token-exchange</procedure>
+          </token-endpoint-procedures>
         </endpoint>
         <endpoint>
           <id>token-service-userinfo</id>

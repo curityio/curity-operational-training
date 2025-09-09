@@ -25,6 +25,9 @@ services:
     environment:
       ADMIN: 'true'
       LICENSE_KEY: '${LICENSE_KEY}'
+    depends_on:
+      curity-data:
+        condition: service_started
 
   curity-data:
     image: curity_mssql:1.0.0

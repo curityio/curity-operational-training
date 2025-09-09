@@ -32,6 +32,9 @@ services:
       ADMIN: 'true'
       SERVICE_NAME: 'Admin'
       LICENSE_KEY: '${LICENSE_KEY}'
+    depends_on:
+      curity-data:
+        condition: service_started
 
   idsvr-runtime1:
     image: curity.azurecr.io/curity/idsvr:latest
@@ -48,6 +51,9 @@ services:
     environment:
       SERVICE_NAME: 'Runtime1'
       LICENSE_KEY: '${LICENSE_KEY}'
+    depends_on:
+      curity-data:
+        condition: service_started
 
   idsvr-runtime2:
     image: curity.azurecr.io/curity/idsvr:latest
@@ -64,6 +70,9 @@ services:
     environment:
       SERVICE_NAME: 'Runtime2'
       LICENSE_KEY: '${LICENSE_KEY}'
+    depends_on:
+      curity-data:
+        condition: service_started
 
   curity-data:
     image: curity_mssql:1.0.0

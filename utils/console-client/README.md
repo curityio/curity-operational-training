@@ -18,7 +18,7 @@ npm run login
 ### View Access Token Claims
 
 You can run a login and then view access token claims with the following command.\
-The client acts as an API gateway and introspects access tokens to show their claims.
+The client then acts as an API gateway and introspects access tokens to show their claims.
 
 ```bash
 npm run token
@@ -31,6 +31,16 @@ This also shows the client's ID token and the OAuth userinfo it is entitled to.
 
 ```bash
 npm run token
+```
+
+### Exchange an Access Tokens
+
+You can run a login and then view access token claims with the following command.\
+The client then acts as an API and uses token exchange to downscope the access token.\
+The exchanged access token maintains the user identity but no longer contains custom claims.
+
+```bash
+npm run exchange
 ```
 
 ### Configuration

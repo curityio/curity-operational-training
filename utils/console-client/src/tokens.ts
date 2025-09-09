@@ -1,5 +1,5 @@
+import {backChannelRequest, downloadUserInfo, frontChannelRequest} from './security/codeFlowClient.js';
 import {introspectionRequest} from './security/introspectClient.js';
-import {backChannelRequest, downloadUserInfo, frontChannelRequest} from './security/oauthClient.js';
 import {base64UrlDecode} from './security/utils.js';
 
 console.log('Logging in and getting tokens ...')
@@ -7,7 +7,6 @@ try {
 
     const code = await frontChannelRequest();
     const tokens = await backChannelRequest(code);
-    console.log('Received opaque access token ...');
 
     const accessTokenClaims = await introspectionRequest(tokens.access_token);
     console.log('Visualizing JWT access token:');

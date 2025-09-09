@@ -1,5 +1,6 @@
+import {backChannelRequest, frontChannelRequest} from './security/codeFlowClient.js';
 import {introspectionRequest} from './security/introspectClient.js';
-import {backChannelRequest, frontChannelRequest} from './security/oauthClient.js';
+
 
 console.log('Logging in and getting access token ...')
 try {

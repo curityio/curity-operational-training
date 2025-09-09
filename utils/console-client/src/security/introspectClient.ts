@@ -1,4 +1,5 @@
 import axios, {AxiosRequestConfig} from 'axios';
+import {readOAuthResponseBodyError } from './utils';
 
 /*
  * Point to the local deployment or adjust it to point to a remote system
@@ -11,9 +12,9 @@ const configuration = {
 
 /*
  * Real introspection is a backend API gateway responsibility
- * We do it in this test client for troubleshooting when getting integrated
+ * We do introspection in this test client to enable visualization of the token data
  */
-export async function introspectionRequest(opaqueAccessToken: string): Promise<any> {
+export async function introspectionRequest(opaqueAccessToken: string, accept = 'application/json'): Promise<any> {
     
     const formData = new URLSearchParams();
     formData.append('client_id', configuration.clientId);
@@ -25,7 +26,7 @@ export async function introspectionRequest(opaqueAccessToken: string): Promise<a
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            Accept: 'application/json',
+            Accept: accept,
         },
         data: formData,
     } as AxiosRequestConfig;
@@ -37,35 +38,6 @@ export async function introspectionRequest(opaqueAccessToken: string): Promise<a
 
     } catch (e: any) {
 
-        let status: number | null = null;
-        if (e.response?.status) {
-            status = e.response.status;
-        }
-        
-        let code = '';
-        let description = '';
-        if (e.response.data) {
-            
-            if (e.response.data.error) {
-                code = e.response.data.error;
-            }
-
-            if (e.response.data.error_description) {
-                description += `: ${e.response.data.error_description}`;
-            }
-        }
-        
-        let message = 'Introspection request failed';
-        if (status) {
-            message += `, status: ${status}`;
-        }
-        if (code) {
-            message += `, code: ${code}`;
-        }
-        if (description) {
-            message += `, description: ${description}`;
-        }
-        
-        throw new Error(message);
+        throw new Error(readOAuthResponseBodyError('Introspection', e));
     }
 }

@@ -106,18 +106,13 @@
                 </properties>
               </client>
               <client>
-                <id>token-exchange-client</id>
+                <id>api-token-exchange-client</id>
                 <secret>#{TOKEN_EXCHANGE_CLIENT_SECRET}</secret>
-                <scope>sales:reports</scope>
+                <scope>openid</scope>
+                <scope>profile</scope>
                 <capabilities>
-                  <client-credentials/>
+                  <oauth-token-exchange/>
                 </capabilities>
-                <properties>
-                  <property>
-                    <key>access_token_type</key>
-                    <value>jwt</value>
-                  </property>
-                </properties>
               </client>
             </config-backed>
           </client-store>

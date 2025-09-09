@@ -26,3 +26,40 @@ export function generateHash(data: string): string {
     hash.update(data);
     return base64UrlEncode(hash.digest('base64'));
 }
+
+/*
+ * Read OAuth error responses
+ */
+export function readOAuthResponseBodyError(operation: string, e: any): string {
+
+     let status: number | null = null;
+    if (e.response?.status) {
+        status = e.response.status;
+    }
+    
+    let code = '';
+    let description = '';
+    if (e.response.data) {
+        
+        if (e.response.data.error) {
+            code = e.response.data.error;
+        }
+
+        if (e.response.data.error_description) {
+            description += `: ${e.response.data.error_description}`;
+        }
+    }
+    
+    let message = `${operation} failed`;
+    if (status) {
+        message += `, status: ${status}`;
+    }
+    if (code) {
+        message += `, code: ${code}`;
+    }
+    if (description) {
+        message += `, description: ${description}`;
+    }
+    
+    throw new Error(message);
+}
