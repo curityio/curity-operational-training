@@ -30,7 +30,7 @@ You can run a login and then view all tokens with the following command.\
 This visualizes access token claims, ID token claims and the client's OAuth userinfo.
 
 ```bash
-npm run token
+npm run tokens
 ```
 
 ### Exchange an Access Tokens
