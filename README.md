@@ -24,7 +24,6 @@ In some cases, a single person, like a specialist developer, may complete all ce
 ## Example Deployments
 
 You can complete the courses in any environment for the Curity Identity Server.\
-You can deploy examples from a host computer that runs macOS, Linux or Windows.\
 Read the [Local Computer Setup](SETUP.md) document to learn about prerequisites and test behaviors.
 
 ### 0. All Roles: Introduction

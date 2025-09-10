@@ -7,25 +7,11 @@ The deployment highlights the following example behaviors:
 - Customer users can sign in with either passwords or passkeys, with email-based account recovery.
 - Employees can sign in with an external identity provider like Microsoft Entra ID.
 - The DevOps Dashboard and Admin UI can integrate with the IDP to meet your corporate employee login policy.
-- In your applications, you can present tailored authentication options to both customer users and employees.
+- In your applications, you can present tailored login user experiences for both customer users and employees.
 
-## Deployment Instructions
+## Deployment Steps
 
-First, update your `/etc/hosts` file to include the domain for the test email inbox:
-
-```text
-127.0.0.1 admin.demo.example login.demo.example mail.demo.example
-```
-
-If you haven't already done so, trust the root certificate at the following location.\
-For example, on macOS, import it into Keychain Access under System / Certificates.
-
-```text
-utils/ssl-certs/example.ca.crt
-```
-
-Copy a `license.json` file to this folder and run `./deploy.sh` to perform the deployment.\
-Once the system is up and running, sign in to the DevOps Dashboard and the Admin UI with the IDP.
+Read the [Local Computer Setup](../SETUP.md) document to learn how to deploy and use the system.
 
 ## IDP Configuration
 
@@ -36,31 +22,29 @@ Set your preferred values for these fields, like those for a trial version of En
 - Client Secret
 - Configuration URL
 
-Alternatively you can edit the `config/parameters.env` file and the `vault/secrets.env` files before deploying:
+Alternatively, set values in the `config/parameters.env` file and the `vault/secrets.env` files before deploying:
 
 - EMPLOYEE_IDP_CLIENT_ID
-- EMPLOYEE_IDP_OIDC_METADATA
 - EMPLOYEE_IDP_CLIENT_SECRET_RAW
+- EMPLOYEE_IDP_OIDC_METADATA
 
 To get your IDP working with the DevOps Dashboard you may need to change the following settings:
 
-- For some providers you may need to activate the `Fetch User Info` setting to get values like the user's email.
+- Activate the `Fetch User Info` OIDC authenticator setting to get values like the user's email.
 - Edit the `user_type_set_procedure` authentication action to set your preferred employee email suffix.
-- Edit the `employee_set_subject_procedure` authentication action to set the groups claim and user display name.
+- Edit the `employee_set_subject_procedure` authentication action to customize the logic fopr the groups claim.
 
-## Create a Test Customer User
+## Run Flows
 
-After deployment you can use the following script to create a test user account:
+Use OAuth Tools or the [Test Client](../utils/console-client/README.md) to run OAuth flows.\
+The following command performs only a login:
 
 ```bash
-../utils/testuser/create.sh
+npm run login
 ```
 
-The user has an email of `test.user@demo.example` that you can use for authentication purposes.\
-The user can sign in with either passwords or passkeys.\
-The user has a password of `Password1` that you can use for password logins.
+The following command enables you to view access tokens and check for a `groups` claim:
 
-## Query Data
-
-As you run OAuth flows you can also get to see how the Curity Identity Server uses data.\
-See the [Data Sources README](../2-data-sources/README.md) to get connected to the local database and run queries.
+```bash
+npm run tokens
+```

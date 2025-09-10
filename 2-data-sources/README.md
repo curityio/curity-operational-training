@@ -1,12 +1,11 @@
 # Use Data Sources
 
 These resources accompany the lessons from the [Data Sources](https://curity.io/training/data-sources) course.\
-Extends the existing deployment to use durable storage for identity data.
+You learn how to extend early deployments to use durable storage for identity data.
 
-## Deploy the System
+## Deployment Steps
 
-The deployment uses a local Docker Compose environment and a Microsoft SQL Server database.\
-Copy a `license.json` file to this folder and run `./deploy.sh` to perform the deployment.
+Read the [Local Computer Setup](../SETUP.md) document to learn how to deploy and use the system.
 
 ## Connect to the Database
 
@@ -50,7 +49,7 @@ GO
 
 By default, redeployments clear all existing SQL data for the Curity Identity Server.\
 The deployment shares a data volume locally and clears it.\
-To maintain existing SQL data, comment out the above statements before running the redeployment.
+To maintain existing SQL data, comment out the following statements before running the redeployment.
 
 ```bash
 rm -rf data

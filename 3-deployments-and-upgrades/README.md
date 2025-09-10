@@ -29,7 +29,9 @@ Install the Azure CLI, run `az login` and then run scripts in a numeric sequence
 - ./5-deploy-databasejob.sh
 - ./6-deploy-idsvr.sh
 
-On completion, get working internet HTTPS URLs:
+## Use the Deployed System
+
+On completion, get working internet HTTPS URLs and use them to connect to admin and runtime endpoints:
 
 ```bash
 ADMIN_FQDN=$(az containerapp show \

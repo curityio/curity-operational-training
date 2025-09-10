@@ -4,7 +4,7 @@ The minimal console client enables you to quickly run a code flow and view token
 
 ## Usape
 
-To run the console client, first install Node.js 22 or later.\
+To run the console client, first install Node.js 22 or later and clone this repository.\
 Then open a command shell in this folder and run `npm install`.
 
 ### Run a Login
@@ -18,7 +18,7 @@ npm run login
 ### View Access Token Claims
 
 You can run a login and then view access token claims with the following command.\
-The client then acts as an API gateway and introspects access tokens to show their claims.
+The client acts as an API gateway and introspects access tokens to visualize their claims.
 
 ```bash
 npm run token
@@ -27,7 +27,7 @@ npm run token
 ### View All Tokens
 
 You can run a login and then view all tokens with the following command.\
-This also shows the client's ID token and the OAuth userinfo it is entitled to.
+This visualizes access token claims, ID token claims and the client's OAuth userinfo.
 
 ```bash
 npm run token
@@ -35,8 +35,8 @@ npm run token
 
 ### Exchange an Access Tokens
 
-You can run a login and then view access token claims with the following command.\
-The client then acts as an API and uses token exchange to downscope the access token.\
+You can run a login and then exchange the original access token with the following command.\
+The then acts as an API and uses token exchange to downscope the access token.\
 The exchanged access token maintains the user identity but no longer contains custom claims.
 
 ```bash
@@ -74,6 +74,8 @@ Choose the merge option and commit changes, after which you can run the client.
                   <require-proof-key>true</require-proof-key>
                 </proof-key>
                 <scope>openid</scope>
+                <scope>profile</scope>
+                <scope>sales</scope>
                 <capabilities>
                   <code>
                   </code>
@@ -85,6 +87,15 @@ Choose the merge option and commit changes, after which you can run the client.
                 <secret>Password1</secret>
                 <capabilities>
                   <introspection />
+                </capabilities>
+              </client>
+              <client>
+                <id>api-token-exchange-client</id>
+                <secret>Password1</secret>
+                <scope>openid</scope>
+                <scope>profile</scope>
+                <capabilities>
+                  <oauth-token-exchange/>
                 </capabilities>
               </client>
             </config-backed>
@@ -103,4 +114,4 @@ The minimal client has some advantages over OAuth Tools:
 - It is tailored to the teaching material.
 - It does not require an ngrok tunnel, which may not be possible in some environments.
 - It maintains the course's preferred local URLs.
-- Desktop OAuth Tools does not currently support logins with passkeys.
+- It supports logins with passkeys, which Desktop OAuth Tools does not currently support.

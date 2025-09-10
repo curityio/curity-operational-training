@@ -17,6 +17,7 @@ while [[ $DBSTATUS -ne 1 ]]; do
     sleep 1
   fi
 done
+sleep 5
 
 #
 # Create base resources
@@ -57,6 +58,7 @@ while [[ $AGENTSTATUS -ne 1 ]]; do
     sleep 1
   fi
 done
+sleep 5
 
 #
 # See if the maintenance job already exists in the msdb database

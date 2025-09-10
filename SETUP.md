@@ -1,6 +1,7 @@
 # Local Computer Setup
 
 Most examples use local Docker based deployments, to enable fast feedback.\
+You can deploy examples from a host computer that runs macOS, Linux or Windows.\
 When required, roles should collaborate to enable local setups.
 
 ## 1. Local Administrator Privileges
@@ -25,9 +26,7 @@ Examples use a backend cluster and domain-based URLs similar to real deployments
 You then connect to that cluster from frontends, most commonly:
 
 - Browsers run login screens at `https://login.demo.example`.
-- Administrative user interfaces run at `https://login.demo.example`.
-
-On Windows, Git bash provides a Linux environment with good frontend and backend performance.
+- Administrative user interfaces run at `https://admin.demo.example`.
 
 ### Enable DNS
 
@@ -44,10 +43,10 @@ The hosts file is located at the following locations:
 
 ### Enable HTTPS Trust
 
-Most deployments use HTTPS certificates and create a certificate at this location:
+Most deployments use HTTPS certificates and create a root certificate authority at this location:
 
 ```text
-utils/ssl-certs/
+utils/ssl-certs/example.ca.crt
 ```
 
 Trust the certificate by importing it into the local computer's trust store, for example:
@@ -62,15 +61,14 @@ Then, copy in a `license.json` file and run `./deploy.sh` to perform the deploym
 
 ## 6. Run the Admin UI
 
-To sign in to the Admin UI, use the following details.\
-Some early courses use HTTP instead of HTTPS.
+To sign in to the Admin UI, most deployments use the following details:
 
-URL: `https://admin.demo/example/admin`
-Username: `admin`
+- URL: `https://admin.demo/example/admin`
+- Username: `admin`
 
 ## 7. Use Passwords
 
-For convenience, all courses that use passwords use password values of `Password1`.\
+For convenience, all courses that use passwords or client secrets use values of `Password1`.\
 For real systems you should instead use strong passwords, or, preferably, avoid them altogether.
 
 ## 8. Test Logins with an OAuth Client
@@ -82,7 +80,16 @@ You can choose from one of the following options:
 - USe the desktop OAuth Tools and point to the local environment.
 - Use a [Minimal Console Client](utils/console-client/README.md), tailored to the course's content, that we provide.
 
-## 9. Test Users
+## 9. Use Test User Accounts
 
-Courses use a customer user who signs in with an email of `test.user@customer.example`.\
-Employee users instead authenticate with a corporate identity provider.
+Administrator courses can use a test customer user account created by the following script.\
+The user has an email of `test.user@customer.example`.\
+
+```bash
+./utils/testuser/create.sh
+```
+
+## 10. Query Identity Data
+
+As you generate identity data you can connect to a database and query it.\
+See the [Data Sources README](./2-data-sources/README.md) to get connected to a local database and run queries.
