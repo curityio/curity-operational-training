@@ -9,37 +9,36 @@ The deployment shows how to implement the following tasks in the Curity Identity
 - Control ID token claims and attributes returned from the OpenID Connect userinfo endpoint.
 - Use token exchange to scale the use of access tokens.
 
-## Deployment Instructions
+## Prerequisites
 
-First, update your `/etc/hosts` file to include the domains for the local Curity Identity Server:
-
-```text
-127.0.0.1 admin.demo.example login.demo.example
-```
-
-Then, trust the root certificate at the following location.\
-For example, on macOS, import it into Keychain Access under System / Certificates.
-
-```text
-utils/ssl-certs/example.ca.crt
-```
-
-Copy a `license.json` file to this folder and run `./deploy.sh` to perform the deployment.\
-Then sign in to the Admin UI as user `admin` with an initial credential of `Password1`.
+First read the [Local Computer Setup](SETUP.md) document to learn about prerequisites and test behaviors.
 
 ## Create a Test Customer User
 
-After deployment you can use the following script to create a test user account:
+After deployment you can use the following script from the repository's root folder.\
+This creates a test user account with email `test.user@demo.example` and password `Password1`.
 
 ```bash
-../utils/testuser/create.sh
+./utils/testuser/create.sh
 ```
 
-The user has an email of `test.user@demo.example` that you can use for authentication purposes.\
-The user can sign in with either passwords or passkeys.\
-The user has a password of `Password1` that you can use for password logins.
+## Run Flows
 
-## Query Token Data
+Use OAuth Tools or the [Test Client](../utils/console-client/README.md) to run OAuth flows.\
+The following commands show fully customized token data:
 
-As you run OAuth flows you can also get to see how the Curity Identity Server stores token related data.\
-See the [Data Sources README](../2-data-sources/README.md) to get connected to the local database and run queries.
+```bash
+export SCOPE="openid profile sales"
+npm run tokens
+```
+
+The following commands show how to use OAuth 2.0 token exchange to get new tokens:
+
+```bash
+export SCOPE="openid profile sales"
+npm run exchange
+```
+
+## Query Identity Data
+
+After running flows, see the [Data Sources README](../2-data-sources/README.md) to get connected to the local database and run queries.

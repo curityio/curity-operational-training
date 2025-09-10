@@ -1,6 +1,6 @@
 # Operational Training Resources
 
-These resources provide some concrete resources to complement Curity's [Operational Training](https://curity.io/training/) courses.\
+These resources provide some example deployments to complement Curity's [Operational Training](https://curity.io/training/) courses.\
 Complete the courses for your role(s) to earn Curity certifications.
 
 ## Training Roles
@@ -24,10 +24,8 @@ In some cases, a single person, like a specialist developer, may complete all ce
 ## Example Deployments
 
 You can complete the courses in any environment for the Curity Identity Server.\
-We provide example deployments to compare against, for when you need it.
-
-You can run deployments from a host computer that runs macOS, Linux or Windows.\
-The [Local Computer Setup](SETUP.md) document to learn about prerequisites and behaviors for a local computer.
+You can deploy examples from a host computer that runs macOS, Linux or Windows.\
+Read the [Local Computer Setup](SETUP.md) document to learn about prerequisites and test behaviors.
 
 ### 0. All Roles: Introduction
 
@@ -42,22 +40,22 @@ Learn how to configure highly availabile URLs and manage security settings for a
 ### 2. Operator: Data Sources
 
 An operator should next complete the [Data Sources](2-data-sources/README.md) course.\
-Learn how to use the Curity Identity Server schema for durable storage of identity data.
+Learn how to use durable storage of identity data with the Curity Identity Server.
 
 ### 3. Operator: Deployments and Upgrades
 
 An operator should next complete the [Deployments and Upgrades](3-deployments-and-upgrades/README.md) course.\
-Learn how to provide internet endpoints and integrate with real infrastructure.
+Learn how to provide internet endpoints, use real infrastructure and run reliable upgrades.
 
 ### 4. Administrator: User Management
 
 An administrator should first complete the [User Management](4-user-management/README.md) course.\
-Learn how to administer both customer users and employee users.
+Learn how to administer customer users and employee users with control over attributes.
 
 ### 5. Administrator: User Authentication
 
 An administrator should next complete the [User Authentication](5-user-authentication/README.md) course.\
-Learn how to take full control over user authentication for both customers and employees.
+Learn how to take full control over authentication behaviors for both customers and employees.
 
 ### 6. Administrator: Token Issuance
 
