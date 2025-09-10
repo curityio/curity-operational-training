@@ -17,7 +17,7 @@ while [[ $DBSTATUS -ne 1 ]]; do
     sleep 1
   fi
 done
-sleep 5
+sleep 10
 
 #
 # Create base resources
@@ -58,15 +58,6 @@ while [[ $AGENTSTATUS -ne 1 ]]; do
     sleep 1
   fi
 done
-sleep 5
-
-#
-# See if the maintenance job already exists in the msdb database
-#
-JOB_COUNT=$(/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d msdb -h -1 -t 1 -C -Q 'SET NOCOUNT ON; SELECT COUNT(1) FROM sysjobs WHERE name="idsvr_maintenance"')
-if [ $? -ne 0 ]; then
-  exit 1
-fi
 
 #
 # Set up the database maintenance job in the msdb database
