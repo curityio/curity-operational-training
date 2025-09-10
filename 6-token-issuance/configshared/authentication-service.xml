@@ -1,0 +1,242 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+      <id>authentication-service</id>
+      <type xmlns:auth="https://curity.se/ns/conf/profile/authentication">auth:authentication-service</type>
+      <settings>
+        <authentication-service xmlns="https://curity.se/ns/conf/profile/authentication">
+          <persisted-sso-session>true</persisted-sso-session>
+          <authentication-actions>
+            <authentication-action>
+              <id>user_type_set</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <attributes-location>action-attributes</attributes-location>
+                <transformation-procedure>user_type_set_procedure</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
+              <id>user_type_switch</id>
+              <switch xmlns="https://curity.se/ns/ext-conf/switch">
+                <case>
+                  <name>customer_users</name>
+                  <condition-script>YXR0cmlidXRlcy5hY3Rpb24uaXNFbXBsb3llZT09PWZhbHNl</condition-script>
+                  <action>customer_sequence</action>
+                </case>
+                <case>
+                  <name>employee_users</name>
+                  <condition-script>YXR0cmlidXRlcy5hY3Rpb24uaXNFbXBsb3llZT09PXRydWU=</condition-script>
+                  <action>employee_sequence</action>
+                </case>
+              </switch>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_sequence</id>
+              <sequence xmlns="https://curity.se/ns/ext-conf/sequence">
+                <action>customer_selector</action>
+                <action>customer_switch</action>
+              </sequence>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_selector</id>
+              <selector xmlns="https://curity.se/ns/ext-conf/selector">
+                <attribute-name>customer_login_method</attribute-name>
+                <option>
+                  <title>Passkey</title>
+                  <string-attribute-value>passkey</string-attribute-value>
+                </option>
+                <option>
+                  <title>Password</title>
+                  <string-attribute-value>password</string-attribute-value>
+                </option>
+                <title>Choose your Login Method</title>
+              </selector>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_switch</id>
+              <switch xmlns="https://curity.se/ns/ext-conf/switch">
+                <case>
+                  <name>passkey</name>
+                  <condition-script>YXR0cmlidXRlcy5hY3Rpb24uY3VzdG9tZXJfbG9naW5fbWV0aG9kPT09J3Bhc3NrZXkn</condition-script>
+                  <action>customer_login_passkeys</action>
+                </case>
+                <case>
+                  <name>password</name>
+                  <condition-script>YXR0cmlidXRlcy5hY3Rpb24uY3VzdG9tZXJfbG9naW5fbWV0aG9kPT09J3Bhc3N3b3JkJw==</condition-script>
+                  <action>customer_login_passwords</action>
+                </case>
+              </switch>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_login_passkeys</id>
+              <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
+                <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
+                <always>
+                  <second-factor>
+                    <id>passkeys</id>
+                  </second-factor>
+                </always>
+              </multi-factor-condition>
+            </authentication-action>
+            <authentication-action>
+              <id>customer_login_passwords</id>
+              <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
+                <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
+                <always>
+                  <second-factor>
+                    <id>passwords</id>
+                  </second-factor>
+                </always>
+              </multi-factor-condition>
+            </authentication-action>
+            <authentication-action>
+              <id>employee_sequence</id>
+              <sequence xmlns="https://curity.se/ns/ext-conf/sequence">
+                <action>employee_login</action>
+              </sequence>
+            </authentication-action>
+            <authentication-action>
+              <id>employee_login</id>
+              <multi-factor-condition xmlns="https://curity.se/ns/ext-conf/multi-factor-condition">
+                <disable-second-factor-subject-check>true</disable-second-factor-subject-check>
+                <always>
+                  <second-factor>
+                    <id>employees</id>
+                  </second-factor>
+                  <allow-authentication-with-sso-for-second-factor>false</allow-authentication-with-sso-for-second-factor>
+                </always>
+              </multi-factor-condition>
+            </authentication-action>
+            <authentication-action>
+              <id>employee_set_subject</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <transformation-procedure>employee_set_subject_procedure</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
+              <id>set_final_subject</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <transformation-procedure>set_final_subject_procedure</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
+              <id>passwords_claims</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <attributes-location>context-attributes</attributes-location>
+                <transformation-procedure>passwords_claims_proc</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
+              <id>passkeys_claims</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <attributes-location>context-attributes</attributes-location>
+                <transformation-procedure>passkeys_claims_proc</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+            <authentication-action>
+              <id>employee_claims</id>
+              <script-transformer xmlns="https://curity.se/ns/ext-conf/script-transformer">
+                <attributes-location>context-attributes</attributes-location>
+                <transformation-procedure>employee_claims_proc</transformation-procedure>
+              </script-transformer>
+            </authentication-action>
+          </authentication-actions>
+          <authenticators>
+            <authenticator>
+              <id>username</id>
+              <authentication-actions>
+                <login>user_type_set</login>
+                <login>user_type_switch</login>
+                <login>set_final_subject</login>
+              </authentication-actions>
+              <description>Identify the user</description>
+              <username xmlns="https://curity.se/ns/ext-conf/username">
+              </username>
+            </authenticator>
+            <authenticator>
+              <id>employees</id>
+              <authentication-actions>
+                <login>employee_set_subject</login>
+                <login>employee_claims</login>
+              </authentication-actions>
+              <description>Sign in with the employee login policy </description>
+              <oidc xmlns="https://curity.se/ns/conf/authenticators/oidc">
+                <configuration-url>#{EMPLOYEE_IDP_OIDC_METADATA}</configuration-url>
+                <client-id>#{EMPLOYEE_IDP_CLIENT_ID}</client-id>
+                <client-secret>#{EMPLOYEE_IDP_CLIENT_SECRET}</client-secret>
+                <scope>openid email</scope>
+                <use-subject-for-login-hint>true</use-subject-for-login-hint>
+                <prompt-login>always</prompt-login>
+              </oidc>
+            </authenticator>
+            <authenticator>
+              <id>passkeys</id>
+              <authentication-actions>
+                <login>passkeys_claims</login>
+              </authentication-actions>
+              <description>Sign in with a passkey</description>
+              <required-authenticator-for-registration>email</required-authenticator-for-registration>
+              <passkeys xmlns="https://curity.se/ns/conf/authenticators/passkeys">
+                <allow-registration-during-login>true</allow-registration-during-login>
+                <enable-discoverable-credentials>true</enable-discoverable-credentials>
+                <account-manager>
+                  <id>default-account-manager</id>
+                </account-manager>
+              </passkeys>
+            </authenticator>
+            <authenticator>
+              <id>passwords</id>
+              <authentication-actions>
+                <login>passwords_claims</login>
+              </authentication-actions>
+              <description>Sign in with a password</description>
+              <html-form xmlns="https://curity.se/ns/conf/authenticators/html-form">
+                <account-manager>default-account-manager</account-manager>
+                <credential-manager>default-credential-manager</credential-manager>
+              </html-form>
+            </authenticator>
+            <authenticator>
+              <id>email</id>
+              <description>Email authentication</description>
+              <email>
+                <account-manager>default-account-manager</account-manager>
+              </email>
+            </authenticator>
+            <include-attributes-of-all-authenticators/>
+          </authenticators>
+          <protocols>
+            <protocol>
+              <id>default-simple-protocol</id>
+              <simple-api/>
+            </protocol>
+          </protocols>
+        </authentication-service>
+      </settings>
+      <endpoints>
+        <endpoint>
+          <id>authentication-service-anonymous</id>
+          <uri>/authn/anonymous</uri>
+          <endpoint-kind>auth-anonymous</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>authentication-service-authentication</id>
+          <uri>/authn/authentication</uri>
+          <endpoint-kind>auth-authentication</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>authentication-service-registration</id>
+          <uri>/authn/registration</uri>
+          <endpoint-kind>auth-registration</endpoint-kind>
+        </endpoint>
+      </endpoints>
+      <token-issuers>
+        <default-token-issuer>
+          <jwt-issuer-settings>
+            <algorithm>ES256</algorithm>
+            <signing-key-id>default-signing-key</signing-key-id>
+          </jwt-issuer-settings>
+          <default-data-source>default-datasource</default-data-source>
+        </default-token-issuer>
+      </token-issuers>
+    </profile>
+  </profiles>
+</config>

@@ -1,0 +1,29 @@
+_format_version: '2.1'
+_transform: true
+services:
+- name: runtime
+  url: http://idsvr:8443
+  routes:
+  - name: runtime
+    hosts:
+    - login.demo.example
+    paths:
+    - /
+
+- name: admin
+  url: http://idsvr:6749
+  routes:
+  - name: admin
+    hosts:
+    - admin.demo.example
+    paths:
+    - /
+
+- name: email-inbox
+  url: http://smtpserver:1080
+  routes:
+  - name: email-inbox-route
+    hosts:
+    - mail.demo.example
+    paths:
+    - /

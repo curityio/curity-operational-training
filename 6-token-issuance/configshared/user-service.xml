@@ -1,0 +1,34 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+      <id>user-service</id>
+      <type xmlns:um="https://curity.se/ns/conf/profile/user-management">um:user-management-service</type>
+      <settings>
+        <user-management-service xmlns="https://curity.se/ns/conf/profile/user-management">
+          <api-authentication>
+            <oauth-service>token-service</oauth-service>
+          </api-authentication>
+          <authorization-manager>default</authorization-manager>
+          <user-account-data-source>default-datasource</user-account-data-source>
+          <token-data-source>default-datasource</token-data-source>
+          <credential-management>
+            <credential-manager>default-credential-manager</credential-manager>
+          </credential-management>
+        </user-management-service>
+      </settings>
+      <endpoints>
+        <endpoint>
+          <id>graphql-users-service</id>
+          <uri>/users/graphql</uri>
+          <client-authentication>disallow</client-authentication>
+          <endpoint-kind>um-graphql-api</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>user-service</id>
+          <uri>/scim</uri>
+          <endpoint-kind>um-api</endpoint-kind>
+        </endpoint>
+      </endpoints>
+    </profile>
+  </profiles>
+</config>

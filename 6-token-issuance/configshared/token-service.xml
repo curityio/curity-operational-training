@@ -1,0 +1,334 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+      <id>token-service</id>
+      <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
+      <settings>
+        <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
+          <client-authentication>
+            <symmetrically-signed-jwt>
+              <signature-algorithm>HS512</signature-algorithm>
+            </symmetrically-signed-jwt>
+          </client-authentication>
+          <authentication-service>
+            <authentication-profile>authentication-service</authentication-profile>
+          </authentication-service>
+          <client-capabilities>
+            <code>
+            </code>
+            <client-credentials/>
+            <introspection/>
+             <oauth-token-exchange/>
+            <assisted-token>
+            </assisted-token>
+          </client-capabilities>
+          <scopes>
+            <scope>
+              <id>accounts</id>
+            </scope>
+            <scope>
+              <id>accounts:migration</id>
+            </scope>
+            <scope>
+              <id>address</id>
+              <description>OpenId Connect address scope</description>
+              <claims>address</claims>
+            </scope>
+            <scope>
+              <id>email</id>
+              <description>OpenId Connect email scope</description>
+              <claims>email</claims>
+              <claims>email_verified</claims>
+            </scope>
+            <scope>
+              <id>openid</id>
+              <description>Standard OpenID Connect scope</description>
+              <claims>user_id</claims>
+              <claims>groups</claims>
+            </scope>
+            <scope>
+              <id>phone</id>
+              <description>OpenId Connect phone scope</description>
+              <claims>phone_number</claims>
+              <claims>phone_number_verified</claims>
+            </scope>
+            <scope>
+              <id>profile</id>
+              <description>OpenId Connect profile scope</description>
+              <claims>family_name</claims>
+              <claims>given_name</claims>
+            </scope>
+            <scope>
+              <id>sales</id>
+              <claims>age</claims>
+              <claims>region</claims>
+              <claims>has_mfa</claims>
+            </scope>
+            <scope>
+              <id>sales:reports</id>
+            </scope>
+            <scope>
+              <id>urn:se:curity:scopes:admin:api</id>
+              <claims>groups</claims>
+            </scope>
+          </scopes>
+          <claims>
+            <claim>
+              <name>address</name>
+              <description>OpenID Connect address claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>age</name>
+              <value-provided-by>datasource-claims-provider</value-provided-by>
+              <transformation>
+                <input-attribute-names>attributes</input-attribute-names>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICAgIAogICAgaWYgKCFhY2NvdW50LmF0dHJpYnV0ZXMpIHsKICAgICAgICByZXR1cm4gbnVsbDsKICAgIH0KCiAgICB2YXIgZGF0YSA9IEpTT04ucGFyc2UoYWNjb3VudC5hdHRyaWJ1dGVzKTsKICAgIHJldHVybiBkYXRhLmFnZTsKfQ==</value-transformation-procedure>
+              </transformation>
+            </claim>
+            <claim>
+              <name>birthdate</name>
+              <description>OpenID Connect birthdate claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>email</name>
+              <description>OpenID Connect email claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>email_verified</name>
+              <description>OpenID Connect email_verified claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>family_name</name>
+              <description>OpenID Connect family_name claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>gender</name>
+              <description>OpenID Connect gender claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>given_name</name>
+              <description>OpenID Connect given_name claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>groups</name>
+              <value-provided-by>subject-claims-provider</value-provided-by>
+              <transformation>
+                <input-attribute-names>groups</input-attribute-names>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGF0dHJpYnV0ZXMpIHsKICByZXR1cm4gYXR0cmlidXRlcy5ncm91cHM7Cn0=</value-transformation-procedure>
+              </transformation>
+            </claim>
+            <claim>
+              <name>has_mfa</name>
+              <value-provided-by>context-claims-provider</value-provided-by>
+              <transformation>
+                <input-attribute-names>has_mfa</input-attribute-names>
+              </transformation>
+            </claim>
+            <claim>
+              <name>locale</name>
+              <description>OpenID Connect locale claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>middle_name</name>
+              <description>OpenID Connect middle_name claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>name</name>
+              <description>OpenID Connect name claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>nickname</name>
+              <description>OpenID Connect nickname claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>phone_number</name>
+              <description>OpenID Connect phone_number claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>phone_number_verified</name>
+              <description>OpenID Connect phone_number_verified claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>picture</name>
+              <description>OpenID Connect picture claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>preferred_username</name>
+              <description>OpenID Connect preferred_username claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+             <claim>
+              <name>region</name>
+              <value-provided-by>datasource-claims-provider</value-provided-by>
+              <transformation>
+                <input-attribute-names>attributes</input-attribute-names>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICAKICBpZiAoIWFjY291bnQuYXR0cmlidXRlcykgewogICAgcmV0dXJuIG51bGw7CiAgfQoKICB2YXIgZGF0YSA9IEpTT04ucGFyc2UoYWNjb3VudC5hdHRyaWJ1dGVzKTsKICByZXR1cm4gZGF0YS5yZWdpb247Cn0=</value-transformation-procedure>
+              </transformation>
+            </claim>
+            <claim>
+              <name>region</name>
+              <value-provided-by>datasource-claims-provider</value-provided-by>
+              <transformation>
+                <input-attribute-names>attributes</input-attribute-names>
+                <value-transformation-procedure>ZnVuY3Rpb24gdHJhbnNmb3JtKGFjY291bnQpIHsKICAKICBpZiAoIWFjY291bnQuYXR0cmlidXRlcykgewogICAgcmV0dXJuIG51bGw7CiAgfQogIAogIHZhciBkYXRhID0gSlNPTi5wYXJzZShhY2NvdW50LmF0dHJpYnV0ZXMpOwogIHJldHVybiBkYXRhLnJlZ2lvbjsKfQ==</value-transformation-procedure>
+              </transformation>
+            </claim>
+            <claim>
+              <name>updated_at</name>
+              <description>OpenID Connect updated_at claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>user_id</name>
+              <value-provided-by>scim-claims-provider</value-provided-by>
+              <transformation>
+                <input-attribute-names>externalId</input-attribute-names>
+              </transformation>
+            </claim>
+            <claim>
+              <name>website</name>
+              <description>OpenID Connect website claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claim>
+              <name>zoneinfo</name>
+              <description>OpenID Connect zoneinfo claim</description>
+              <value-provided-by>account-manager-claims-provider</value-provided-by>
+            </claim>
+            <claims-value-provider>
+              <id>scim-claims-provider</id>
+              <account-manager-claims-provider xmlns="https://curity.se/ns/ext-conf/account-manager-claims-provider">
+                <account-manager>
+                  <id>default-account-manager</id>
+                </account-manager>
+                <map-account-to-openid-connect-claims>false</map-account-to-openid-connect-claims>
+              </account-manager-claims-provider>
+            </claims-value-provider>
+            <claims-value-provider>
+              <id>account-manager-claims-provider</id>
+              <account-manager-claims-provider xmlns="https://curity.se/ns/ext-conf/account-manager-claims-provider">
+                <account-manager>
+                  <id>default-account-manager</id>
+                </account-manager>
+                <map-account-to-openid-connect-claims>true</map-account-to-openid-connect-claims>
+              </account-manager-claims-provider>
+            </claims-value-provider>
+            <claims-value-provider>
+              <id>context-claims-provider</id>
+              <authentication-context-claims-provider xmlns="https://curity.se/ns/ext-conf/authentication-context-claims-provider"/>
+            </claims-value-provider>
+            <claims-value-provider>
+              <id>datasource-claims-provider</id>
+              <data-source-claims-provider xmlns="https://curity.se/ns/ext-conf/data-source-claims-provider">
+                <data-source>
+                  <data-source>default-datasource</data-source>
+                </data-source>
+              </data-source-claims-provider>
+            </claims-value-provider>
+            <claims-value-provider>
+              <id>subject-claims-provider</id>
+              <authentication-subject-claims-provider xmlns="https://curity.se/ns/ext-conf/authentication-subject-claims-provider"/>
+            </claims-value-provider>
+            <claims-mappers>
+              <claims-mapper>
+                <id>default</id>
+                <access_token>
+                  <claim>age</claim>
+                  <claim>groups</claim>
+                  <claim>region</claim>
+                  <claim>user_id</claim>
+                </access_token>
+                <id_token>
+                  <claim>has_mfa</claim>
+                </id_token>
+                <userinfo>
+                  <claim>family_name</claim>
+                  <claim>given_name</claim>
+                  <claim>region</claim>
+                </userinfo>
+              </claims-mapper>
+              <default-claims-mapper>default</default-claims-mapper>
+            </claims-mappers>
+          </claims>
+          <openid-connect>
+            <expose-metadata>
+            </expose-metadata>
+          </openid-connect>
+        </authorization-server>
+      </settings>
+      <endpoints>
+        <endpoint>
+          <id>token-service-anonymous</id>
+          <uri>/~</uri>
+          <endpoint-kind>oauth-anonymous</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>token-service-assisted-token</id>
+          <uri>/oauth/v2/oauth-assisted-token</uri>
+          <endpoint-kind>oauth-assisted-token</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>token-service-authorize</id>
+          <uri>/oauth/v2/oauth-authorize</uri>
+          <endpoint-kind>oauth-authorize</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>token-service-introspect</id>
+          <uri>/oauth/v2/oauth-introspect</uri>
+          <endpoint-kind>oauth-introspect</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>token-service-revoke</id>
+          <uri>/oauth/v2/oauth-revoke</uri>
+          <endpoint-kind>oauth-revoke</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>token-service-session</id>
+          <uri>/oauth/v2/oauth-session</uri>
+          <endpoint-kind>oauth-session</endpoint-kind>
+        </endpoint>
+        <endpoint>
+          <id>token-service-token</id>
+          <uri>/oauth/v2/oauth-token</uri>
+          <endpoint-kind>oauth-token</endpoint-kind>
+          <token-endpoint-procedures>
+            <flow>oauth-token-client-credentials</flow>
+            <procedure>custom-client-credentials</procedure>
+          </token-endpoint-procedures>
+          <token-endpoint-procedures>
+            <flow>oauth-token-oauth-token-exchange</flow>
+            <procedure>custom-oauth-token-exchange</procedure>
+          </token-endpoint-procedures>
+        </endpoint>
+        <endpoint>
+          <id>token-service-userinfo</id>
+          <uri>/oauth/v2/oauth-userinfo</uri>
+          <endpoint-kind>oauth-userinfo</endpoint-kind>
+        </endpoint>
+      </endpoints>
+      <token-issuers>
+        <default-token-issuer>
+          <jwt-issuer-settings>
+            <algorithm>ES256</algorithm>
+            <signing-key-id>default-signing-key</signing-key-id>
+          </jwt-issuer-settings>
+          <default-data-source>default-datasource</default-data-source>
+        </default-token-issuer>
+      </token-issuers>
+    </profile>
+  </profiles>
+</config>

@@ -1,0 +1,29 @@
+#
+# The deployment for the database job container
+#
+name: idsvr-dbinit
+location : $REGION
+resourceGroup: $RESOURCE_GROUP
+type: Microsoft.App/containerApps
+identity:
+  type: UserAssigned
+  userAssignedIdentities:
+    $IDENTITY_ID:
+      clientId: $IDENTITY_CLIENT_ID
+      principalId: $IDENTITY_PRINCIPAL_ID
+properties:
+  managedEnvironmentId: $ENVIRONMENT_ID
+  configuration:
+    registries:
+    - identity: $IDENTITY_ID
+      server: $REGISTRY.azurecr.io
+  template:
+    containers:
+    - name: idsvr-dbinit-container
+      image: $IDSVR_DBINIT_IMAGE
+      resources:
+        cpu: 1
+        memory: 2Gi
+    scale:
+      minReplicas: 1
+      maxReplicas: 1
