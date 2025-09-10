@@ -33,7 +33,7 @@ This visualizes access token claims, ID token claims and the client's OAuth user
 npm run tokens
 ```
 
-### Exchange an Access Tokens
+### Exchange an Access Token
 
 You can run a login and then exchange the original access token with the following command.\
 The then acts as an API and uses token exchange to downscope the access token.\
