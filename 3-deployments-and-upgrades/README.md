@@ -36,7 +36,8 @@ Verify that each script completes successfully before running the next one.
 ## Post Deployment Configuration
 
 The example deployment uses domain names that Azure generates.\
-Run a patch to update to the dynamically generated URLs from Azure:
+Run a patch to update to the dynamically generated URLs from Azure.\
+In the event of failure, apply settings to match the patch.xml file manually in the Admin UI.
 
 ```bash
 ./postdeployment/patch.sh
