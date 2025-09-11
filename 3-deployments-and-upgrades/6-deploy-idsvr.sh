@@ -7,6 +7,24 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #################################################
 
 #
+# By default CONFIGURATION_FOLDER is the current folder.
+# It is also possible to deploy configurations from other folders, to test flows in Azure.
+# Set deployment variables here that the run-crypto-tools.sh script uses.
+#
+if [ "$CONFIGURATION_FOLDER" == '6-token-issuance' ]; then
+  export USER_MANAGEMENT='true'
+  export USER_AUTHENTICATION='true'
+  export TOKEN_ISSUANCE='true'
+elif [ "$CONFIGURATION_FOLDER" == '5-user-authentication' ]; then
+  export USER_MANAGEMENT='true'
+  export USER_AUTHENTICATION='true'
+elif [ "$CONFIGURATION_FOLDER" == '4-user-management' ]; then
+  export USER_MANAGEMENT='true'
+else
+  export CONFIGURATION_FOLDER='3-deployments-and-upgrades'
+fi
+
+#
 # Get the license
 #
 if [ ! -f ./license.json ]; then
@@ -52,7 +70,7 @@ export IDENTITY_PRINCIPAL_ID=$(az identity show --resource-group "$RESOURCE_GROU
 # You only need to create crypto keys once per stage of your deployment pipeline
 #
 export GENERATE_CLUSTER_KEY='true'
-../utils/crypto/create-crypto-keys.sh "$(pwd)"
+../utils/crypto/create-crypto-keys.sh ../../"$CONFIGURATION_FOLDER"
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -60,16 +78,30 @@ fi
 #
 # Run crypto tools to create protected secrets
 #
-../utils/crypto/run-crypto-tools.sh "$(pwd)"
+export DBSERVER_HOSTNAME="$DBSERVER.database.windows.net"
+../utils/crypto/run-crypto-tools.sh ../../"$CONFIGURATION_FOLDER"
 if [ $? -ne 0 ]; then
   exit 1
 fi
 
 #
-# Export all parameters so that envsubst can use them
+# Some unpleasant bash manipulation rather than having to list each environment variable individually in yaml files
 #
-. ./config/parameters.env
-. ./vault/protected-secrets.env
+echo 'Preparing environment variables ...'
+rm environment_variables.txt 2>/dev/null
+touch environment_variables.txt
+declare -a files=(../"$CONFIGURATION_FOLDER"/config/parameters.env ../"$CONFIGURATION_FOLDER"/vault/protected-secrets.env)
+for file in "${files[@]}"
+do
+  while IFS= read -r LINE; do
+    LINE_DATA="${LINE#'export '}"
+    PART1=$(cut -d '=' -f 1  <<< "$LINE_DATA")
+    PART2=$(cut -d '=' -f 2- <<< "$LINE_DATA")
+    echo "      - name: ${PART1}"  >> environment_variables.txt
+    echo "        value: ${PART2}" >> environment_variables.txt
+  done < $file
+done
+export ENVIRONMENT_VARIABLES="$(cat environment_variables.txt)"
 
 #
 # Use the envsubst tool to populate yaml files with the values to use in Azure
@@ -80,6 +112,10 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 envsubst < idsvr/runtime-template.yml > idsvr/runtime.yml
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+envsubst < idsvr/maildev-template.yml > idsvr/maildev.yml
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -119,16 +155,12 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Report generated base URLs
+# Then deploy the maildev utility
 #
-ADMIN_BASE_URL=$(az containerapp show \
-    --name idsvr-admin \
-    --resource-group "curity-rg" \
-    --query properties.configuration.ingress.fqdn --output tsv)
-echo "Admin base URL is https://$ADMIN_BASE_URL/admin"
-
-RUNTIME_BASE_URL=$(az containerapp show \
-    --name idsvr-runtime \
-    --resource-group "curity-rg" \
-    --query properties.configuration.ingress.fqdn --output tsv)
-echo "Runtime base URL is https://$RUNTIME_BASE_URL"
+az containerapp create \
+    --name smtpserver \
+    --resource-group "$RESOURCE_GROUP" \
+    --yaml idsvr/maildev.yml
+if [ $? -ne 0 ]; then
+  exit 1
+fi

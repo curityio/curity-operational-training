@@ -40,24 +40,8 @@ properties:
         value: 'Runtime'
       - name: LICENSE_KEY
         value: $LICENSE_KEY
-      - name: ADMIN_BASE_URL
-        value: $ADMIN_BASE_URL
-      - name: RUNTIME_BASE_URL
-        value: $RUNTIME_BASE_URL
-      - name: ADMIN_PASSWORD
-        value: $ADMIN_PASSWORD
-      - name: DB_CONNECTION
-        value: $DB_CONNECTION
-      - name: DB_USER
-        value: $DB_USER
-      - name: DB_PASSWORD
-        value: $DB_PASSWORD
-      - name: CONFIG_ENCRYPTION_KEY
-        value: $CONFIG_ENCRYPTION_KEY
-      - name: SYMMETRIC_KEY
-        value: $SYMMETRIC_KEY
-      - name: SIGNING_KEY
-        value: $SIGNING_KEY
+$ENVIRONMENT_VARIABLES
+
       volumeMounts:
       - volumeName: cluster-volume
         mountPath: /opt/idsvr/etc/init/cluster.xml

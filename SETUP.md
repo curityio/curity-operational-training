@@ -15,6 +15,7 @@ Make sure you have the following tools installed:
 - A Docker engine, configured with 8GB of RAM.
 - The OpenSSL tool.
 - The jq tool.
+- Then envsubst tool.
 
 ## 3. License
 
@@ -28,7 +29,7 @@ You then connect to that cluster from frontends, most commonly:
 - Browsers run login screens at `https://login.demo.example`.
 - Administrative user interfaces run at `https://admin.demo.example`.
 
-### Enable DNS
+### 5. Enable DNS
 
 To enable those URLs you must add the following entries to your hosts file:
 
@@ -41,7 +42,7 @@ The hosts file is located at the following locations:
 - `/etc/hosts` on macOS or Linux computers.
 - `C:\windows\system32\drivers\etc\hosts` on Windows.
 
-### Enable HTTPS Trust
+### 6. Enable HTTPS Trust
 
 Most deployments use HTTPS certificates and create a root certificate authority at this location:
 
@@ -54,12 +55,12 @@ Trust the certificate by importing it into the local computer's trust store, for
 - On macOS, open Keychain Access and import the file under `System / Certificates`.
 - On Windows, use the Microsoft Management Console and import the file under `Local Computer / Trusted Root Certification Authorities`.
 
-## 5. Run a Deployment
+## 7. Run a Deployment
 
 To run most deployments, open a Linux terminal it ita folder.\
 Then, copy in a `license.json` file and run `./deploy.sh` to perform the deployment.
 
-## 6. Use Exposed URLs
+## 8. Use Exposed URLs
 
 To sign in to the Admin UI, most deployments use the following details:
 
@@ -74,12 +75,12 @@ curl -s -k https://login.demo.example/~/.well-known/openid-configuration | jq
 
 For deployments that use email authentication, receive emails for test users at `https://mail.demo.example`.
 
-## 7. Use Passwords
+## 9. Use Passwords
 
 For convenience, all courses that use passwords or client secrets use values of `Password1`.\
 For real systems you should instead use strong passwords, or, preferably, avoid them altogether.
 
-## 8. Test Logins with an OAuth Client
+## 10. Test Logins with an OAuth Client
 
 When you want to run OAuth flows for a deployed example you need an OAuth client.\
 You can choose from one of the following options:
@@ -88,7 +89,7 @@ You can choose from one of the following options:
 - USe the desktop OAuth Tools and point to the local environment.
 - Use a [Minimal Console Client](utils/console-client/README.md), tailored to the course's content, that we provide.
 
-## 9. Use Test User Accounts
+## 11. Use Test User Accounts
 
 Administrator courses can use a test customer user account created by the following script.\
 The user has an email of `test.user@customer.example`.
@@ -97,7 +98,7 @@ The user has an email of `test.user@customer.example`.
 ./utils/testuser/create.sh
 ```
 
-## 10. Query Identity Data
+## 12. Query Identity Data
 
 As you generate identity data you can connect to a database and query it.\
 See the [Data Sources README](./2-data-sources/README.md) to get connected to a local database and run queries.
