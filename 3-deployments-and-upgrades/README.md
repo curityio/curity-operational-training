@@ -45,25 +45,16 @@ export CONFIGURATION_FOLDER='6-token-issuance'
 
 ## Use the Deployed System
 
-On completion, get working internet HTTPS URLs and use them to connect to admin and runtime endpoints:
+On completion, scripts output internet HTTPS base URLs such as the following:
 
-```bash
-ADMIN_FQDN=$(az containerapp show \
-    --name idsvr-admin \
-    --resource-group "curity-rg" \
-    --query properties.configuration.ingress.fqdn --output tsv)
-echo "https://$ADMIN_FQDN/admin"
-
-RUNTIME_FQDN=$(az containerapp show \
-    --name idsvr-runtime \
-    --resource-group "curity-rg" \
-    --query properties.configuration.ingress.fqdn --output tsv)
-
-MAILDEV_FQDN=$(az containerapp show \
-    --name maildev \
-    --resource-group "curity-rg" \
-    --query properties.configuration.ingress.fqdn --output tsv)
+```text
+Admin   base URL is https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io/admin
+Runtime base URL is https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontainerapps.io
+Maildev base URL is https://maildev.calmsea-582ed713.uksouth.azurecontainerapps.io
 ```
 
+The maildev utility provides a mock email inbox for the administrator courses.\
+Run the Admin UI at the `/admin` path of the admin base URL and make the following updates:
 
-echo "https://$RUNTIME_FQDN/~/.well-known/openid-configuration"
+- Set the base URL
+- Set the admin base URL

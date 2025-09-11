@@ -177,7 +177,7 @@ ADMIN_BASE_URL=$(az containerapp show \
     --name idsvr-admin \
     --resource-group "$RESOURCE_GROUP" \
     --query properties.configuration.ingress.fqdn --output tsv)
-echo "Admin base URL is https://$ADMIN_BASE_URL/admin"
+echo "Admin base URL is https://$ADMIN_BASE_URL"
 
 RUNTIME_BASE_URL=$(az containerapp show \
     --name idsvr-runtime \
@@ -186,7 +186,7 @@ RUNTIME_BASE_URL=$(az containerapp show \
 echo "Runtime base URL is https://$RUNTIME_BASE_URL"
 
 MAILDEV_BASE_URL=$(az containerapp show \
-    --name smtpserver \
+    --name maildev \
     --resource-group "$RESOURCE_GROUP" \
     --query properties.configuration.ingress.fqdn --output tsv)
 echo "Maildev base URL is https://$MAILDEV_BASE_URL"
