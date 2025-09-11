@@ -1,0 +1,37 @@
+#
+# The maildev utility container
+#
+name: smtpserver
+location : $REGION
+resourceGroup: $RESOURCE_GROUP
+type: Microsoft.App/containerApps
+identity:
+  type: UserAssigned
+  userAssignedIdentities:
+    $IDENTITY_ID:
+      clientId: $IDENTITY_CLIENT_ID
+      principalId: $IDENTITY_PRINCIPAL_ID
+properties:
+  managedEnvironmentId: $ENVIRONMENT_ID
+  configuration:
+    registries:
+    - identity: $IDENTITY_ID
+      server: $REGISTRY.azurecr.io
+    ingress:
+      external: true
+      targetPort: 1080
+      allowInsecure: false
+      additionalPortMappings:
+      - external: false
+        targetPort: 1025
+        exposedPort: 1025
+  template:
+    containers:
+    - name: maildev-container
+      image: maildev/maildev:latest
+      resources:
+        cpu: 1
+        memory: 2Gi
+    scale:
+      minReplicas: 1
+      maxReplicas: 1

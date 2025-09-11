@@ -13,6 +13,7 @@ download
 job.yml
 admin.yml
 runtime.yml
+maildev.yml
 cluster.xml
 node_modules
 response.txt

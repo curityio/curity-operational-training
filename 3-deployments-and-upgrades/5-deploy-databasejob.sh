@@ -12,14 +12,6 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 . ./infrastructure.env
 
 #
-# Get the latest MS SQL Server schema creation scripts
-#
-../utils/sql/get-mssql-script.sh "$(pwd)/idsvr-dbinit"
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-#
 # Get the tag of the last pushed Docker image
 #
 az acr login --name "$REGISTRY"

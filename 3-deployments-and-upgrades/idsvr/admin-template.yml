@@ -60,6 +60,21 @@ properties:
         value: $SYMMETRIC_KEY
       - name: SIGNING_KEY
         value: $SIGNING_KEY
+
+      # These are only deployed if you deploy configurations from the administrator courses
+      - name: MIGRATION_CLIENT_SECRET
+        value: $MIGRATION_CLIENT_SECRET
+      - name: INTROSPECT_CLIENT_SECRET
+        value: $INTROSPECT_CLIENT_SECRET
+      - name: ADMIN_CLIENT_SYMMETRIC_KEY
+        value: $ADMIN_CLIENT_SYMMETRIC_KEY
+      - name: SSL_TRUST_STORE
+        value: $SSL_TRUST_STORE
+      - name: BACKEND_JOB_CLIENT_SECRET
+        value: $BACKEND_JOB_CLIENT_SECRET
+      - name: TOKEN_EXCHANGE_CLIENT_SECRET
+        value: $TOKEN_EXCHANGE_CLIENT_SECRET
+
       volumeMounts:
       - volumeName: cluster-volume
         mountPath: /opt/idsvr/etc/init/cluster.xml

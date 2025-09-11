@@ -7,6 +7,24 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #################################################
 
 #
+# By default the configuration from this folder is used.
+# It is also possible to deploy configurations from other folders and then test flows in Azure.
+# Set deployment variables here that utility scripts need.
+#
+if [ "$CONFIGURATION_FOLDER" == '6-token-issuance' ]; then
+  export USER_MANAGEMENT='true'
+  export USER_AUTHENTICATION='true'
+  export TOKEN_ISSUANCE='true'
+elif [ "$CONFIGURATION_FOLDER" == '5-user-authentication' ]; then
+  export USER_MANAGEMENT='true'
+  export USER_AUTHENTICATION='true'
+elif [ "$CONFIGURATION_FOLDER" == '4-user-management' ]; then
+  export USER_MANAGEMENT='true'
+else
+  export CONFIGURATION_FOLDER='3-deployments-and-upgrades'
+fi
+
+#
 # Get the license
 #
 if [ ! -f ./license.json ]; then
@@ -52,7 +70,7 @@ export IDENTITY_PRINCIPAL_ID=$(az identity show --resource-group "$RESOURCE_GROU
 # You only need to create crypto keys once per stage of your deployment pipeline
 #
 export GENERATE_CLUSTER_KEY='true'
-../utils/crypto/create-crypto-keys.sh "$(pwd)"
+../utils/crypto/create-crypto-keys.sh ../../"$CONFIGURATION_FOLDER"
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -60,7 +78,7 @@ fi
 #
 # Run crypto tools to create protected secrets
 #
-../utils/crypto/run-crypto-tools.sh "$(pwd)"
+../utils/crypto/run-crypto-tools.sh ../../"$CONFIGURATION_FOLDER"
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -68,8 +86,27 @@ fi
 #
 # Export all parameters so that envsubst can use them
 #
-. ./config/parameters.env
-. ./vault/protected-secrets.env
+. ../"$CONFIGURATION_FOLDER"/config/parameters.env
+. ../"$CONFIGURATION_FOLDER"/vault/protected-secrets.env
+
+#
+# Set any unused values in template files to dummy values so that the deployment works
+#
+if [ -z "$EMPLOYEE_IDP_CLIENT_ID" ]; then 
+  export EMPLOYEE_IDP_CLIENT_ID='x'
+fi
+if [ -z "$EMPLOYEE_IDP_CLIENT_SECRET" ]; then 
+  export EMPLOYEE_IDP_CLIENT_SECRET='x'
+fi
+if [ -z "$EMPLOYEE_IDP_OIDC_METADATA" ]; then 
+  export EMPLOYEE_IDP_OIDC_METADATA='x'
+fi
+if [ -z "$BACKEND_JOB_CLIENT_SECRET" ]; then 
+  export BACKEND_JOB_CLIENT_SECRET='x'
+fi
+if [ -z "$TOKEN_EXCHANGE_CLIENT_SECRET" ]; then 
+  export TOKEN_EXCHANGE_CLIENT_SECRET='x'
+fi
 
 #
 # Use the envsubst tool to populate yaml files with the values to use in Azure
@@ -80,6 +117,10 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 envsubst < idsvr/runtime-template.yml > idsvr/runtime.yml
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+envsubst < idsvr/maildev-template.yml > idsvr/maildev.yml
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -119,16 +160,33 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Then deploy the maildev utility
+#
+az containerapp create \
+    --name maildev \
+    --resource-group "$RESOURCE_GROUP" \
+    --yaml idsvr/maildev.yml
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+#
 # Report generated base URLs
 #
 ADMIN_BASE_URL=$(az containerapp show \
     --name idsvr-admin \
-    --resource-group "curity-rg" \
+    --resource-group "$RESOURCE_GROUP" \
     --query properties.configuration.ingress.fqdn --output tsv)
 echo "Admin base URL is https://$ADMIN_BASE_URL/admin"
 
 RUNTIME_BASE_URL=$(az containerapp show \
     --name idsvr-runtime \
-    --resource-group "curity-rg" \
+    --resource-group "$RESOURCE_GROUP" \
     --query properties.configuration.ingress.fqdn --output tsv)
 echo "Runtime base URL is https://$RUNTIME_BASE_URL"
+
+MAILDEV_BASE_URL=$(az containerapp show \
+    --name smtpserver \
+    --resource-group "$RESOURCE_GROUP" \
+    --query properties.configuration.ingress.fqdn --output tsv)
+echo "Maildev base URL is https://$MAILDEV_BASE_URL"
