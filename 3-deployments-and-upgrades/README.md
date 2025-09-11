@@ -49,6 +49,7 @@ The patch then outputs generated Azure URLs of the following form:
 Admin base URL is https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io
 Runtime base URL is https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontainerapps.io
 Email inbox for testing is at https://maildev.calmsea-582ed713.uksouth.azurecontainerapps.io
+```
 
 ## Troubleshoot
 
