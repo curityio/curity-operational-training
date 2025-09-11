@@ -1,4 +1,4 @@
-# Test Outh Flows in a Deployed Environment
+# Test OAuth Flows in a Deployed Environment
 
 Once you understand the deployment you can deploy more complete configurations.\
 You can then test OAuth flows using an internet Curity Identity Server cluster.
