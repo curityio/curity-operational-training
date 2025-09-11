@@ -43,6 +43,13 @@ In the event of failure, apply settings to match the patch.xml file manually in 
 ./postdeployment/patch.sh
 ```
 
+The patch then outputs generated Azure URLs of the following form:
+
+```text
+Admin base URL is https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io
+Runtime base URL is https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontainerapps.io
+Email inbox for testing is at https://maildev.calmsea-582ed713.uksouth.azurecontainerapps.io
+
 ## Troubleshoot
 
 Get container IDs:
