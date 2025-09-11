@@ -36,10 +36,44 @@ Verify that each script completes successfully before running the next one.
 ## Post Deployment Configuration
 
 The example deployment uses domain names that Azure generates.\
-Run a patch to update to Azure's dynamically generated URLs:
+Run a patch to update to the dynamically generated URLs from Azure:
 
 ```bash
 ./postdeployment/patch.sh
+```
+
+## Troubleshoot
+
+Get container IDs:
+
+```bash
+az containerapp replica list \
+  --name idsvr-admin \
+  --resource-group curity-rg \
+  --query '[].name' \
+  --output tsv
+
+az containerapp replica list \
+  --name idsvr-runtime \
+  --resource-group curity-rg \
+  --query '[].name' \
+  --output tsv
+```
+
+Then tail logs using a container ID:
+
+```bash
+az containerapp logs show \
+  --name idsvr-admin \
+  --resource-group curity-rg \
+  --replica MY_ADMIN_CONTAINER_ID \
+  --follow
+
+az containerapp logs show \
+  --name idsvr-admin \
+  --resource-group curity-rg \
+  --replica MY_RUNTIME_CONTAINER_ID \
+  --follow
 ```
 
 ## Test OAuth Flows

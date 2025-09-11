@@ -7,13 +7,19 @@
           <base-url>$ADMIN_BASE_URL</base-url>
         </http>
       </admin-service>
-      </environment>
+      <services>
+        <zones>
+          <default-zone>
+            <allowed-origins-for-cors>$ADMIN_BASE_URL</allowed-origins-for-cors>
+          </default-zone>
+        </zones>
+      </services>
+    </environment>
   </environments>
   <profiles xmlns="https://curity.se/ns/conf/base">
     <profile>
       <id>token-service</id>
       <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
-      <expose-detailed-error-messages />
       <settings>
         <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
           <client-store>
