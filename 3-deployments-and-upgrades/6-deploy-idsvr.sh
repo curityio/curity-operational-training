@@ -78,6 +78,7 @@ fi
 #
 # Run crypto tools to create protected secrets
 #
+export DBSERVER_HOSTNAME="$DBSERVER.database.windows.net"
 ../utils/crypto/run-crypto-tools.sh ../../"$CONFIGURATION_FOLDER"
 if [ $? -ne 0 ]; then
   exit 1
@@ -169,24 +170,3 @@ az containerapp create \
 if [ $? -ne 0 ]; then
   exit 1
 fi
-
-#
-# Report generated base URLs
-#
-ADMIN_BASE_URL=$(az containerapp show \
-    --name idsvr-admin \
-    --resource-group "$RESOURCE_GROUP" \
-    --query properties.configuration.ingress.fqdn --output tsv)
-echo "Admin base URL is https://$ADMIN_BASE_URL"
-
-RUNTIME_BASE_URL=$(az containerapp show \
-    --name idsvr-runtime \
-    --resource-group "$RESOURCE_GROUP" \
-    --query properties.configuration.ingress.fqdn --output tsv)
-echo "Runtime base URL is https://$RUNTIME_BASE_URL"
-
-MAILDEV_BASE_URL=$(az containerapp show \
-    --name maildev \
-    --resource-group "$RESOURCE_GROUP" \
-    --query properties.configuration.ingress.fqdn --output tsv)
-echo "Maildev base URL is https://$MAILDEV_BASE_URL"

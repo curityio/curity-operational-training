@@ -7,7 +7,8 @@ import {generateHash, generateRandomString, readOAuthResponseBodyError} from './
 
 const defaultPort = 3333;
 const eventEmitter = new EventEmitter();
-let metadata: any;
+let runtimeBaseUrl = process.env.RUNTIME_BASE_URL || 'https://login.demo.example';
+let metadata: any = null;
 let redirectUri: string | null = null;
 let codeVerifier: string | null = null;
 let httpServer: http.Server | null = null;
@@ -18,7 +19,7 @@ let httpServer: http.Server | null = null;
 const configuration = {
     clientId: 'console-client',
     scope: process.env.SCOPE || 'openid profile sales',
-    issuer: 'https://login.demo.example/~',
+    issuer: `${runtimeBaseUrl}/~`,
 };
 
 /*

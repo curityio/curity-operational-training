@@ -4,10 +4,11 @@ import {readOAuthResponseBodyError} from './utils';
 /*
  * Point to the local deployment or adjust it to point to a remote system
  */
+let runtimeBaseUrl = process.env.RUNTIME_BASE_URL || 'https://login.demo.example';
 const configuration = {
     clientId: 'api-token-exchange-client',
     clientSecret: 'Password1',
-    endpoint: 'https://login.demo.example/oauth/v2/oauth-token',
+    endpoint: `${runtimeBaseUrl}/oauth/v2/oauth-token`,
     downscope: 'openid profile',
 };
 

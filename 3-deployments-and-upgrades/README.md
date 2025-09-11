@@ -11,7 +11,7 @@ You can use a Kubernetes cluster for the most complete deployment control.
 - Create a cluster.
 - Build a custom image of the Curity Identity Server that contains shared resources like configuration.
 - Deploy multiple replicas of the image to enable OAuth endpoints with high availability.
-- Expose OAuth endpoints at internet HTTPS URLs.
+- Expose OAuth endpoints at internet HTTPS URLs with precreated custom domain names.
 - Create durable storage for the Curity Identity Server.
 - Integrate with managed services and use infrastructure security permissions.
 
@@ -33,28 +33,16 @@ Verify that each script completes successfully before running the next one.
 ./6-deploy-idsvr.sh
 ```
 
-## Use Advanced Configurations
+## Post Deployment Configuration
 
-If required, you can run a deployment that uses configurations from administrator courses.\
-That enables you to run authentication and token issuance flows against the deployed system.\
-To do so, use an environment variable with the course folder before running the above scripts:
+The example deployment uses domain names that Azure generates.\
+Run a patch to update to Azure's dynamically generated URLs:
 
 ```bash
-export CONFIGURATION_FOLDER='6-token-issuance'
+./postdeployment/patch.sh
 ```
 
-## Use the Deployed System
+## Test OAuth Flows
 
-On completion, scripts output internet HTTPS base URLs such as the following:
-
-```text
-Admin   base URL is https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io/admin
-Runtime base URL is https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontainerapps.io
-Maildev base URL is https://maildev.calmsea-582ed713.uksouth.azurecontainerapps.io
-```
-
-The maildev utility provides a mock email inbox for the administrator courses.\
-Run the Admin UI at the `/admin` path of the admin base URL and make the following updates:
-
-- Set the base URL
-- Set the admin base URL
+Once you are comfortable with the deployment you can test using the internet cluster.\
+See the [Testing Instructions](TESTING.md) to run some user authentication and token issuance flows.

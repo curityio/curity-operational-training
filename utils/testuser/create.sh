@@ -5,12 +5,16 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 RESPONSE_FILE='response.txt'
 INPUT_FILE='testuser.json'
 
+if [ "$RUNTIME_BASE_URL" == '' ]; then
+  RUNTIME_BASE_URL='https://login.demo.example'
+fi
+
 #
 # Get an access token with the 'accounts:migration' scope.
 # In the example deployment this allows SCIM access.
 #
 echo 'Getting an access token with SCIM privileges ...'
-HTTP_STATUS=$(curl -k -s -X POST https://login.demo.example/oauth/v2/oauth-token \
+HTTP_STATUS=$(curl -k -s -X POST "$RUNTIME_BASE_URL/oauth/v2/oauth-token" \
      -H 'Content-Type: application/x-www-form-urlencoded' \
      -d 'grant_type=client_credentials' \
      -d 'client_id=migration-client' \
@@ -32,7 +36,7 @@ fi
 # Use SCIM to insert the test user account from JSON data
 #
 echo 'Calling SCIM endpoint to create a test user ...'
-HTTP_STATUS=$(curl -k -s -X POST 'https://login.demo.example/scim/Users' \
+HTTP_STATUS=$(curl -k -s -X POST "$RUNTIME_BASE_URL/scim/Users" \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     -H 'Accept: application/scim+json' \
     -H 'Content-Type: application/scim+json' \
