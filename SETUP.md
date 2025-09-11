@@ -33,7 +33,7 @@ You then connect to that cluster from frontends, most commonly:
 To enable those URLs you must add the following entries to your hosts file:
 
 ```text
-127.0.0.1 admin.demo.example login.demo.example
+127.0.0.1 admin.demo.example login.demo.example mail.demo.example
 ```
 
 The hosts file is located at the following locations:
@@ -59,12 +59,20 @@ Trust the certificate by importing it into the local computer's trust store, for
 To run most deployments, open a Linux terminal it ita folder.\
 Then, copy in a `license.json` file and run `./deploy.sh` to perform the deployment.
 
-## 6. Run the Admin UI
+## 6. Use Exposed URLs
 
 To sign in to the Admin UI, most deployments use the following details:
 
 - URL: `https://admin.demo/example/admin`
 - Username: `admin`
+
+Most deployments expose metadata that includes OAuth endpoints at the following URL:
+
+```bash
+curl -s -k https://login.demo.example/~/.well-known/openid-configuration | jq
+```
+
+For deployments that use email authentication, receive emails for test users at `https://mail.demo.example`.
 
 ## 7. Use Passwords
 

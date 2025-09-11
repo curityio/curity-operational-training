@@ -49,17 +49,6 @@ if [ $TABLE_COUNT -eq 0 ]; then
 fi
 
 #
-# Wait for the Agent process to come up
-#
-AGENTSTATUS=''
-while [[ $AGENTSTATUS -ne 1 ]]; do
-	AGENTSTATUS=$(/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -h -1 -t 1 -C -Q "SET NOCOUNT ON; SELECT 1 FROM sysprocesses WHERE program_name=''SQLAgent - Generic Refresher''")
-  if [[ $AGENTSTATUS -ne 1 ]]; then
-    sleep 1
-  fi
-done
-
-#
 # Set up the database maintenance job in the msdb database
 #
 if [ $JOB_COUNT -eq 0 ]; then
