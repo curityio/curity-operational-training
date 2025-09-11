@@ -10,7 +10,6 @@ data
 mssql-create_database.sql
 infrastructure.env
 environment_variables.txt
-patch.xml
 download
 job.yml
 admin.yml

@@ -1,4 +1,4 @@
-# Testin Outh Flows in a Deployed Environment
+# Test Outh Flows in a Deployed Environment
 
 Once you understand the deployment you can deploy more complete configurations.\
 You can then test OAuth flows using an internet Curity Identity Server cluster.
@@ -22,7 +22,8 @@ Then run a patch to update to Azure's dynamically generated URLs:
 ./postdeployment/patch.sh
 ```
 
-The patch outputs generated Azure URLs of the following form:
+In the event of failure, apply settings to match the `patch.xml` file manually in the Admin UI.\
+The patch then outputs generated Azure URLs of the following form:
 
 ```text
 Admin base URL is https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io
