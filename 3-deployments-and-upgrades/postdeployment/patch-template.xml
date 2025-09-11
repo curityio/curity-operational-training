@@ -1,0 +1,39 @@
+<data xmlns="urn:ietf:params:xml:ns:yang:ietf-restconf">
+  <environments xmlns="https://curity.se/ns/conf/base">
+    <environment>
+      <base-url>$RUNTIME_BASE_URL</base-url>
+      <admin-service>
+        <http>
+          <base-url>$ADMIN_BASE_URL</base-url>
+        </http>
+      </admin-service>
+      </environment>
+  </environments>
+  <profiles xmlns="https://curity.se/ns/conf/base">
+    <profile>
+      <id>token-service</id>
+      <type xmlns:as="https://curity.se/ns/conf/profile/oauth">as:oauth-service</type>
+      <expose-detailed-error-messages />
+      <settings>
+        <authorization-server xmlns="https://curity.se/ns/conf/profile/oauth">
+          <client-store>
+            <config-backed>
+              <client>
+                <id>admin_ui_client</id>
+                <redirect-uris>$ADMIN_BASE_URL/admin/login/handler</redirect-uris>
+              </client>
+              <client>
+                <id>devops_dashboard_restconf_client</id>
+                <redirect-uris>$ADMIN_BASE_URL/admin/dashboard/assisted.html</redirect-uris>
+                <user-authentication>
+                  <allowed-post-logout-redirect-uris>$ADMIN_BASE_URL/admin/dashboard/assisted.html</allowed-post-logout-redirect-uris>
+                </user-authentication>
+                <allowed-origins>$ADMIN_BASE_URL</allowed-origins>
+              </client>
+            </config-backed>
+          </client-store>
+        </authorization-server>
+      </settings>
+    </profile>
+  </profiles>
+</data>

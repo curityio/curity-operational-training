@@ -5,7 +5,8 @@ You can then test OAuth flows using an internet Curity Identity Server cluster.
 
 ## Deploy Advanced Configurations
 
-Re-run the following scripts to redeploy with configuration from the administrator courses:
+Re-run the following scripts to redeploy with configuration from the administrator courses.\
+Run scripts separately and wait until they complete successfully.
 
 ```bash
 export CONFIGURATION_FOLDER='6-token-issuance'
@@ -19,6 +20,14 @@ Then run a patch to update to Azure's dynamically generated URLs:
 
 ```bash
 ./postdeployment/patch.sh
+```
+
+The patch outputs generated Azure URLs of the following form:
+
+```text
+Admin base URL is https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io
+Runtime base URL is https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontainerapps.io
+Email inbox for testing is at https://maildev.calmsea-582ed713.uksouth.azurecontainerapps.io
 ```
 
 ## Create a Test User Account

@@ -15,6 +15,7 @@ Make sure you have the following tools installed:
 - A Docker engine, configured with 8GB of RAM.
 - The OpenSSL tool.
 - The jq tool.
+- Then envsubst tool.
 
 ## 3. License
 

@@ -7,9 +7,9 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #################################################
 
 #
-# By default the configuration from this folder is used.
-# It is also possible to deploy configurations from other folders and then test flows in Azure.
-# Set deployment variables here that utility scripts need.
+# By default CONFIGURATION_FOLDER is the current folder.
+# It is also possible to deploy configurations from other folders, to test flows in Azure.
+# Set deployment variables here that the run-crypto-tools.sh script uses.
 #
 if [ "$CONFIGURATION_FOLDER" == '6-token-issuance' ]; then
   export USER_MANAGEMENT='true'
@@ -85,29 +85,23 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Export all parameters so that envsubst can use them
+# Some unpleasant bash manipulation rather than having to list each environment variable individually in yaml files
 #
-. ../"$CONFIGURATION_FOLDER"/config/parameters.env
-. ../"$CONFIGURATION_FOLDER"/vault/protected-secrets.env
-
-#
-# Set any unused values in template files to dummy values so that the deployment works
-#
-if [ -z "$EMPLOYEE_IDP_CLIENT_ID" ]; then 
-  export EMPLOYEE_IDP_CLIENT_ID='x'
-fi
-if [ -z "$EMPLOYEE_IDP_CLIENT_SECRET" ]; then 
-  export EMPLOYEE_IDP_CLIENT_SECRET='x'
-fi
-if [ -z "$EMPLOYEE_IDP_OIDC_METADATA" ]; then 
-  export EMPLOYEE_IDP_OIDC_METADATA='x'
-fi
-if [ -z "$BACKEND_JOB_CLIENT_SECRET" ]; then 
-  export BACKEND_JOB_CLIENT_SECRET='x'
-fi
-if [ -z "$TOKEN_EXCHANGE_CLIENT_SECRET" ]; then 
-  export TOKEN_EXCHANGE_CLIENT_SECRET='x'
-fi
+echo 'Preparing environment variables ...'
+rm environment_variables.txt 2>/dev/null
+touch environment_variables.txt
+declare -a files=(../"$CONFIGURATION_FOLDER"/config/parameters.env ../"$CONFIGURATION_FOLDER"/vault/protected-secrets.env)
+for file in "${files[@]}"
+do
+  while IFS= read -r LINE; do
+    LINE_DATA="${LINE#'export '}"
+    PART1=$(cut -d '=' -f 1  <<< "$LINE_DATA")
+    PART2=$(cut -d '=' -f 2- <<< "$LINE_DATA")
+    echo "      - name: ${PART1}"  >> environment_variables.txt
+    echo "        value: ${PART2}" >> environment_variables.txt
+  done < $file
+done
+export ENVIRONMENT_VARIABLES="$(cat environment_variables.txt)"
 
 #
 # Use the envsubst tool to populate yaml files with the values to use in Azure
@@ -164,7 +158,7 @@ fi
 # Then deploy the maildev utility
 #
 az containerapp create \
-    --name maildev \
+    --name smtpserver \
     --resource-group "$RESOURCE_GROUP" \
     --yaml idsvr/maildev.yml
 if [ $? -ne 0 ]; then

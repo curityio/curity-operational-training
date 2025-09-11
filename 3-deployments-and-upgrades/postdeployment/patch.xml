@@ -1,0 +1,16 @@
+<data xmlns="urn:ietf:params:xml:ns:yang:ietf-restconf">
+  <environments xmlns="https://curity.se/ns/conf/base">
+    <environment>
+      <base-url>https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontainerapps.io</base-url>
+      <admin-service>
+        <http>
+          <base-url>https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io</base-url>
+          <web-ui>
+          </web-ui>
+          <restconf>
+          </restconf>
+        </http>
+      </admin-service>
+      </environment>
+  </environments>
+</data>
