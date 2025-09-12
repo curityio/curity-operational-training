@@ -134,7 +134,7 @@
       </token-procedure>
       <transformation-procedure>
         <id>employee_set_subject_procedure</id>
-        <script>LyoqCiAqIFRoaXMgaXMgYW4gZXhhbXBsZSBwcm9jZWR1cmUgdGhhdCBwZXJmb3JtcyBubyB0cmFuc2Zvcm1hdGlvbgogKiBAcGFyYW0ge3NlLmN1cml0eS5pZGVudGl0eXNlcnZlci5wcm9jZWR1cmVzLmNvbnRleHQuVHJhbnNmb3JtYXRpb25Qcm9jZWR1cmVDb250ZXh0fSBjb250ZXh0CiAqIEByZXR1cm5zIHsqfQogKi8KZnVuY3Rpb24gcmVzdWx0KGNvbnRleHQpIHsKICB2YXIgYXR0cmlidXRlcyA9IGNvbnRleHQuYXR0cmlidXRlTWFwOwogIAogIGlmIChhdHRyaWJ1dGVzLmVtYWlsKSB7CiAgICBhdHRyaWJ1dGVzLnN1YmplY3QgPSBhdHRyaWJ1dGVzLmVtYWlsOwogIH0KCiAgLy8gSWYgRW50cmEgSUQgcmV0dXJucyBncm91cCBvYmplY3QgSURzLCB0aGlzIG92ZXJyaWRlcyB0aGVtIHdpdGggYSBoYXJkIGNvZGVkIGdyb3VwCiAgaWYgKGF0dHJpYnV0ZXMuZ3JvdXBzKSB7CiAgICBhdHRyaWJ1dGVzLmdyb3VwcyA9IFsiYWRtaW4iXTsKICB9CiAgcmV0dXJuIGF0dHJpYnV0ZXM7Cn0=</script>
+        <script>LyoqCiAqIFRoaXMgaXMgYW4gZXhhbXBsZSBwcm9jZWR1cmUgdGhhdCBwZXJmb3JtcyBubyB0cmFuc2Zvcm1hdGlvbgogKiBAcGFyYW0ge3NlLmN1cml0eS5pZGVudGl0eXNlcnZlci5wcm9jZWR1cmVzLmNvbnRleHQuVHJhbnNmb3JtYXRpb25Qcm9jZWR1cmVDb250ZXh0fSBjb250ZXh0CiAqIEByZXR1cm5zIHsqfQogKi8KZnVuY3Rpb24gcmVzdWx0KGNvbnRleHQpIHsKICB2YXIgYXR0cmlidXRlcyA9IGNvbnRleHQuYXR0cmlidXRlTWFwOwogIAogIGlmIChhdHRyaWJ1dGVzLmVtYWlsKSB7CiAgICBhdHRyaWJ1dGVzLnN1YmplY3QgPSBhdHRyaWJ1dGVzLmVtYWlsOwogIH0KCiAgLy8gQXBwbHkgbG9naWMgdG8gdHJhbnNmb3JtIGZyb20gYW4gSURQIGNsYWltIHRvIHRoZSBncm91cHMgY2xhaW0gaGVyZQogIGlmIChhdHRyaWJ1dGVzLmdyb3VwcykgewogICAgCiAgICAvLyBJTklUSUFMIEVYQU1QTEUKICAgIC8vIElmIHRoZXJlIGlzIGFuIEVudHJhIElEIGdyb3VwIG9iamVjdCBJRCwgdGhpcyBoYXJkIGNvZGVzIHRoZSBmb2xsb3dpbmcgYXV0aG9yaXphdGlvbjoKICAgIC8vIC0gVGhlIGNvbmZpZ3VyZWQgRGV2T3BzIERhc2hib2FyZCBwZXJtaXNzaW9ucyBmb3IgdGhlIGRldm9wcyBncm91cAogICAgLy8gLSBGdWxsIGFkbWluIHBlcm1pc3Npb25zIHRvIHRoZSBBZG1pbiBVSQogICAgYXR0cmlidXRlcy5ncm91cHMgPSBbImRldm9wcyIsICJhZG1pbiJdOwogIH0KICByZXR1cm4gYXR0cmlidXRlczsKfQ==</script>
       </transformation-procedure>
       <transformation-procedure>
         <id>user_type_set_procedure</id>
@@ -182,10 +182,22 @@
         <name>admin</name>
         <user-name>admin</user-name>
       </group>
+      <group>
+       <name>devops</name>
+       <user-name>admin</user-name>
+     </group>
     </groups>
     <rule-list>
-      <name>dd-admin</name>
+      <name>admin</name>
       <group>admin</group>
+      <rule>
+        <name>any-access</name>
+        <action>permit</action>
+      </rule>
+    </rule-list>
+    <rule-list>
+      <name>dd-devops</name>
+      <group>devops</group>
       <rule>
         <name>alarms</name>
         <path>/al:alarms</path>
@@ -278,15 +290,15 @@
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
       </rule>
       <rule>
-        <name>read-custom-token-issuer-id</name>
-        <path>/profiles/profile/token-issuers/custom-token-issuer/id</path>
+        <name>read-custom-token-issuer-purpose-type</name>
+        <path>/profiles/profile/token-issuers/custom-token-issuer/purpose-type</path>
         <access-operations>read</access-operations>
         <action>permit</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
       </rule>
       <rule>
-        <name>read-custom-token-issuer-purpose-type</name>
-        <path>/profiles/profile/token-issuers/custom-token-issuer/purpose-type</path>
+        <name>read-custom-token-issuer-id</name>
+        <path>/profiles/profile/token-issuers/custom-token-issuer/id</path>
         <access-operations>read</access-operations>
         <action>permit</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
@@ -365,14 +377,6 @@
         <name>deny-access</name>
         <action>deny</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
-      </rule>
-    </rule-list>
-    <rule-list>
-      <name>admin</name>
-      <group>admin</group>
-      <rule>
-        <name>any-access</name>
-        <action>permit</action>
       </rule>
     </rule-list>
     <rule-list>

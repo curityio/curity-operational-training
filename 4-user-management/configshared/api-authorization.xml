@@ -35,7 +35,7 @@
         <groups xmlns="https://curity.se/ns/conf/authorization-manager/group">
           <scope>urn:se:curity:scopes:admin:api</scope>
           <group>
-            <name>admin</name>
+            <name>devops</name>
             <allows>
               <create/>
               <read/>

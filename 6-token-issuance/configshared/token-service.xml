@@ -253,6 +253,7 @@
                   <claim>user_id</claim>
                 </access_token>
                 <id_token>
+                  <claim>groups</claim>
                   <claim>has_mfa</claim>
                 </id_token>
                 <userinfo>
