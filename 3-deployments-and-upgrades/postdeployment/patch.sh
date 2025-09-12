@@ -10,7 +10,6 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 echo "Getting the Curity Identity Server's external URLs ..."
 export ADMIN_BASE_URL=$(./admin-base-url.sh)
 export RUNTIME_BASE_URL=$(./runtime-base-url.sh)
-export MAILDEV_BASE_URL=$(./maildev-base-url.sh)
 
 envsubst < patch-template.xml > patch.xml
 if [ $? -ne 0 ]; then
@@ -33,7 +32,3 @@ if [ "$HTTP_STATUS" != '204' ]; then
   echo "Problem encountered patching the Curity Identity Server's configuration: $HTTP_STATUS"
   exit 1
 fi
-
-echo "Admin base URL is $ADMIN_BASE_URL"
-echo "Runtime base URL is $RUNTIME_BASE_URL"
-echo "Email inbox for testing is at $MAILDEV_BASE_URL"

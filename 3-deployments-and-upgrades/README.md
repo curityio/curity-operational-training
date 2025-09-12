@@ -33,13 +33,13 @@ Verify that each script completes successfully before running the next one.
 ./6-deploy-idsvr.sh
 ```
 
-## Post Deployment Configuration
-
 The example deployment uses domain names that Azure generates.\
-Run a patch to update to the dynamically generated URLs from Azure:
+Once the final script completes it outputs the generated domain names:
 
-```bash
-./postdeployment/patch.sh
+```text
+Admin base URL is https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io
+Runtime base URL is https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontainerapps.io
+Email inbox for testing is at https://maildev.calmsea-582ed713.uksouth.azurecontainerapps.io
 ```
 
 ## Troubleshoot
