@@ -110,10 +110,22 @@
         <name>admin</name>
         <user-name>admin</user-name>
       </group>
+      <group>
+        <name>devops</name>
+        <user-name>admin</user-name>
+      </group>
     </groups>
     <rule-list>
-      <name>dd-admin</name>
+      <name>admin</name>
       <group>admin</group>
+      <rule>
+        <name>any-access</name>
+        <action>permit</action>
+      </rule>
+    </rule-list>
+    <rule-list>
+      <name>dd-devops</name>
+      <group>devops</group>
       <rule>
         <name>alarms</name>
         <path>/al:alarms</path>
@@ -199,8 +211,8 @@
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
       </rule>
       <rule>
-        <name>read-custom-token-issuer-id</name>
-        <path>/profiles/profile/token-issuers/custom-token-issuer/id</path>
+        <name>read-claims</name>
+        <path>/profiles/profile/settings/as:authorization-server/claims</path>
         <access-operations>read</access-operations>
         <action>permit</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
@@ -213,15 +225,8 @@
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
       </rule>
       <rule>
-        <name>read-claims</name>
-        <path>/profiles/profile/settings/as:authorization-server/claims</path>
-        <access-operations>read</access-operations>
-        <action>permit</action>
-        <context xmlns="http://tail-f.com/yang/acm">rest</context>
-      </rule>
-      <rule>
-        <name>read-client-capabilities</name>
-        <path>/profiles/profile/settings/as:authorization-server/client-capabilities</path>
+        <name>read-custom-token-issuer-id</name>
+        <path>/profiles/profile/token-issuers/custom-token-issuer/id</path>
         <access-operations>read</access-operations>
         <action>permit</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
@@ -229,6 +234,13 @@
       <rule>
         <name>read-associated-authentication-profile</name>
         <path>/profiles/profile/settings/as:authorization-server/authentication-service/authentication-profile</path>
+        <access-operations>read</access-operations>
+        <action>permit</action>
+        <context xmlns="http://tail-f.com/yang/acm">rest</context>
+      </rule>
+      <rule>
+        <name>read-client-capabilities</name>
+        <path>/profiles/profile/settings/as:authorization-server/client-capabilities</path>
         <access-operations>read</access-operations>
         <action>permit</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
@@ -293,14 +305,6 @@
         <name>deny-access</name>
         <action>deny</action>
         <context xmlns="http://tail-f.com/yang/acm">rest</context>
-      </rule>
-    </rule-list>
-    <rule-list>
-      <name>admin</name>
-      <group>admin</group>
-      <rule>
-        <name>any-access</name>
-        <action>permit</action>
       </rule>
     </rule-list>
     <rule-list>

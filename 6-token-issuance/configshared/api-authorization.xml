@@ -53,7 +53,7 @@
               <claim-requirement>
                 <name>groups</name>
                 <applicability>all-of</applicability>
-                <value>admin</value>
+                <value>devops</value>
               </claim-requirement>
             </select-rule-list-when>
           </rule-list>
