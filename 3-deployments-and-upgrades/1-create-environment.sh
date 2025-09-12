@@ -20,7 +20,7 @@ echo "export DBNAME='idsvr'"                          >> infrastructure.env
 echo "export STORAGE_ACCOUNT='curitystorage$SUFFIX'"  >> infrastructure.env
 echo "export STORAGE_SHARE='curity-share'"            >> infrastructure.env
 echo "export STORAGE_MOUNT='curity-mount'"            >> infrastructure.env
-echo "export REGISTRY='curitytraining'"               >> infrastructure.env
+echo "export REGISTRY='curitytraining$SUFFIX'"        >> infrastructure.env
 echo "export IDENTITY='curity-identity'"              >> infrastructure.env
 . ./infrastructure.env
 

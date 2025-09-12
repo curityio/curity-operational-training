@@ -5,14 +5,6 @@
       <admin-service>
         <http>
           <base-url>$ADMIN_BASE_URL</base-url>
-          <web-ui>
-          <admin-federated-login>
-            <using-oauth-profile xmlns="https://curity.se/ns/conf/profile/oauth">
-              <oauth-profile>token-service</oauth-profile>
-              <client>admin_ui_client</client>
-            </using-oauth-profile>
-          </admin-federated-login>
-        </web-ui>
         </http>
       </admin-service>
       <services>
@@ -50,4 +42,14 @@
       </settings>
     </profile>
   </profiles>
+  <facilities xmlns="https://curity.se/ns/conf/base">
+    <http>
+      <client>
+        <id>token_service_http_client</id>
+        <tls>
+          <use-truststore>false</use-truststore>
+        </tls>
+      </client>
+    </http>
+  </facilities>
 </data>

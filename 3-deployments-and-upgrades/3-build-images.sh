@@ -7,17 +7,6 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #############################
 
 #
-# By default the configuration from this folder is used.
-# It is also possible to deploy configurations from other folders and then test flows in Azure.
-# Set deployment variables here that utility scripts need.
-#
-if [ "$CONFIGURATION_FOLDER" == '' ]; then
-  export DOCKER_LOCATION='./idsvr'
-else
-  export DOCKER_LOCATION="../$CONFIGURATION_FOLDER"
-fi
-
-#
 # Get infrastructure parameters
 #
 . ./infrastructure.env
@@ -38,12 +27,28 @@ TAG="$(date +%Y%m%d%H%M%S)"
 #
 # Build a Curity Identity Server Docker image to include shared resources
 #
-cd "$DOCKER_LOCATION"
-docker build --no-cache -t "idsvr:$TAG" .
-if [ $? -ne 0 ]; then
-  exit 1
+if [ "$CONFIGURATION_FOLDER" == '' ]; then
+
+  #
+  # By default the configuration from this folder is used.
+  #
+  docker build --no-cache -f ./idsvr/Dockerfile -t "idsvr:$TAG" .
+  if [ $? -ne 0 ]; then
+    exit 1
+  fi
+
+else
+
+  #
+  # The demo deployment also supports building Docker images with configurations from other folders.
+  #
+  cd "../$CONFIGURATION_FOLDER"
+  docker build --no-cache -t "idsvr:$TAG" .
+  if [ $? -ne 0 ]; then
+    exit 1
+  fi
+  cd -
 fi
-cd -
 
 #
 # Get the latest MS SQL Server schema creation script

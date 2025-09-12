@@ -5,8 +5,8 @@ You can then test OAuth flows using an internet Curity Identity Server cluster.
 
 ## Deploy Advanced Configurations
 
-Re-run the following scripts to redeploy with configuration from the administrator courses.\
-Run scripts separately and wait until they complete successfully.
+Re-run the following commands to redeploy with configuration from the administrator courses.\
+Run scripts one at a time and wait for each to complete successfully.
 
 ```bash
 export CONFIGURATION_FOLDER='6-token-issuance'
@@ -16,14 +16,11 @@ export CONFIGURATION_FOLDER='6-token-issuance'
 
 ## Patch the Configuration
 
-Then run a patch to update the configuration to Azure's dynamically generated URLs:
+Then run a patch to enable a working system with Azure's dynamically generated URLs:
 
 ```bash
 ./postdeployment/patch.sh
 ```
-
-Also inspect the `patch.xml` file to understand the configuration settings that use external URLs.\
-Run the Admin UI to locate these settings and check their updated values.
 
 ## Create a Test User Account
 

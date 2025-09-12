@@ -127,7 +127,7 @@ az storage file upload \
     --account-name "$STORAGE_ACCOUNT" \
     --share-name "$STORAGE_SHARE" \
     --source config/cluster.xml \
-    --path cluster.xml
+    --path ../"$CONFIGURATION_FOLDER"/cluster.xml
 if [ $? -ne 0 ]; then
   exit 1
 fi
