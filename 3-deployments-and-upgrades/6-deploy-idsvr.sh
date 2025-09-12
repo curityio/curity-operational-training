@@ -69,6 +69,10 @@ fi
 export IDSVR_IMAGE="$REGISTRY.azurecr.io/idsvr:$TAG"
 
 #
+# COPY AND ADJUST CONFIG HERE
+#
+
+#
 # You only need to create crypto keys once per stage of your deployment pipeline
 #
 export GENERATE_CLUSTER_KEY='true'
