@@ -14,14 +14,6 @@ export CONFIGURATION_FOLDER='6-token-issuance'
 ./6-deploy-idsvr.sh
 ```
 
-## Patch the Configuration
-
-Then run a patch to enable a working system with Azure's dynamically generated URLs:
-
-```bash
-./postdeployment/patch.sh
-```
-
 ## Create a Test User Account
 
 Run the following commands to create the test user:

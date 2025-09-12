@@ -29,7 +29,7 @@ fi
 #
 # If required, create HTTPS certificates that the API gateway uses for external URLs
 #
-../utils/ssl-certs/create.sh "$(pwd)"
+../utils/ssl-certs/create.sh
 if [ $? -ne 0 ]; then
   exit 1
 fi
