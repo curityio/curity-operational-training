@@ -23,7 +23,7 @@
         <zones>
           <default-zone>
             <symmetric-key>#{SYMMETRIC_KEY}</symmetric-key>
-            <allowed-origins-for-cors>https://admin.demo.example</allowed-origins-for-cors>
+            <allowed-origins-for-cors>#{ADMIN_BASE_URL}</allowed-origins-for-cors>
           </default-zone>
         </zones>
         <service-role>
