@@ -16,20 +16,14 @@ export CONFIGURATION_FOLDER='6-token-issuance'
 
 ## Patch the Configuration
 
-Then run a patch to update to Azure's dynamically generated URLs:
+Then run a patch to update the configuration to Azure's dynamically generated URLs:
 
 ```bash
 ./postdeployment/patch.sh
 ```
 
-In the event of failure, apply settings to match the `patch.xml` file manually in the Admin UI.\
-The patch then outputs generated Azure URLs of the following form:
-
-```text
-Admin base URL is https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io
-Runtime base URL is https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontainerapps.io
-Email inbox for testing is at https://maildev.calmsea-582ed713.uksouth.azurecontainerapps.io
-```
+Also inspect the `patch.xml` file to understand the configuration settings that use external URLs.\
+Run the Admin UI to locate these settings and check their updated values.
 
 ## Create a Test User Account
 

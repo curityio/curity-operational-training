@@ -164,3 +164,13 @@ az containerapp create \
 if [ $? -ne 0 ]; then
   exit 1
 fi
+
+#
+# Output Azure generated domain names
+#
+export ADMIN_BASE_URL=$(./postdeployment/admin-base-url.sh)
+export RUNTIME_BASE_URL=$(./postdeployment/runtime-base-url.sh)
+export MAILDEV_BASE_URL=$(./postdeployment/maildev-base-url.sh)
+echo "Admin base URL is $ADMIN_BASE_URL"
+echo "Runtime base URL is $RUNTIME_BASE_URL"
+echo "Email inbox for testing is at $MAILDEV_BASE_URL"
