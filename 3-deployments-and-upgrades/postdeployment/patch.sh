@@ -30,5 +30,6 @@ HTTP_STATUS=$(curl -s \
   -o response.txt -w '%{http_code}')
 if [ "$HTTP_STATUS" != '204' ]; then
   echo "Problem encountered patching the Curity Identity Server's configuration: $HTTP_STATUS"
+  cat response.txt
   exit 1
 fi
