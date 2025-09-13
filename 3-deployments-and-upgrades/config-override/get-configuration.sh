@@ -36,3 +36,5 @@ cp $CONFIGURATION_FOLDER/vault/secrets.env     ./vault/
 #
 # Use sed to override the DBSERVER, ADMIN_BASE_URL, RUNTIME_BASE_URL
 #
+
+# Use $DBSERVER.database.windows.net"

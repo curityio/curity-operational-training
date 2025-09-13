@@ -4,17 +4,11 @@
 - Keep Docker Compose use of two .env files, which is expressive
 - Extra Azure complexity is confined to a deployment 3 add-on script
 
-## 1. Delete Old Config
-
-- Update .gitignore specially for course 3
-- Do not check config / configshared / vault subfolders into source control
-
 ## 2. Use Course 2 Config
 
-- Copy in course 2 configuration at runtime, deleting and recreating subfolders
 - Do a replace on the config/parameters.env file using sed (different for macOS)
 - Update DB_CONNECTION, ADMIN_BASE_URL, RUNTIME_BASE_URL
-- Remove the need for DBSERVER_HOSTNAME
+- Simplify non Azure deployments and remove DBSERVER_HOSTNAME
 
 ## 3. Use Course 4 Config
 

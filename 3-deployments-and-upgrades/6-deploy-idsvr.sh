@@ -79,8 +79,12 @@ fi
 export IDSVR_IMAGE="$REGISTRY.azurecr.io/idsvr:$TAG"
 
 #
-# COPY AND ADJUST CONFIG HERE
+# Copy in the configuration for this deployment
 #
+./config-override/get-configuration.sh
+if [ $? -ne 0 ]; then
+  exit 1
+fi
 
 #
 # You only need to create crypto keys once per stage of your deployment pipeline
@@ -94,7 +98,6 @@ fi
 #
 # Run crypto tools to create protected secrets
 #
-export DBSERVER_HOSTNAME="$DBSERVER.database.windows.net"
 ../utils/crypto/run-crypto-tools.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
