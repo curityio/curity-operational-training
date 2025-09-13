@@ -20,6 +20,16 @@ if [ "$LICENSE_KEY" == '' ]; then
 fi
 
 #
+# Copy in the configuration for this deployment
+#
+./config-override/get-configuration.sh
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+echo 'quitting'
+exit
+
+#
 # Prevent accidental checkins of license files
 #
 cp ../hooks/pre-commit ../.git/hooks

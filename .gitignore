@@ -10,7 +10,6 @@ data
 mssql-create_database.sql
 infrastructure.env
 environment_variables.txt
-patch.xml
 download
 job.yml
 admin.yml
@@ -19,3 +18,6 @@ maildev.yml
 cluster.xml
 node_modules
 response.txt
+3-deployments-and-upgrades/config
+3-deployments-and-upgrades/configshared
+3-deployments-and-upgrades/vault
