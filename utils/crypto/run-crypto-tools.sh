@@ -146,12 +146,15 @@ if [ "$USER_AUTHENTICATION" == 'true' ]; then
   fi
   echo "export ADMIN_CLIENT_SYMMETRIC_KEY='$ADMIN_CLIENT_SYMMETRIC_KEY'" >> ./protected-secrets.env
 
-  SSL_TRUST_STORE_RAW=$(openssl base64 -in ../../utils/ssl-certs/example.ca.crt | tr -d "$LINE_SEPARATOR")
-  SSL_TRUST_STORE=$(docker exec -i curity bash -c "PLAINTEXT='$SSL_TRUST_STORE_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-keystore.sh")
-  if [ $? -ne 0 ]; then
-    exit 1
+  if [ "$USE_TRUST_STORE" != 'false' ]; then
+  
+    SSL_TRUST_STORE_RAW=$(openssl base64 -in ../../utils/ssl-certs/example.ca.crt | tr -d "$LINE_SEPARATOR")
+    SSL_TRUST_STORE=$(docker exec -i curity bash -c "PLAINTEXT='$SSL_TRUST_STORE_RAW' CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY' /tmp/encrypt-keystore.sh")
+    if [ $? -ne 0 ]; then
+      exit 1
+    fi
+    echo "export SSL_TRUST_STORE='$SSL_TRUST_STORE'" >> ./protected-secrets.env
   fi
-  echo "export SSL_TRUST_STORE='$SSL_TRUST_STORE'" >> ./protected-secrets.env
 fi
 
 #

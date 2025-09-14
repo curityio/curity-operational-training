@@ -35,7 +35,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Set variables that activate the use of additional secrets
+# Set variables used by the run-crypto-tools.sh script
 #
 export USER_MANAGEMENT='true'
 export USER_AUTHENTICATION='true'
@@ -44,7 +44,7 @@ export TOKEN_ISSUANCE='true'
 #
 # If required, create HTTPS certificates that the API gateway uses for external URLs
 #
-../utils/ssl-certs/create.sh "$(pwd)"
+../utils/ssl-certs/create.sh
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -60,7 +60,6 @@ fi
 #
 # Run crypto tools to create protected secrets
 #
-export DBSERVER_HOSTNAME='dbserver:1433'
 ../utils/crypto/run-crypto-tools.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1

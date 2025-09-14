@@ -14,14 +14,6 @@ export CONFIGURATION_FOLDER='6-token-issuance'
 ./6-deploy-idsvr.sh
 ```
 
-## Patch the Configuration
-
-Then run a patch to enable a working system with Azure's dynamically generated URLs:
-
-```bash
-./postdeployment/patch.sh
-```
-
 ## Create a Test User Account
 
 Run the following commands to create the test user:
@@ -39,7 +31,9 @@ To use the [Minimal Console Client](../utils/console-client/README.md), use comm
 ```bash
 export RUNTIME_BASE_URL=$(./postdeployment/runtime-base-url.sh)
 cd ../utils/console-client
-npm run tokens
+
+npm install
+npm run login
 ```
 
 ## Query Azure SQL Identity Data

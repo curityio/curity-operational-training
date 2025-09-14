@@ -39,16 +39,8 @@ Once the final script completes it outputs the generated domain names:
 ```text
 Admin base URL is https://idsvr-admin.calmsea-582ed713.uksouth.azurecontainerapps.io
 Runtime base URL is https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontainerapps.io
-Email inbox for testing is at https://maildev.calmsea-582ed713.uksouth.azurecontainerapps.io
+Email inbox for testing is at https://smtpserver.calmsea-582ed713.uksouth.azurecontainerapps.io
 ```
-
-## Post Deployment
-
-To complete the deployment, navigate to the `/admin` path of the Admin URL.\
-Sign in and make the following configuration changes:
-
-- Set the generated runtime base URL under **System** -> **General**.
-- Set the generated admin base URL under **System** -> **Admin Service**.
 
 ## Troubleshoot
 
@@ -78,10 +70,27 @@ az containerapp logs show \
   --follow
 
 az containerapp logs show \
-  --name idsvr-admin \
+  --name idsvr-runtime \
   --resource-group curity-rg \
   --replica MY_RUNTIME_CONTAINER_ID \
   --follow
+```
+
+Once containers deploy successfully, get a shell to check deployed files and environment variables:
+
+```bash
+az containerapp exec \
+  --name idsvr-admin \
+  --resource-group curity-rg \
+  --command bash
+```
+
+```bash
+az containerapp exec \
+  --name idsvr-runtime \
+  --resource-group curity-rg \
+  --replica MY_RUNTIME_CONTAINER_ID \
+  --command bash
 ```
 
 ## Test OAuth Flows
