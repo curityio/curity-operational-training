@@ -76,6 +76,32 @@ az containerapp logs show \
   --follow
 ```
 
+If containers deployed successfully, get a shell to check deployed files and environment variables:
+
+```bash
+az containerapp exec \
+  --name smtpserver \
+  --resource-group curity-rg \
+  --command '/bin/sh -c ls'
+```
+
+
+az containerapp exec \
+  --name idsvr-admin \
+  --replica idsvr-runtime--0000007-6bf69cbf5d-2f498 \
+  --resource-group curity-rg \
+  --command '/bin/sh -c ls'
+
+
+az containerapp exec \
+  --name idsvr-runtime \
+  --resource-group curity-rg \
+  --replica idsvr-runtime--0000004-5d654cfdcb-mcr8j \
+  --command '/bin/sh -c ls'
+
+
+
+
 ## Test OAuth Flows
 
 Once you are comfortable with the deployment you can test using the internet cluster.\

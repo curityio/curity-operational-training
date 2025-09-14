@@ -27,6 +27,7 @@ function replaceStringInFile() {
 #
 # Set the Azure specific database hostname
 #
+cd ..
 replaceStringInFile 'dbserver:1433' "$DBSERVER.database.windows.net" './vault/secrets.env'
 
 #
@@ -38,7 +39,7 @@ replaceStringInFile 'admin.demo.example' "$ADMIN_FQDN"   './config/parameters.en
 replaceStringInFile 'login.demo.example' "$RUNTIME_FQDN" './config/parameters.env'
 
 #
-# Finally, set variables used by the run-crypto-tools.sh script
+# Finally, set parameters used by the run-crypto-tools.sh script
 #
 export GENERATE_CLUSTER_KEY='true'
 if [ "$CONFIGURATION_FOLDER" == '4-user-management'  ]; then
@@ -49,8 +50,6 @@ elif [ "$CONFIGURATION_FOLDER" == '5-user-authentication'  ]; then
 
   export USER_MANAGEMENT='true'
   export USER_AUTHENTICATION='true'
-  
-  cp config-override/trust.xml configshared
   export USE_TRUST_STORE='false'
 
 elif [ "$CONFIGURATION_FOLDER" == '6-token-issuance'  ]; then
@@ -58,7 +57,5 @@ elif [ "$CONFIGURATION_FOLDER" == '6-token-issuance'  ]; then
   export USER_MANAGEMENT='true'
   export USER_AUTHENTICATION='true'
   export TOKEN_ISSUANCE='true'
-  
-  cp config-override/trust.xml configshared
   export USE_TRUST_STORE='false'
 fi

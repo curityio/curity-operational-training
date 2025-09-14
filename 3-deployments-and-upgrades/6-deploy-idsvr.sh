@@ -64,7 +64,6 @@ export RUNTIME_BASE_URL="${MAILDEV_BASE_URL/smtpserver/idsvr-runtime}"
 if [ $? -ne 0 ]; then
   exit 1
 fi
-cd ..
 
 #
 # You only need to create crypto keys once per stage of your deployment pipeline

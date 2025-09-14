@@ -7,6 +7,9 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 # By default it uses course 2 but can also use courses 4, 5 or 6, so that you can test cloud OAuth flows.
 #########################################################################################################
 
+#
+# Copy in configuration
+#
 cd ..
 rm -rf ./config        2>/dev/null
 rm -rf ./configshared  2>/dev/null
@@ -26,3 +29,16 @@ fi
 cp ../$CONFIGURATION_FOLDER/config/parameters.env ./config/
 cp ../$CONFIGURATION_FOLDER/configshared/*        ./configshared/
 cp ../$CONFIGURATION_FOLDER/vault/secrets.env     ./vault/
+
+#
+# For local deployments we configure SSL trust for federated admin UI logins
+# For the example cloud deployment we remove trust store details
+#
+if [ "$CONFIGURATION_FOLDER" == '5-user-authentication'  ]; then
+
+  cp config-override/trust.xml configshared
+
+elif [ "$CONFIGURATION_FOLDER" == '6-token-issuance'  ]; then
+ 
+  cp config-override/trust.xml configshared
+fi

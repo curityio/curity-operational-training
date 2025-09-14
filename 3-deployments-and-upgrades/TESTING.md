@@ -31,7 +31,9 @@ To use the [Minimal Console Client](../utils/console-client/README.md), use comm
 ```bash
 export RUNTIME_BASE_URL=$(./postdeployment/runtime-base-url.sh)
 cd ../utils/console-client
-npm run tokens
+
+npm install
+npm run login
 ```
 
 ## Query Azure SQL Identity Data

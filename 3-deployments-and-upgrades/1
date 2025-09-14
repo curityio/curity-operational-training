@@ -1,0 +1,78 @@
+[
+  {
+    "id": "/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/providers/Microsoft.App/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-2f498",
+    "name": "idsvr-runtime--0000007-6bf69cbf5d-2f498",
+    "properties": {
+      "containers": [
+        {
+          "containerId": "containerd://4af5e0e5c26242e09bd9fd84c36002c7",
+          "debugEndpoint": "wss://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-2f498/debug?targetContainer=idsvr-runtime-container",
+          "execEndpoint": "wss://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-2f498/containers/idsvr-runtime-container/exec",
+          "logStreamEndpoint": "https://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-2f498/containers/idsvr-runtime-container/logstream",
+          "name": "idsvr-runtime-container",
+          "ready": true,
+          "restartCount": 0,
+          "runningState": "Running",
+          "runningStateDetails": "Container started at: 9/14/2025 9:11:22 AM.",
+          "started": true
+        }
+      ],
+      "createdTime": "2025-09-14T09:11:14Z",
+      "initContainers": [
+        {
+          "debugEndpoint": "wss://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-2f498/debug?targetContainer=identity-service-0cee4339-transition",
+          "execEndpoint": "wss://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-2f498/containers/identity-service-0cee4339-transition/exec",
+          "logStreamEndpoint": "https://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-2f498/containers/identity-service-0cee4339-transition/logstream",
+          "name": "identity-service-0cee4339-transition",
+          "ready": false,
+          "restartCount": 0,
+          "runningState": "Terminated",
+          "runningStateDetails": "Container was terminated with reason: ProcessExited, exit code: 0.",
+          "started": false
+        }
+      ],
+      "runningState": "Running",
+      "runningStateDetails": ""
+    },
+    "resourceGroup": "curity-rg",
+    "type": "Microsoft.App/containerapps/revisions/replicas"
+  },
+  {
+    "id": "/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/providers/Microsoft.App/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-f7zzx",
+    "name": "idsvr-runtime--0000007-6bf69cbf5d-f7zzx",
+    "properties": {
+      "containers": [
+        {
+          "containerId": "containerd://723c5b523f4f42919e17737e221a1e6c",
+          "debugEndpoint": "wss://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-f7zzx/debug?targetContainer=idsvr-runtime-container",
+          "execEndpoint": "wss://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-f7zzx/containers/idsvr-runtime-container/exec",
+          "logStreamEndpoint": "https://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-f7zzx/containers/idsvr-runtime-container/logstream",
+          "name": "idsvr-runtime-container",
+          "ready": true,
+          "restartCount": 0,
+          "runningState": "Running",
+          "runningStateDetails": "Container started at: 9/14/2025 9:11:28 AM.",
+          "started": true
+        }
+      ],
+      "createdTime": "2025-09-14T09:11:14Z",
+      "initContainers": [
+        {
+          "debugEndpoint": "wss://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-f7zzx/debug?targetContainer=identity-service-0cee4339-transition",
+          "execEndpoint": "wss://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-f7zzx/containers/identity-service-0cee4339-transition/exec",
+          "logStreamEndpoint": "https://uksouth.azurecontainerapps.dev/subscriptions/3d52ec16-06b8-4b44-bdfd-9fdd056e16f1/resourceGroups/curity-rg/containerApps/idsvr-runtime/revisions/idsvr-runtime--0000007/replicas/idsvr-runtime--0000007-6bf69cbf5d-f7zzx/containers/identity-service-0cee4339-transition/logstream",
+          "name": "identity-service-0cee4339-transition",
+          "ready": false,
+          "restartCount": 0,
+          "runningState": "Terminated",
+          "runningStateDetails": "Container was terminated with reason: ProcessExited, exit code: 0.",
+          "started": false
+        }
+      ],
+      "runningState": "Running",
+      "runningStateDetails": ""
+    },
+    "resourceGroup": "curity-rg",
+    "type": "Microsoft.App/containerapps/revisions/replicas"
+  }
+]
