@@ -35,7 +35,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Set variables that activate the use of additional secrets
+# Set variables used by the run-crypto-tools.sh script
 #
 export USER_MANAGEMENT='true'
 
@@ -58,7 +58,6 @@ fi
 #
 # Run crypto tools to create protected secrets
 #
-export DBSERVER_HOSTNAME='dbserver:1433'
 ../utils/crypto/run-crypto-tools.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1

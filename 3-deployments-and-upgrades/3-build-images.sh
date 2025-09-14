@@ -12,6 +12,14 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 . ./infrastructure.env
 
 #
+# Get the configuration for this deployment
+#
+./config-override/get-configuration.sh
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+#
 # Make sure we are logged into the Azure container registry
 #
 az acr login --name "$REGISTRY"
@@ -27,27 +35,9 @@ TAG="$(date +%Y%m%d%H%M%S)"
 #
 # Build a Curity Identity Server Docker image to include shared resources
 #
-if [ "$CONFIGURATION_FOLDER" == '' ]; then
-
-  #
-  # By default the configuration from this folder is used.
-  #
-  docker build --no-cache -f ./idsvr/Dockerfile -t "idsvr:$TAG" .
-  if [ $? -ne 0 ]; then
-    exit 1
-  fi
-
-else
-
-  #
-  # The demo deployment also supports building Docker images with configurations from other folders.
-  #
-  cd "../$CONFIGURATION_FOLDER"
-  docker build --no-cache -t "idsvr:$TAG" .
-  if [ $? -ne 0 ]; then
-    exit 1
-  fi
-  cd -
+docker build --no-cache -f ./idsvr/Dockerfile -t "idsvr:$TAG" .
+if [ $? -ne 0 ]; then
+  exit 1
 fi
 
 #

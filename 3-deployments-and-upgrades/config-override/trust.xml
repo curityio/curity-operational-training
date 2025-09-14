@@ -1,2 +1,12 @@
-<xml>
-</xml>
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <facilities xmlns="https://curity.se/ns/conf/base">
+    <http>
+      <client>
+        <id>token_service_http_client</id>
+        <tls>
+          <use-truststore>false</use-truststore>
+        </tls>
+      </client>
+    </http>
+  </facilities>
+</config>

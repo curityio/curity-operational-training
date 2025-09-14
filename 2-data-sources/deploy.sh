@@ -35,9 +35,13 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Create crypto keys once per stage of your deployment pipeline
+# Set variables used by the run-crypto-tools.sh script
 #
 export GENERATE_CLUSTER_KEY='true'
+
+#
+# Create crypto keys once per stage of your deployment pipeline
+#
 ../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
@@ -46,7 +50,6 @@ fi
 #
 # Run crypto tools to create protected secrets
 #
-export DBSERVER_HOSTNAME='dbserver:1433'
 ../utils/crypto/run-crypto-tools.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1

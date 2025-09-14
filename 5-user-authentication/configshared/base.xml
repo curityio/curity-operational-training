@@ -57,14 +57,6 @@
     </environment>
   </environments>
   <facilities xmlns="https://curity.se/ns/conf/base">
-    <http>
-      <client>
-        <id>token_service_http_client</id>
-        <tls>
-          <use-truststore>true</use-truststore>
-        </tls>
-      </client>
-    </http>
     <data-sources>
       <data-source>
         <id>default-datasource</id>
@@ -79,16 +71,6 @@
       </data-source>
     </data-sources>
     <crypto>
-      <ssl>
-        <server-truststore>
-          <server-certificate>
-            <id>Training_Course_Local_CA</id>
-            <curve-name>P-256</curve-name>
-            <keystore>#{SSL_TRUST_STORE}</keystore>
-            <type>elliptic-curve</type>
-          </server-certificate>
-        </server-truststore>
-      </ssl>
       <signing-keys>
         <signing-key>
           <id>default-signing-key</id>

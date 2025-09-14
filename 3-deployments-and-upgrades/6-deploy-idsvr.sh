@@ -20,16 +20,6 @@ if [ "$LICENSE_KEY" == '' ]; then
 fi
 
 #
-# Copy in the configuration for this deployment
-#
-./config-override/get-configuration.sh
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-echo 'quitting'
-exit
-
-#
 # Prevent accidental checkins of license files
 #
 cp ../hooks/pre-commit ../.git/hooks
@@ -68,28 +58,17 @@ export ADMIN_BASE_URL="${MAILDEV_BASE_URL/smtpserver/idsvr-admin}"
 export RUNTIME_BASE_URL="${MAILDEV_BASE_URL/smtpserver/idsvr-runtime}"
 
 #
-# Get the tag of the last pushed Curity Identity Server Docker image
+# Override local computer environment variable values and set Azure specific values
 #
-az acr login --name "$REGISTRY"
-TAG=$(az acr repository show-tags --name "$REGISTRY" --repository idsvr --orderby time_desc --top 1 --output tsv)
-if [ "$TAG" == '' ]; then
-  echo 'Please push a Docker image before deploying the Curity Identity Server'
-  exit 1
-fi
-export IDSVR_IMAGE="$REGISTRY.azurecr.io/idsvr:$TAG"
-
-#
-# Copy in the configuration for this deployment
-#
-./config-override/get-configuration.sh
+. ./config-override/set-environment-variables.sh
 if [ $? -ne 0 ]; then
   exit 1
 fi
+cd ..
 
 #
 # You only need to create crypto keys once per stage of your deployment pipeline
 #
-export GENERATE_CLUSTER_KEY='true'
 ../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
@@ -104,8 +83,7 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# I don't think we can easily use .env files with Azure Container Apps
-# Therefore do some unpleasant bash manipulation, to avoid listing each environment variable in yaml files
+# Bash manipulation to avoid needing to list each environment variable in yaml files
 #
 echo 'Preparing environment variables ...'
 rm environment_variables.txt 2>/dev/null
@@ -122,6 +100,17 @@ do
   done < $file
 done
 export ENVIRONMENT_VARIABLES="$(cat environment_variables.txt)"
+
+#
+# Get the tag of the last pushed Curity Identity Server Docker image and set the Docker image to use
+#
+az acr login --name "$REGISTRY"
+TAG=$(az acr repository show-tags --name "$REGISTRY" --repository idsvr --orderby time_desc --top 1 --output tsv)
+if [ "$TAG" == '' ]; then
+  echo 'Please push a Docker image before deploying the Curity Identity Server'
+  exit 1
+fi
+export IDSVR_IMAGE="$REGISTRY.azurecr.io/idsvr:$TAG"
 
 #
 # Use the envsubst tool to populate yaml files with the values to use in Azure

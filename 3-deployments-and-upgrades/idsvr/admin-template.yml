@@ -42,10 +42,6 @@ properties:
         value: 'Admin'
       - name: LICENSE_KEY
         value: $LICENSE_KEY
-      - name: ADMIN_BASE_URL
-        value: $ADMIN_BASE_URL
-      - name: RUNTIME_BASE_URL
-        value: $RUNTIME_BASE_URL
 $ENVIRONMENT_VARIABLES
 
       volumeMounts:

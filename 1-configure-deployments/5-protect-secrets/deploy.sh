@@ -19,9 +19,13 @@ if [ "$LICENSE_KEY" == '' ]; then
 fi
 
 #
-# Create crypto keys once per stage of your deployment pipeline
+# Set variables used by the run-crypto-tools.sh script
 #
 export GENERATE_CLUSTER_KEY='true'
+
+#
+# Create crypto keys once per stage of your deployment pipeline
+#
 ../../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
   exit 1
