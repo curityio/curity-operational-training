@@ -66,7 +66,6 @@ Then tail logs using a container ID:
 az containerapp logs show \
   --name idsvr-admin \
   --resource-group curity-rg \
-  --replica MY_ADMIN_CONTAINER_ID \
   --follow
 
 az containerapp logs show \
