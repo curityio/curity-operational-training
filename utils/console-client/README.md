@@ -46,12 +46,13 @@ npm run exchange
 ### Configuration
 
 By default, the console client points to OAuth endpoints for this repository's local deployments.\
-You can edit the following files to point to a remote system instead.
+You can set the following environment variable to point it to a different base URL before running npm commands:
 
-- [OAuth Client Settings](src/security/oauthClient.ts)
-- [Introspection Settings](src/security/introspectClient.ts)
+```bash
+export RUNTIME_BASE_URL='http://localhost:8443'
+```
 
-Each lesson has XML configuration for the console client that you can import into your system.\
+Each course has XML configuration for the console client that you can import into your system.\
 For example, save the following XML to a `client.xml` file, then upload it in the Admin UI.\
 Choose the merge option and commit changes, after which you can run the client.
 
