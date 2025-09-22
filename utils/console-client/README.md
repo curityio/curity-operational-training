@@ -53,7 +53,7 @@ export RUNTIME_BASE_URL='http://localhost:8443'
 ```
 
 Each course has XML configuration for the console client that you can import into your system.\
-To test a code flow with the console client, save the following XML to a `client.xml` file and upload it in the Admin UI:
+To test a code flow with the console client, save the following XML to a `client.xml` file and upload it in the Admin UI.\
 Choose the merge option and commit changes, after which you can run the client.
 
 ```xml
