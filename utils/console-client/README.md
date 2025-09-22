@@ -53,7 +53,7 @@ export RUNTIME_BASE_URL='http://localhost:8443'
 ```
 
 Each course has XML configuration for the console client that you can import into your system.\
-For example, save the following XML to a `client.xml` file, then upload it in the Admin UI.\
+To test a code flow with the console client, save the following XML to a `client.xml` file and upload it in the Admin UI:
 Choose the merge option and commit changes, after which you can run the client.
 
 ```xml
@@ -76,28 +76,11 @@ Choose the merge option and commit changes, after which you can run the client.
                 </proof-key>
                 <scope>openid</scope>
                 <scope>profile</scope>
-                <scope>sales</scope>
                 <capabilities>
                   <code>
                   </code>
                 </capabilities>
                 <validate-port-on-loopback-interfaces>false</validate-port-on-loopback-interfaces>
-              </client>
-              <client>
-                <id>introspect-client</id>
-                <secret>Password1</secret>
-                <capabilities>
-                  <introspection />
-                </capabilities>
-              </client>
-              <client>
-                <id>api-token-exchange-client</id>
-                <secret>Password1</secret>
-                <scope>openid</scope>
-                <scope>profile</scope>
-                <capabilities>
-                  <oauth-token-exchange/>
-                </capabilities>
               </client>
             </config-backed>
           </client-store>
