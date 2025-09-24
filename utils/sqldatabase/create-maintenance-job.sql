@@ -22,8 +22,8 @@ EXEC sp_add_jobstep
     @step_name = 'idsvr_clear_nonces',
     @subsystem = 'TSQL',
     @command = 'EXEC idsvr.dbo.sp_clear_nonces;',
-    @retry_attempts = 3,
-    @retry_interval = 3;
+    @on_success_action = 3,
+    @on_fail_action = 3;
 GO
 
 --
@@ -34,8 +34,8 @@ EXEC sp_add_jobstep
     @step_name = 'idsvr_clear_tokens',
     @subsystem = 'TSQL',
     @command = 'EXEC idsvr.dbo.sp_clear_tokens;',
-    @retry_attempts = 3,
-    @retry_interval = 3;
+    @on_success_action = 3,
+    @on_fail_action = 3;
 GO
 
 --
@@ -46,8 +46,8 @@ EXEC sp_add_jobstep
     @step_name = 'idsvr_clear_sessions',
     @subsystem = 'TSQL',
     @command = 'EXEC idsvr.dbo.sp_clear_sessions;',
-    @retry_attempts = 3,
-    @retry_interval = 3;
+    @on_success_action = 3,
+    @on_fail_action = 3;
 GO
 
 --
@@ -58,8 +58,8 @@ EXEC sp_add_jobstep
     @step_name = 'idsvr_clear_delegations',
     @subsystem = 'TSQL',
     @command = 'EXEC idsvr.dbo.sp_clear_delegations;',
-    @retry_attempts = 3,
-    @retry_interval = 3;
+    @on_success_action = 3,
+    @on_fail_action = 3;
 GO
 
 --
