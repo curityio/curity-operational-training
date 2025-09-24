@@ -22,6 +22,13 @@ USE idsvr;
 GO
 
 --
+-- You must disable intra-query parallelism for the Curity Identity Server's database
+-- SELECT value FROM sys.database_scoped_configurations WHERE name = 'MAXDOP';
+--
+ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 1;
+GO
+
+--
 -- Create a low privilege daabase user
 --
 IF DATABASE_PRINCIPAL_ID('idsvruser') IS NULL
