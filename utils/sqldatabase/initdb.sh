@@ -5,7 +5,6 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #################################################################################################################
 # When you create a data source for the Curity Identity Server it is essential to use a resilient database setup.
 # Therefore, involve DBAs and follow similar processes that you use for your business data.
-# This script also highlights some reliability steps that you would need to follow in a real deployment.
 #################################################################################################################
 
 #
