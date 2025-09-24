@@ -56,10 +56,16 @@ rm -rf data
 mkdir data
 ```
 
-## Run Maintenance Procedures
+## Database Administration
 
-The maintenance procedures are run every 12 hours by the Microsoft SQL Server Agent process.\
-You can run them manually with the following commands:
+You must also do some database administration work for your data sources.\
+You then get confidence that the system runs reliably under load.\
+The [Data Sources](https://curity.io/training/data-sources/) training course explains the requirements.
+
+## Maintenance Procedures
+
+Part of the database administration work is to implement mainteance procedures.\
+This example deployment includes some example scripts that you can use as a reference.
 
 ```sql
 /opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'EXEC sp_clear_nonces'
@@ -68,6 +74,7 @@ You can run them manually with the following commands:
 /opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'EXEC sp_clear_delegations'
 ```
 
+The maintenance procedures are run every 12 hours by the Microsoft SQL Server Agent process.\
 The following command shows details of scheduled job executions:
 
 ```bash

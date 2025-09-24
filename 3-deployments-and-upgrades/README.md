@@ -42,6 +42,12 @@ Runtime base URL is https://idsvr-runtime.calmsea-582ed713.uksouth.azurecontaine
 Email inbox for testing is at https://smtpserver.calmsea-582ed713.uksouth.azurecontainerapps.io
 ```
 
+## Database Administration
+
+You must also do some database administration work for your data sources.\
+You then get confidence that the system runs reliably under load.\
+The [Data Sources](https://curity.io/training/data-sources/) training course explains the requirements.
+
 ## Troubleshoot
 
 Get container IDs:
