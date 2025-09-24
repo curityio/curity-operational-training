@@ -21,19 +21,7 @@ EXEC sp_add_jobstep
     @job_name = 'idsvr_maintenance',
     @step_name = 'idsvr_clear_nonces',
     @subsystem = 'TSQL',
-    @command = "DELETE FROM idsvr.dbo.nonces WHERE status = 'used';",
-    @retry_attempts = 3,
-    @retry_interval = 3;
-GO
-
---
--- Clear expired sessions
---
-EXEC sp_add_jobstep
-    @job_name = 'idsvr_maintenance',
-    @step_name = 'idsvr_clear_sessions',
-    @subsystem = 'TSQL',
-    @command = "DELETE TOP (10000) FROM idsvr.dbo.sessions WHERE expires < DATEDIFF(s, '1970-01-01 00:00:00', CURRENT_TIMESTAMP);",
+    @command = 'EXEC idsvr.dbo.sp_clear_nonces;',
     @retry_attempts = 3,
     @retry_interval = 3;
 GO
@@ -45,7 +33,19 @@ EXEC sp_add_jobstep
     @job_name = 'idsvr_maintenance',
     @step_name = 'idsvr_clear_tokens',
     @subsystem = 'TSQL',
-    @command = "DELETE TOP (10000) FROM idsvr.dbo.tokens WHERE expires < DATEDIFF(s, '1970-01-01 00:00:00', CURRENT_TIMESTAMP);",
+    @command = 'EXEC idsvr.dbo.sp_clear_tokens;',
+    @retry_attempts = 3,
+    @retry_interval = 3;
+GO
+
+--
+-- Clear expired sessions
+--
+EXEC sp_add_jobstep
+    @job_name = 'idsvr_maintenance',
+    @step_name = 'idsvr_clear_sessions',
+    @subsystem = 'TSQL',
+    @command = 'EXEC idsvr.dbo.sp_clear_sessions;',
     @retry_attempts = 3,
     @retry_interval = 3;
 GO
@@ -57,38 +57,27 @@ EXEC sp_add_jobstep
     @job_name = 'idsvr_maintenance',
     @step_name = 'idsvr_clear_delegations',
     @subsystem = 'TSQL',
-    @command = "DELETE TOP (10000) FROM idsvr.dbo.delegations WHERE expires < DATEDIFF(s, '1970-01-01 00:00:00', CURRENT_TIMESTAMP);",
+    @command = 'EXEC idsvr.dbo.sp_clear_delegations;',
     @retry_attempts = 3,
     @retry_interval = 3;
 GO
 
 --
--- Add a daily schedule to run the job at midnight every day
---
-EXEC sp_add_schedule
-    @schedule_name = 'idsvr_maintenance',
-    @freq_type = 4,
-    @freq_interval = 1;
-GO
-
---
--- Attach the schedule to the job
---
-EXEC sp_attach_schedule
-    @job_name = 'idsvr_maintenance',
-    @schedule_name = 'idsvr_maintenance';
-GO
-
---
--- Add the job to the SQL Server
+-- Add the job to SQL Server
 --
 EXEC sp_add_jobserver @job_name = 'idsvr_maintenance';
 GO
 
 --
--- To debug and ensure that the job runs, you can add these parameters to sp_add_schedule, to run the job every minute:
---   @freq_subday_type = 4,
---   @freq_subday_interval = 1;
+-- This example adds a schedule to run maintenance procedures once every 12 hours
+-- https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-add-jobschedule-transact-sql
 --
--- Then run the following command to view details of recent job executions:
---   msdb.dbo.sp_help_job @Job_name = 'idsvr_maintenance'
+EXEC sp_add_jobschedule 
+    @job_name = 'idsvr_maintenance',
+    @name = 'idsvr_maintenance', 
+    @enabled = 1,
+    @freq_type = 4,             -- Run on a faily basis
+    @freq_interval = 1,         -- This means not used
+    @freq_subday_type = 8,      -- Use units of hours - reduce this to minutes for testing
+    @freq_subday_interval = 12; -- The number of units before the next execution
+GO

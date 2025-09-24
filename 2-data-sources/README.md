@@ -31,14 +31,14 @@ select name from sysobjects where type='U';
 GO
 ```
 
-Or query user accounts:
+Query information about user accounts:
 
 ```sql
 select * from accounts;
 GO
 ```
 
-Or query operational data:
+Or query information about operational data:
 
 ```sql
 select * from delegations;
@@ -54,4 +54,22 @@ To maintain existing SQL data, comment out the following statements before runni
 ```bash
 rm -rf data
 mkdir data
+```
+
+## Run Maintenance Procedures
+
+The maintenance procedures are run every 12 hours by the Microsoft SQL Server Agent process.\
+You can run them manually with the following commands:
+
+```sql
+/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'EXEC sp_clear_nonces'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'EXEC sp_clear_tokens'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'EXEC sp_clear_sessions'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'EXEC sp_clear_delegations'
+```
+
+The following command shows details of scheduled job executions:
+
+```bash
+cat /var/opt/mssql/log/sqlagent.out
 ```

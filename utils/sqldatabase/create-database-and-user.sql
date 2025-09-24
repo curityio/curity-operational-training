@@ -1,21 +1,36 @@
 USE master;
 GO
 
+-- 
+-- Create the login
+--
 IF SUSER_ID('idsvruser') IS NULL
-CREATE LOGIN idsvruser WITH PASSWORD = 'Password1';
+    CREATE LOGIN idsvruser WITH PASSWORD = 'Password1';
 GO
 
+-- 
+-- Create the database
+-- A real database deployment should set sufficient data and log sizes
+-- You should also configure backup related settings
+-- https://curity.io/docs/idsvr/latest/system-admin-guide/system-requirements.html#database
+--
 IF DB_ID('idsvr') IS NULL
-CREATE DATABASE idsvr;
+    CREATE DATABASE idsvr;
 GO
 
 USE idsvr;
 GO
 
+--
+-- Create a low privilege daabase user
+--
 IF DATABASE_PRINCIPAL_ID('idsvruser') IS NULL
-CREATE USER idsvruser FOR LOGIN idsvruser;
+    CREATE USER idsvruser FOR LOGIN idsvruser;
 GO
 
+--
+-- The database user must have read and write permissions to the identity data tables
+--
 EXEC sp_addrolemember 'db_datareader', 'idsvruser';
 GO
 

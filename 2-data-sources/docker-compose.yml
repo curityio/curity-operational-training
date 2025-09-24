@@ -81,6 +81,7 @@ services:
     - ./data:/var/opt/mssql/data
     environment:
       ACCEPT_EULA: Y
+      MSSQL_PID: Developer
       MSSQL_SA_PASSWORD: Password1
       MSSQL_COLLATION: Latin1_General_100_CI_AS_SC_UTF8
       MSSQL_AGENT_ENABLED: true
