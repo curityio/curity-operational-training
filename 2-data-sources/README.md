@@ -60,7 +60,7 @@ mkdir data
 
 You must also do some database administration work for your data sources.\
 You then get confidence that the system runs reliably under load.\
-The [Data Sources](https://curity.io/training/data-sources/) training course explains the requirements.
+The example deployment demonstrates some of the approaches.
 
 ## Maintenance Procedures
 
