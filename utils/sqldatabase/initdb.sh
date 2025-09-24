@@ -53,11 +53,6 @@ fi
 #
 # Create maintenance stored procedures
 #
-/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'DROP PROCEDURE sp_clear_nonces'      >/dev/null
-/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'DROP PROCEDURE sp_clear_tokens'      >/dev/null
-/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'DROP PROCEDURE sp_clear_sessions'    >/dev/null
-/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -Q 'DROP PROCEDURE sp_clear_delegations' >/dev/null
-
 /opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -d idsvr -C -I -i /tmp/initscripts/sp_clear_nonces.sql
 if [ $? -ne 0 ]; then
   echo 'Problem encountered creating the sp_clear_nonces maintenance procedure'
