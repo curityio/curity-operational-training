@@ -32,13 +32,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-
-
-ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 
-
-/opt/mssql-tools/bin/sqlcmd -S "$DBSERVER.database.windows.net" -U superuser -P Password1 -d master -i /tmp/initscripts/create-login.sql
-
-
 #
 # See if tables already exist in the Curity Identity Server database
 #

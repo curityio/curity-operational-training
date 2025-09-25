@@ -13,9 +13,9 @@ AS
 -- * Test the procedure under load.
 -- * Implement logging that highlights slow DELETE commands.
 --
-DECLARE @batch_size INT = 1000;
-DECLARE @rows       INT = 1;
-DECLARE @deleted    INT = 0;
+DECLARE @batch_size     INT = 1000;
+DECLARE @rows           INT = 1;
+DECLARE @deleted        INT = 0;
 SET XACT_ABORT ON;
 
 WHILE @rows > 0
@@ -39,8 +39,16 @@ BEGIN
             ', batch rows deleted: ', @rows,
             ', cumulative rows deleted: ', @deleted
         );
+
     END TRY
     BEGIN CATCH
+        
+        PRINT CONCAT(
+            'sp_clear_delegations: Problem encountered at ', 
+            CONVERT(varchar(23), SYSDATETIME(), 121),
+            ', number: ', ERROR_NUMBER(),
+            ', message: ', ERROR_MESSAGE()
+        );
         IF @@TRANCOUNT > 0
             ROLLBACK TRANSACTION;
         THROW;

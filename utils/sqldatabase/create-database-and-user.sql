@@ -9,7 +9,7 @@ IF SUSER_ID('idsvruser') IS NULL
 GO
 
 -- 
--- Create the database fgor the Curity Identity Server
+-- Create the database for the Curity Identity Server
 -- A real database deployment should set sufficient data and log sizes
 -- You should also configure backup related settings
 -- https://curity.io/docs/idsvr/latest/system-admin-guide/system-requirements.html#database

@@ -41,6 +41,13 @@ BEGIN
         );
     END TRY
     BEGIN CATCH
+        
+        PRINT CONCAT(
+            'sp_clear_tokens: Problem encountered at ', 
+            CONVERT(varchar(23), SYSDATETIME(), 121),
+            ', number: ', ERROR_NUMBER(),
+            ', message: ', ERROR_MESSAGE()
+        );
         IF @@TRANCOUNT > 0
             ROLLBACK TRANSACTION;
         THROW;

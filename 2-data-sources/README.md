@@ -64,14 +64,14 @@ The example deployment demonstrates some of the approaches.
 
 ## Maintenance Procedures
 
-Part of the database administration work is to implement mainteance procedures.\
+Part of the database administration work is to implement maintenance procedures.\
 This example deployment includes some example scripts that you can use as a reference.
 
 ```sql
-/opt/mssql-tools18/bin/sqlcmd -U idsvruser -P Password1 -d idsvr -C -Q 'EXEC sp_clear_nonces'
-/opt/mssql-tools18/bin/sqlcmd -U idsvruser -P Password1 -d idsvr -C -Q 'EXEC sp_clear_tokens'
-/opt/mssql-tools18/bin/sqlcmd -U idsvruser -P Password1 -d idsvr -C -Q 'EXEC sp_clear_sessions'
-/opt/mssql-tools18/bin/sqlcmd -U idsvruser -P Password1 -d idsvr -C -Q 'EXEC sp_clear_delegations'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P Password1 -d idsvr -C -Q 'EXEC sp_clear_nonces'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P Password1 -d idsvr -C -Q 'EXEC sp_clear_tokens'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P Password1 -d idsvr -C -Q 'EXEC sp_clear_sessions'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P Password1 -d idsvr -C -Q 'EXEC sp_clear_delegations'
 ```
 
 The maintenance procedures are run every 12 hours by the Microsoft SQL Server Agent process.\
