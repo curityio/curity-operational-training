@@ -31,14 +31,14 @@ select name from sysobjects where type='U';
 GO
 ```
 
-Or query user accounts:
+Query information about user accounts:
 
 ```sql
 select * from accounts;
 GO
 ```
 
-Or query operational data:
+Or query information about operational data:
 
 ```sql
 select * from delegations;
@@ -54,4 +54,29 @@ To maintain existing SQL data, comment out the following statements before runni
 ```bash
 rm -rf data
 mkdir data
+```
+
+## Database Administration
+
+You must also do some database administration work for your data sources.\
+You then get confidence that the system runs reliably under load.\
+The example deployment demonstrates some of the approaches.
+
+## Maintenance Procedures
+
+Part of the database administration work is to implement maintenance procedures.\
+This example deployment includes some example scripts that you can use as a reference.
+
+```sql
+/opt/mssql-tools18/bin/sqlcmd -U sa -P Password1 -d idsvr -C -Q 'EXEC sp_clear_nonces'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P Password1 -d idsvr -C -Q 'EXEC sp_clear_tokens'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P Password1 -d idsvr -C -Q 'EXEC sp_clear_sessions'
+/opt/mssql-tools18/bin/sqlcmd -U sa -P Password1 -d idsvr -C -Q 'EXEC sp_clear_delegations'
+```
+
+The maintenance procedures are run every 12 hours by the Microsoft SQL Server Agent process.\
+The following command shows details of scheduled job executions:
+
+```bash
+cat /var/opt/mssql/log/sqlagent.out
 ```

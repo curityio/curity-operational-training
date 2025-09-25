@@ -39,7 +39,10 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Create a database for the Curity Identity Server
+# Create the database for the Curity Identity Server
+# A real database deployment should set sufficient data and log sizes
+# You should also configure backup related settings
+# - https://curity.io/docs/idsvr/latest/system-admin-guide/system-requirements.html#database
 #
 az sql db create \
     --resource-group "$RESOURCE_GROUP" \
