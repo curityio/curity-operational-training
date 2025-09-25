@@ -33,17 +33,6 @@ This visualizes access token claims, ID token claims and the client's OAuth user
 npm run tokens
 ```
 
-### Exchange an Access Token
-
-If you use the configuration from the token issuance course you can run a token exchange flow.\
-You can run a login and then exchange the original access token with the following command.\
-The client then acts as an API and uses token exchange to downscope the access token.\
-The exchanged access token maintains the user identity but no longer contains custom claims.
-
-```bash
-npm run exchange
-```
-
 ### Configuration
 
 By default, the console client points to OAuth endpoints for this repository's local deployments.\
@@ -97,6 +86,17 @@ Choose the merge option and commit changes, after which you can run the client a
     </profile>
   </profiles>
 </config>
+```
+
+### Exchange an Access Token
+
+If you use the configuration from the token issuance traing course you can also run a token exchange flow.\
+You can run a login and then exchange the original access token with the following command.\
+The client then acts as an API and uses token exchange to downscope the access token.\
+The exchanged access token maintains the user identity but no longer contains custom claims.
+
+```bash
+npm run exchange
 ```
 
 ## Advantages
