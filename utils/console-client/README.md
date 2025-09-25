@@ -35,8 +35,9 @@ npm run tokens
 
 ### Exchange an Access Token
 
+If you use the configuration from the token issuance course you can run a token exchange flow.\
 You can run a login and then exchange the original access token with the following command.\
-The then acts as an API and uses token exchange to downscope the access token.\
+The client then acts as an API and uses token exchange to downscope the access token.\
 The exchanged access token maintains the user identity but no longer contains custom claims.
 
 ```bash
