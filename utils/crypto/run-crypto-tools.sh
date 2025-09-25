@@ -46,8 +46,9 @@ docker exec -i curity bash -c 'chmod +x /tmp/encrypt-keystore.sh'
 echo 'Temporary Docker container running ...'
 
 #
-# Simulate a CI/CD system downloading secrets from a secure vault
+# First, simulate a CI/CD system downloading secrets from a secure vault
 #
+
 cd "$OUTPUT_FOLDER/vault"
 . ./secrets.env
 CONFIG_ENCRYPTION_KEY="$(cat ./encryption.key)"
@@ -61,12 +62,11 @@ SIGNING_KEY_PATH=./signing.p12
 #
 if [ "$GENERATE_CLUSTER_KEY" == 'true' ]; then
 
-  cd "$OUTPUT_FOLDER/config"
   CLUSTER_CONFIG=$(docker exec -i curity bash -c "genclust -c idsvr-admin -e $CONFIG_ENCRYPTION_KEY")
   if [ $? -ne 0 ]; then
     exit 1
   fi
-  echo "$CLUSTER_CONFIG" > cluster.xml
+  echo "$CLUSTER_CONFIG" > "$OUTPUT_FOLDER/config/cluster.xml"
 fi
 
 #
@@ -109,10 +109,10 @@ fi
 #
 # Save protected secrets to environment variables
 #
-echo "export ADMIN_PASSWORD='$ADMIN_PASSWORD'"                  > ./protected-secrets.env
+echo "export CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY'"   >  ./protected-secrets.env
+echo "export ADMIN_PASSWORD='$ADMIN_PASSWORD'"                 >> ./protected-secrets.env
 echo "export DB_CONNECTION='$DB_CONNECTION'"                   >> ./protected-secrets.env
 echo "export DB_PASSWORD='$DB_PASSWORD'"                       >> ./protected-secrets.env
-echo "export CONFIG_ENCRYPTION_KEY='$CONFIG_ENCRYPTION_KEY'"   >> ./protected-secrets.env
 echo "export SYMMETRIC_KEY='$SYMMETRIC_KEY'"                   >> ./protected-secrets.env
 echo "export SIGNING_KEY='$SIGNING_KEY'"                       >> ./protected-secrets.env
 

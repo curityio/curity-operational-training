@@ -50,7 +50,8 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Create crypto keys once per stage of your deployment pipeline
+# In real deployments, only create crypto keys once per stage of your deployment pipeline.
+# Then, reuse them for all subsequent deployments to the same stage.
 #
 ../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
@@ -68,7 +69,7 @@ fi
 #
 # Ensure that there is no leftover configuration data from a cached Docker image
 #
-rm -rf cdb 
+rm -rf cdb 2>/dev/null
 mkdir cdb
 chmod 777 cdb
 
@@ -76,7 +77,7 @@ chmod 777 cdb
 # Store SQL Server data on a local volume as opposed to the external volumes that real deployments use
 # To redeploy and keep existing data, delete the 'rm -rf' line from the below commands
 #
-rm -rf data
+rm -rf data 2>/dev/null
 mkdir data
 chmod 777 data
 

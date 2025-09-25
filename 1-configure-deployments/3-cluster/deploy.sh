@@ -32,7 +32,7 @@ export ADMIN_BASE_URL='https://admin.demo.example'
 #
 # Ensure that there is no leftover configuration data from a cached Docker image
 #
-rm -rf cdb 
+rm -rf cdb 2>/dev/null
 mkdir cdb
 chmod 777 cdb
 

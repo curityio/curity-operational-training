@@ -52,7 +52,7 @@ The deployment shares a data volume locally and clears it.\
 To maintain existing SQL data, comment out the following statements before running the redeployment.
 
 ```bash
-rm -rf data
+rm -rf data 2>/dev/null
 mkdir data
 ```
 

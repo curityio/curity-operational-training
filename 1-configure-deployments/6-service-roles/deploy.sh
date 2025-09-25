@@ -24,7 +24,8 @@ fi
 export GENERATE_CLUSTER_KEY='true'
 
 #
-# You only need to create crypto keys once per stage of your deployment pipeline
+# In real deployments, only create crypto keys once per stage of your deployment pipeline.
+# Then, reuse them for all subsequent deployments to the same stage.
 #
 ../../utils/crypto/create-crypto-keys.sh "$(pwd)"
 if [ $? -ne 0 ]; then
@@ -42,7 +43,7 @@ fi
 #
 # Ensure that there is no leftover configuration data from a cached Docker image
 #
-rm -rf cdb 
+rm -rf cdb 2>/dev/null
 mkdir cdb
 chmod 777 cdb
 
