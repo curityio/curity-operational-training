@@ -53,8 +53,8 @@ export RUNTIME_BASE_URL='http://localhost:8443'
 ```
 
 Each course has XML configuration for the console client that you can import into your system.\
-To test a code flow with the console client, save the following XML to a `client.xml` file and upload it in the Admin UI.\
-Choose the merge option and commit changes, after which you can run the client.
+To run a code flow with the console client, save the following XML to a `client.xml` file and upload it in the Admin UI.\
+Choose the merge option and commit changes, after which you can run the client and view all tokens.
 
 ```xml
 <config xmlns="http://tail-f.com/ns/config/1.0">
@@ -81,6 +81,13 @@ Choose the merge option and commit changes, after which you can run the client.
                   </code>
                 </capabilities>
                 <validate-port-on-loopback-interfaces>false</validate-port-on-loopback-interfaces>
+              </client>
+              <client>
+                <id>introspect-client</id>
+                <secret>Password1</secret>
+                <capabilities>
+                  <introspection />
+                </capabilities>
               </client>
             </config-backed>
           </client-store>
