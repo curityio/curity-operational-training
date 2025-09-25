@@ -68,7 +68,7 @@ fi
 # Store SQL Server data on a local volume as opposed to the external volumes that real deployments use
 # To redeploy and keep existing data, delete the 'rm -rf' line from the below commands
 #
-rm -rf data
+rm -rf data 2>/dev/null
 mkdir data
 chmod 777 data
 
