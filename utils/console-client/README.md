@@ -104,6 +104,6 @@ npm run exchange
 The minimal client has some advantages over OAuth Tools:
 
 - It is tailored to the teaching material.
-- It does not require an ngrok tunnel, which may not be possible in some environments.
-- It maintains the course's preferred local URLs.
+- It does not require an HTTP internet tunnel, which may not be possible in some environments.
+- It maintains the course's preferred local URLs, unlike internet tunnels.
 - It supports logins with passkeys, which Desktop OAuth Tools does not currently support.
