@@ -20,6 +20,7 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-admin
     volumes:
+      - ./cdb:/opt/idsvr/var/cdb
       - ./config/base.xml:/opt/idsvr/etc/init/base.xml
       - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
       - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml

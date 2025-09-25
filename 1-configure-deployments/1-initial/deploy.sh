@@ -9,10 +9,9 @@ cp ../../hooks/pre-commit ../../.git/hooks
 
 #
 # You should generate your own encryption key and strong password for the Admin UI
-# This key was produced by running the following command:
-# - openssl rand 32 | xxd -p -c 64 > encryption.key
 #
-export CONFIG_ENCRYPTION_KEY='e3b860830de04cc47214d3363d00ed4b1d8d9fb8c9ec7c9877046c35665ac68c'
+openssl rand 32 | xxd -p -c 64 > ../initial-encryption.key
+export CONFIG_ENCRYPTION_KEY=$(cat ../initial-encryption.key)
 
 #
 # Use this environment variable to generate a configuration database if required
@@ -21,10 +20,9 @@ export CONFIG_ENCRYPTION_KEY='e3b860830de04cc47214d3363d00ed4b1d8d9fb8c9ec7c9877
 export PASSWORD='Password1'
 
 #
-# Ensure that there is no leftover data from an existing Docker image
-# Share the configuration database and remove it to force the installer to run
+# Make sure there is no leftover configuration database in the local Docker image
 #
-rm -rf cdb 
+rm -rf cdb 2>/dev/null
 mkdir cdb
 chmod 777 cdb
 

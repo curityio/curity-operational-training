@@ -19,6 +19,8 @@ services:
   curity-idsvr:
     image: custom_idsvr:1.0.0
     hostname: idsvr
+    volumes:
+      - ./cdb:/opt/idsvr/var/cdb
     extra_hosts:
       - login.demo.example:host-gateway
     env_file:

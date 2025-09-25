@@ -6,6 +6,7 @@ services:
       - 6749:6749
       - 80:8443
     volumes:
+      - ./cdb:/opt/idsvr/var/cdb
       - ./curity-config.xml:/opt/idsvr/etc/init/curity-config.xml
     environment:
       ADMIN: 'true'

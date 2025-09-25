@@ -40,6 +40,13 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Make sure there is no leftover configuration database in the local Docker image
+#
+rm -rf cdb 2>/dev/null
+mkdir cdb
+chmod 777 cdb
+
+#
 # Run the deployment
 #
 docker compose up
