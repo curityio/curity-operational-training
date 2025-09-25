@@ -8,10 +8,10 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 cp ../../hooks/pre-commit ../../.git/hooks
 
 #
-# You should generate your own encryption key and strong password for the Admin UI
+# This fixed key was used to create the early curity-config.xml files for this course.
+# It is only used for the first 4 lessons, after which we create a new key for each deployment.
 #
-openssl rand 32 | xxd -p -c 64 > ../initial-encryption.key
-export CONFIG_ENCRYPTION_KEY=$(cat ../initial-encryption.key)
+export CONFIG_ENCRYPTION_KEY='e3b860830de04cc47214d3363d00ed4b1d8d9fb8c9ec7c9877046c35665ac68c'
 
 #
 # Use this environment variable to generate a configuration database if required
