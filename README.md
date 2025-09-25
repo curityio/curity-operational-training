@@ -5,7 +5,8 @@ Complete the courses for your role(s) to earn Curity certifications.
 
 ## Training Roles
 
-There are three roles, targeted at people who manage the Curity Identity Server:
+There are three logical roles, targeted at people who manage the Curity Identity Server.\
+Anyone who is interested in the Curity Identity Server can complete the training.
 
 | Role | Description |
 | ---- | ----------- |
@@ -30,7 +31,7 @@ Learn how to configure highly availabile URLs and manage security settings for a
 
 ### 2. Operator: Data Sources
 
-An operator should next complete the [Data Sources](2-data-sources/README.md) course.\
+An operator should next complete the [Data Sources](2-data-sources/README.md) course and might work with a database administrator.\
 Learn how to use durable storage of identity data with the Curity Identity Server.
 
 ### 3. Operator: Deployments and Upgrades
