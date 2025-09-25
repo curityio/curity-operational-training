@@ -46,21 +46,6 @@ docker exec -i curity bash -c 'chmod +x /tmp/encrypt-keystore.sh'
 echo 'Temporary Docker container running ...'
 
 #
-# Demonstrates how to generate a new cluster key during deployments
-# You must do this when upgrading the Curity Identity Server to a new version
-# You can optionally do it whenever you trigger a redeployment of all admin and runtime nodes
-#
-if [ "$GENERATE_CLUSTER_KEY" == 'true' ]; then
-
-  cd "$OUTPUT_FOLDER/config"
-  CLUSTER_CONFIG=$(docker exec -i curity bash -c "genclust -c idsvr-admin")
-  if [ $? -ne 0 ]; then
-    exit 1
-  fi
-  echo "$CLUSTER_CONFIG" > cluster.xml
-fi
-
-#
 # Simulate a CI/CD system downloading secrets from a secure vault
 #
 cd "$OUTPUT_FOLDER/vault"
@@ -68,6 +53,21 @@ cd "$OUTPUT_FOLDER/vault"
 CONFIG_ENCRYPTION_KEY="$(cat ./encryption.key)"
 SYMMETRIC_KEY_RAW="$(cat ./symmetric.key)"
 SIGNING_KEY_PATH=./signing.p12
+
+#
+# Generate a new cluster key during deployments, encrypted with the config encyption key
+# You must do this when upgrading the Curity Identity Server to a new version
+# You can optionally do it whenever you trigger a redeployment of all admin and runtime nodes
+#
+if [ "$GENERATE_CLUSTER_KEY" == 'true' ]; then
+
+  cd "$OUTPUT_FOLDER/config"
+  CLUSTER_CONFIG=$(docker exec -i curity bash -c "genclust -c idsvr-admin -e $CONFIG_ENCRYPTION_KEY")
+  if [ $? -ne 0 ]; then
+    exit 1
+  fi
+  echo "$CLUSTER_CONFIG" > cluster.xml
+fi
 
 #
 # Use crypto tools to protect the secrets

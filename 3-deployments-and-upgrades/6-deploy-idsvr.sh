@@ -66,6 +66,11 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Set variables used by the run-crypto-tools.sh script
+#
+export GENERATE_CLUSTER_KEY='true'
+
+#
 # You only need to create crypto keys once per stage of your deployment pipeline
 #
 ../utils/crypto/create-crypto-keys.sh "$(pwd)"

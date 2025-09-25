@@ -21,8 +21,7 @@ export CONFIG_ENCRYPTION_KEY='e3b860830de04cc47214d3363d00ed4b1d8d9fb8c9ec7c9877
 export PASSWORD='Password1'
 
 #
-# Ensure that there is no leftover data from an existing Docker image
-# Share the configuration database and remove it to force the installer to run
+# Ensure that there is no leftover configuration data from a cached Docker image
 #
 rm -rf cdb 
 mkdir cdb

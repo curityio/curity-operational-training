@@ -40,6 +40,13 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Ensure that there is no leftover configuration data from a cached Docker image
+#
+rm -rf cdb 
+mkdir cdb
+chmod 777 cdb
+
+#
 # Run the deployment
 #
 docker compose up

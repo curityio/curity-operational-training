@@ -20,6 +20,7 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-admin
     volumes:
+      - ./cdb:/opt/idsvr/var/cdb
       - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
       - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
       - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
@@ -38,6 +39,7 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime1
     volumes:
+      - ./cdb:/opt/idsvr/var/cdb
       - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
       - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
       - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
@@ -55,6 +57,7 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime2
     volumes:
+      - ./cdb:/opt/idsvr/var/cdb
       - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
       - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
       - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
@@ -72,6 +75,7 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime-internal1
     volumes:
+      - ./cdb:/opt/idsvr/var/cdb
       - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
       - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
       - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
@@ -90,6 +94,7 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-runtime-internal2
     volumes:
+      - ./cdb:/opt/idsvr/var/cdb
       - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
       - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
       - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml

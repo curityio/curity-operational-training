@@ -21,6 +21,8 @@ services:
     hostname: idsvr
     extra_hosts:
       - login.demo.example:host-gateway
+    volumes:
+      - ./cdb:/opt/idsvr/var/cdb
     env_file:
       - ./config/parameters.env
       - ./vault/protected-secrets.env

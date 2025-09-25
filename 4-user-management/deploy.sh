@@ -64,6 +64,13 @@ if [ $? -ne 0 ]; then
 fi
 
 #
+# Ensure that there is no leftover configuration data from a cached Docker image
+#
+rm -rf cdb 
+mkdir cdb
+chmod 777 cdb
+
+#
 # Store SQL Server data on a local volume as opposed to the external volumes that real deployments use
 #
 rm -rf data

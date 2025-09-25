@@ -30,6 +30,13 @@ export RUNTIME_BASE_URL='http://login.demo.example'
 export ADMIN_BASE_URL='http://admin.demo.example:6749'
 
 #
+# Ensure that there is no leftover configuration data from a cached Docker image
+#
+rm -rf cdb 
+mkdir cdb
+chmod 777 cdb
+
+#
 # Run the deployment
 #
 docker compose up

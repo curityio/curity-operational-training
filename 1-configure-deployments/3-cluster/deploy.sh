@@ -30,6 +30,13 @@ export RUNTIME_BASE_URL='https://login.demo.example'
 export ADMIN_BASE_URL='https://admin.demo.example'
 
 #
+# Ensure that there is no leftover configuration data from a cached Docker image
+#
+rm -rf cdb 
+mkdir cdb
+chmod 777 cdb
+
+#
 # Run the deployment
 #
 docker pull kong/kong:latest
