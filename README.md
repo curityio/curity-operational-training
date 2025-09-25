@@ -9,17 +9,9 @@ There are three roles, targeted at people who manage the Curity Identity Server:
 
 | Role | Description |
 | ---- | ----------- |
-| Curity Certified Operator | A person who manages deployments, infrastructure and reliable operation. |
+| Curity Certified Operator | A person who manages deployments, infrastructure and databases. |
 | Curity Certified Administrator | A person who manages security settings for APIs and clients. |
 | Curity Certified Developer | A person who extends the login screens or customizes security. |
-
-Typically:
-
-- An operator has the strongest infrastructure skills.
-- An administrator has the deepest security knowledge.
-- A developer has the strongest coding skills.
-
-In some cases, a single person, like a specialist developer, may complete all certifications. 
 
 ## Example Deployments
 
