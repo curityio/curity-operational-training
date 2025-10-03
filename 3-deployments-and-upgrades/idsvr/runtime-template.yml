@@ -1,0 +1,48 @@
+#
+# The deployment for the clustered runtime workloads
+#
+name: idsvr-runtime
+location : $REGION
+resourceGroup: $RESOURCE_GROUP
+type: Microsoft.App/containerApps
+identity:
+  type: UserAssigned
+  userAssignedIdentities:
+    $IDENTITY_ID:
+      clientId: $IDENTITY_CLIENT_ID
+      principalId: $IDENTITY_PRINCIPAL_ID
+properties:
+  managedEnvironmentId: $ENVIRONMENT_ID
+  configuration:
+    registries:
+    - identity: $IDENTITY_ID
+      server: $REGISTRY.azurecr.io
+    ingress:
+      external: true
+      targetPort: 8443
+      allowInsecure: false
+  template:
+    containers:
+    - name: idsvr-runtime-container
+      image: $IDSVR_IMAGE
+      resources:
+        cpu: 2
+        memory: 4Gi
+      env:
+      - name: SERVICE_NAME
+        value: 'Runtime'
+      - name: LICENSE_KEY
+        value: $LICENSE_KEY
+$ENVIRONMENT_VARIABLES
+
+      volumeMounts:
+      - volumeName: cluster-volume
+        mountPath: /opt/idsvr/etc/init/cluster.xml
+        subPath: cluster.xml
+    volumes:
+    - name: cluster-volume
+      storageName: $STORAGE_MOUNT
+      storageType: AzureFile
+    scale:
+      minReplicas: 2
+      maxReplicas: 2

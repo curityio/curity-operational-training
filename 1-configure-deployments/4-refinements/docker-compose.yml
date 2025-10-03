@@ -1,0 +1,67 @@
+services:
+
+  api-gateway:
+    image: kong/kong:latest
+    hostname: apigateway
+    ports:
+      - 443:3000
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml
+      - ../../utils/ssl-certs/example.ssl.key:/usr/local/share/certs/example.ssl.key
+      - ../../utils/ssl-certs/example.ssl.crt:/usr/local/share/certs/example.ssl.crt
+    environment:
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
+      KONG_PROXY_LISTEN: '0.0.0.0:3000 http2 ssl'
+      KONG_SSL_CERT: '/usr/local/share/certs/example.ssl.crt'
+      KONG_SSL_CERT_KEY: '/usr/local/share/certs/example.ssl.key'
+
+  idsvr-admin:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: idsvr-admin
+    volumes:
+      - ./cdb:/opt/idsvr/var/cdb
+      - ./config/base.xml:/opt/idsvr/etc/init/base.xml
+      - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
+      - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml
+      - ./config/applications.xml:/opt/idsvr/etc/init/applications.xml
+      - ./config/cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
+    environment:
+      ADMIN: 'true'
+      CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
+      RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
+      ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
+      SERVICE_NAME: 'Admin'
+
+  idsvr-runtime1:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: idsvr-runtime1
+    volumes:
+      - ./config/base.xml:/opt/idsvr/etc/init/base.xml
+      - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
+      - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml
+      - ./config/applications.xml:/opt/idsvr/etc/init/applications.xml
+      - ./config/cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
+    environment:
+      CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
+      RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
+      ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
+      SERVICE_NAME: 'Runtime1'
+
+  idsvr-runtime2:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: idsvr-runtime2
+    volumes:
+      - ./config/base.xml:/opt/idsvr/etc/init/base.xml
+      - ./config/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
+      - ./config/token-service.xml:/opt/idsvr/etc/init/token-service.xml
+      - ./config/applications.xml:/opt/idsvr/etc/init/applications.xml
+      - ./config/cluster-config.xml:/opt/idsvr/etc/init/cluster.xml
+    environment:
+      CONFIG_ENCRYPTION_KEY: '${CONFIG_ENCRYPTION_KEY}'
+      LICENSE_KEY: '${LICENSE_KEY}'
+      ADMIN_BASE_URL: '${ADMIN_BASE_URL}'
+      RUNTIME_BASE_URL: '${RUNTIME_BASE_URL}'
+      SERVICE_NAME: 'Runtime2'

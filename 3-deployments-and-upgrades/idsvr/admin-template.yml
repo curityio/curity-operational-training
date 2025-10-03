@@ -1,0 +1,57 @@
+#
+# The deployment for the admin workload
+#
+name: idsvr-admin
+location : $REGION
+resourceGroup: $RESOURCE_GROUP
+type: Microsoft.App/containerApps
+identity:
+  type: UserAssigned
+  userAssignedIdentities:
+    $IDENTITY_ID:
+      clientId: $IDENTITY_CLIENT_ID
+      principalId: $IDENTITY_PRINCIPAL_ID
+properties:
+  managedEnvironmentId: $ENVIRONMENT_ID
+  configuration:
+    registries:
+    - identity: $IDENTITY_ID
+      server: $REGISTRY.azurecr.io
+    ingress:
+      external: true
+      targetPort: 6749
+      allowInsecure: false
+      additionalPortMappings:
+      - external: false
+        targetPort: 6789
+        exposedPort: 6789
+      - external: false
+        targetPort: 6790
+        exposedPort: 6790
+  template:
+    containers:
+    - name: idsvr-admin-container
+      image: $IDSVR_IMAGE
+      resources:
+        cpu: 2
+        memory: 4Gi
+      env:
+      - name: ADMIN
+        value: 'true'
+      - name: SERVICE_NAME
+        value: 'Admin'
+      - name: LICENSE_KEY
+        value: $LICENSE_KEY
+$ENVIRONMENT_VARIABLES
+
+      volumeMounts:
+      - volumeName: cluster-volume
+        mountPath: /opt/idsvr/etc/init/cluster.xml
+        subPath: cluster.xml
+    volumes:
+    - name: cluster-volume
+      storageName: $STORAGE_MOUNT
+      storageType: AzureFile
+    scale:
+      minReplicas: 1
+      maxReplicas: 1

@@ -1,0 +1,24 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <facilities xmlns="https://curity.se/ns/conf/base">
+    <http>
+      <client>
+        <id>token_service_http_client</id>
+        <tls>
+          <use-truststore>true</use-truststore>
+        </tls>
+      </client>
+    </http>
+    <crypto>
+      <ssl>
+        <server-truststore>
+          <server-certificate>
+            <id>Training_Course_Local_CA</id>
+            <curve-name>P-256</curve-name>
+            <keystore>#{SSL_TRUST_STORE}</keystore>
+            <type>elliptic-curve</type>
+          </server-certificate>
+        </server-truststore>
+      </ssl>
+    </crypto>
+  </facilities>
+</config>
