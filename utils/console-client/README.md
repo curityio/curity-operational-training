@@ -4,7 +4,7 @@ The minimal console client enables you to quickly run a code flow and view token
 
 ## Usage
 
-To run the console client, first install Node.js 22 or later and clone this repository.\
+To run the console client, first install Node.js 24 or later and clone this repository.\
 Then open a command shell in this folder and run `npm install`.
 
 ### Run a Login

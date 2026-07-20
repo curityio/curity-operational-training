@@ -1,6 +1,6 @@
-import getPort from 'get-port';
-import http from 'http';
 import EventEmitter from 'node:events';
+import http from 'node:http';
+import getPort from 'get-port';
 import open from 'open';
 import {generateHash, generateRandomString, processOAuthPostResponseError} from './utils.js';
 

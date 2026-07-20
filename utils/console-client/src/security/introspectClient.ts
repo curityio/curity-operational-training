@@ -1,4 +1,4 @@
-import {processOAuthPostResponseError } from './utils';
+import {processOAuthPostResponseError } from './utils.js';
 
 /*
  * Point to the local deployment or adjust it to point to a remote system
