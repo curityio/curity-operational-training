@@ -8,16 +8,17 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 #############################################################################################################
 
 #
-# Wait for system databases to come online and use sqlcmd options:
+# Use sqlcmd options to wait until the server is accepting connections
 # - https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility
 #
-DBSTATUS=''
-while [[ $DBSTATUS -ne 1 ]]; do
-	DBSTATUS=$(/opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -h -1 -t 1 -C -Q "SET NOCOUNT ON; SELECT 1 FROM sys.databases WHERE name='msdb' and state = 0")
-  if [[ $DBSTATUS -ne 1 ]]; then
-    sleep 1
-  fi
+until /opt/mssql-tools18/bin/sqlcmd -U sa -P $MSSQL_SA_PASSWORD -h -1 -t 1 -C -Q 'SELECT 1' > /dev/null 2>&1
+do
+  sleep 1
 done
+
+#
+# Add a small delay to ensure the server reaches a ready state
+#
 sleep 10
 
 #

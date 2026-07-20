@@ -29,7 +29,7 @@ services:
       LICENSE_KEY: '${LICENSE_KEY}'
     depends_on:
       curity-data:
-        condition: service_started
+        condition: service_healthy
 
   curity-data:
     image: curity_mssql:1.0.0
@@ -41,6 +41,12 @@ services:
       MSSQL_SA_PASSWORD: Password1
       MSSQL_COLLATION: Latin1_General_100_CI_AS_SC_UTF8
       MSSQL_AGENT_ENABLED: true
+    healthcheck:
+      test: ["CMD", "/tmp/initscripts/healthcheck.sh"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
 
   curity-schema-init:
     image: curity.azurecr.io/curity/idsvr:latest
@@ -52,6 +58,9 @@ services:
       JDBC_URL: 'jdbc:sqlserver://dbserver:1433;databaseName=idsvr;encrypt=false;sendStringParametersAsUnicode=false'
       JDBC_USERNAME: 'sa'
       JDBC_PASSWORD: 'Password1'
+    depends_on:
+      curity-data:
+        condition: service_healthy
 
   mail-server:
     image: maildev/maildev:latest
