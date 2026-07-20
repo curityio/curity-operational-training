@@ -1,4 +1,4 @@
-import {processOAuthPostResponseError} from './utils';
+import {processOAuthPostResponseError} from './utils.js';
 
 /*
  * Point to the local deployment or adjust it to point to a remote system
@@ -45,5 +45,5 @@ export async function tokenExchangeRequest(receivedJwtAccessToken: string): Prom
     }
 
     const tokenData = await response.json();
-    return tokenData.access_token;
+    return (tokenData as any).access_token;
 }
