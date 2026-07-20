@@ -28,25 +28,15 @@ export function generateHash(data: string): string {
 }
 
 /*
- * Read OAuth error responses
+ * Collect OAuth error details
  */
-export function readOAuthResponseBodyError(operation: string, e: any): string {
+export function processOAuthPostResponseError(operation: string, status: number, text: any): string {
 
-     let status: number | null = null;
-    if (e.response?.status) {
-        status = e.response.status;
-    }
-    
-    let code = '';
-    let description = '';
-    if (e.response.data) {
-        
-        if (e.response.data.error) {
-            code = e.response.data.error;
-        }
-
-        if (e.response.data.error_description) {
-            description += `: ${e.response.data.error_description}`;
+    let errorData: any = null;
+    if (text) {
+        try {
+            errorData = JSON.parse(text);
+        } catch {
         }
     }
     
@@ -54,11 +44,11 @@ export function readOAuthResponseBodyError(operation: string, e: any): string {
     if (status) {
         message += `, status: ${status}`;
     }
-    if (code) {
-        message += `, code: ${code}`;
+    if (errorData?.error) {
+        message += `, code: ${errorData.error}`;
     }
-    if (description) {
-        message += `, description: ${description}`;
+    if (errorData?.error_description) {
+        message += `, description: ${errorData.error_description}`;
     }
     
     throw new Error(message);

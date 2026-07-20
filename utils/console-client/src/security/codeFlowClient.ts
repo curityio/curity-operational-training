@@ -1,9 +1,8 @@
-import axios, {AxiosRequestConfig} from 'axios';
 import getPort from 'get-port';
 import http from 'http';
 import EventEmitter from 'node:events';
 import open from 'open';
-import {generateHash, generateRandomString, readOAuthResponseBodyError} from './utils.js';
+import {generateHash, generateRandomString, processOAuthPostResponseError} from './utils.js';
 
 const defaultPort = 3333;
 const eventEmitter = new EventEmitter();
@@ -95,25 +94,23 @@ export async function backChannelRequest(code: string): Promise<any> {
     formData.append('code', code);
     formData.append('code_verifier', codeVerifier!);
 
-    const options = {
-        url: metadata.token_endpoint,
+    const options: RequestInit = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Accept: 'application/json',
+            'accept': 'application/json',
+            'content-type': 'application/x-www-form-urlencoded',
         },
-        data: formData,
-    } as AxiosRequestConfig;
+        body: formData.toString(),
+    };
+    
+    const response = await fetch(metadata.token_endpoint, options);
+    if (!response.ok) {
 
-    try {
-
-        const response = await axios(options);
-        return response.data;
-
-    } catch (e: any) {
-
-        throw new Error(readOAuthResponseBodyError('Authorization code grant', e));
+        const text = await response.text();
+        throw new Error(processOAuthPostResponseError('Introspection', response.status, text));
     }
+    
+    return await response.json();
 }
 
 /*
@@ -121,22 +118,22 @@ export async function backChannelRequest(code: string): Promise<any> {
  */
 export async function downloadUserInfo(accessToken: string): Promise<any> {
 
-    try {
-        const options = {
-            url: metadata.userinfo_endpoint,
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-                Accept: 'application/json',
-            }
-        } as AxiosRequestConfig;
-        
-        const response = await axios(options);
-        return response.data;
+    const options: RequestInit = {
+        method: 'POST',
+        headers: {
+            'authorization': `Bearer ${accessToken}`,
+            'accept': 'application/json',
+        },
+    };
 
-    }  catch (e: any) {
-        throw new Error(readOAuthResponseBodyError('Userinfo download', e));
+    const response = await fetch(metadata.userinfo_endpoint, options);
+    if (!response.ok) {
+
+        const text = await response.text();
+        throw new Error(processOAuthPostResponseError('Userinfo download', response.status, text));
     }
+
+    return await response.json();
 }
 
 /*
@@ -144,11 +141,10 @@ export async function downloadUserInfo(accessToken: string): Promise<any> {
  */
 async function getMetadata(): Promise<void> {
 
-    try {
-        const response = await axios(`${configuration.issuer}/.well-known/openid-configuration`);
-        metadata = response.data;
-
-    }  catch (e: any) {
-        throw new Error('Unable to get metadata', e);
+    const response = await fetch(`${configuration.issuer}/.well-known/openid-configuration`);
+    if (!response.ok) {
+        throw new Error(`Metadata response error, status: ${response.status}`);
     }
+
+     metadata = await response.json();
 }

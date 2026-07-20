@@ -1,5 +1,4 @@
-import axios, {AxiosRequestConfig} from 'axios';
-import {readOAuthResponseBodyError } from './utils';
+import {processOAuthPostResponseError } from './utils';
 
 /*
  * Point to the local deployment or adjust it to point to a remote system
@@ -22,23 +21,21 @@ export async function introspectionRequest(opaqueAccessToken: string, accept = '
     formData.append('client_secret', configuration.clientSecret);
     formData.append('token', opaqueAccessToken);
 
-    const options = {
-        url: configuration.endpoint,
+    const options: RequestInit = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Accept: accept,
+            'accept': 'application/json',
+            'content-type': 'application/x-www-form-urlencoded',
         },
-        data: formData,
-    } as AxiosRequestConfig;
+        body: formData.toString(),
+    };
 
-    try {
+    const response = await fetch(configuration.endpoint, options);
+    if (!response.ok) {
 
-        const response = await axios(options);
-        return response.data;
-
-    } catch (e: any) {
-
-        throw new Error(readOAuthResponseBodyError('Introspection', e));
+        const text = await response.text();
+        throw new Error(processOAuthPostResponseError('Introspection', response.status, text));
     }
+
+    return await response.json();
 }

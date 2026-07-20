@@ -1,5 +1,4 @@
-import axios, {AxiosRequestConfig} from 'axios';
-import {readOAuthResponseBodyError} from './utils';
+import {processOAuthPostResponseError} from './utils';
 
 /*
  * Point to the local deployment or adjust it to point to a remote system
@@ -29,23 +28,22 @@ export async function tokenExchangeRequest(receivedJwtAccessToken: string): Prom
     formData.append('requested_token_type', 'urn:ietf:params:oauth:token-type:access_token');
     formData.append('scope', configuration.downscope);
 
-    const options = {
-        url: configuration.endpoint,
+    const options: RequestInit = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Accept: 'application/json',
+            'accept': 'application/json',
+            'content-type': 'application/x-www-form-urlencoded',
         },
-        data: formData,
-    } as AxiosRequestConfig;
+        body: formData.toString(),
+    };
 
-    try {
+    const response = await fetch(configuration.endpoint, options);
+    if (!response.ok) {
 
-        const response = await axios(options);
-        return response.data.access_token;
-
-    } catch (e: any) {
-
-        throw new Error(readOAuthResponseBodyError('Token exchange', e));
+        const text = await response.text();
+        throw new Error(processOAuthPostResponseError('Token exchange', response.status, text));
     }
+
+    const tokenData = await response.json();
+    return tokenData.access_token;
 }
