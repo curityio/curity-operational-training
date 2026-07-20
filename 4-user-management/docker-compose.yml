@@ -39,3 +39,14 @@ services:
       MSSQL_SA_PASSWORD: Password1
       MSSQL_COLLATION: Latin1_General_100_CI_AS_SC_UTF8
       MSSQL_AGENT_ENABLED: true
+
+  curity-schema-init:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: dbschemainitializer
+    volumes:
+      - ../utils/sqldatabase/initschema.sh:/tmp/initschema.sh
+    command: ["/tmp/initschema.sh"]
+    environment:
+      JDBC_URL: 'jdbc:sqlserver://dbserver:1433;databaseName=idsvr;encrypt=false;sendStringParametersAsUnicode=false'
+      JDBC_USERNAME: 'sa'
+      JDBC_PASSWORD: 'Password1'
