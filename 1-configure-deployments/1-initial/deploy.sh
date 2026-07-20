@@ -20,6 +20,14 @@ export CONFIG_ENCRYPTION_KEY='e3b860830de04cc47214d3363d00ed4b1d8d9fb8c9ec7c9877
 export PASSWORD='Password1'
 
 #
+# The initial deployment shares the configuration database to the host computer
+# Developers should understand how binary files get created from XML configuration
+#
+rm -rf cdb 2>/dev/null
+mkdir cdb
+chmod 777 cdb
+
+#
 # Run the deployment
 #
 docker pull curity.azurecr.io/curity/idsvr
