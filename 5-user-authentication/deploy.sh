@@ -65,13 +65,6 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Make sure there is no leftover configuration database in the local Docker image
-#
-rm -rf cdb 2>/dev/null
-mkdir cdb
-chmod 777 cdb
-
-#
 # Store SQL Server data on a local volume as opposed to the external volumes that real deployments use
 # To redeploy and keep existing data, delete the 'rm -rf' line from the below commands
 #
@@ -82,7 +75,7 @@ chmod 777 data
 #
 # Run the Curity Identity Server with durable storage in a local SQL Server
 #
-docker compose up
+docker compose up --force-recreate
 if [ $? -ne 0 ]; then
   exit 1
 fi

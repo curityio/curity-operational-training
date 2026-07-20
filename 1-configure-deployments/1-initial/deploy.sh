@@ -20,17 +20,10 @@ export CONFIG_ENCRYPTION_KEY='e3b860830de04cc47214d3363d00ed4b1d8d9fb8c9ec7c9877
 export PASSWORD='Password1'
 
 #
-# Make sure there is no leftover configuration database in the local Docker image
-#
-rm -rf cdb 2>/dev/null
-mkdir cdb
-chmod 777 cdb
-
-#
 # Run the deployment
 #
 docker pull curity.azurecr.io/curity/idsvr
-docker compose up
+docker compose up --force-recreate
 if [ $? -ne 0 ]; then
   exit 1
 fi

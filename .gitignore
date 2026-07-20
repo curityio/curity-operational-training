@@ -1,6 +1,5 @@
 .DS_Store
 license.json
-cdb
 *.key
 *.csr
 *.crt

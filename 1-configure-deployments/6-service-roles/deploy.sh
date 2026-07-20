@@ -24,6 +24,14 @@ fi
 export GENERATE_CLUSTER_KEY='true'
 
 #
+# If required, create HTTPS certificates that the API gateway uses for external URLs
+#
+../../utils/ssl-certs/create.sh
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+#
 # You only need to create crypto keys once per stage of your deployment pipeline
 #
 ../../utils/crypto/create-crypto-keys.sh "$(pwd)"
@@ -40,16 +48,9 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Make sure there is no leftover configuration database in the local Docker image
-#
-rm -rf cdb 2>/dev/null
-mkdir cdb
-chmod 777 cdb
-
-#
 # Run the deployment
 #
-docker compose up
+docker compose up --force-recreate
 if [ $? -ne 0 ]; then
   exit 1
 fi

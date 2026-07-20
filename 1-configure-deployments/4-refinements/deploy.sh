@@ -30,16 +30,17 @@ export RUNTIME_BASE_URL='https://login.demo.example'
 export ADMIN_BASE_URL='https://admin.demo.example'
 
 #
-# Make sure there is no leftover configuration database in the local Docker image
+# If required, create HTTPS certificates that the API gateway uses for external URLs
 #
-rm -rf cdb 2>/dev/null
-mkdir cdb
-chmod 777 cdb
+../../utils/ssl-certs/create.sh
+if [ $? -ne 0 ]; then
+  exit 1
+fi
 
 #
 # Run the deployment
 #
-docker compose up
+docker compose up --force-recreate
 if [ $? -ne 0 ]; then
   exit 1
 fi
