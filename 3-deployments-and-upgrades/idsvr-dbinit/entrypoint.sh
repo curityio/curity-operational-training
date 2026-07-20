@@ -3,9 +3,9 @@
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 #
-# Create the database schema if required
+# Initialize the database server if required
 #
-/tmp/initscripts/initdb.sh
+/tmp/initscripts/initdbserver.sh
 
 #
 # For debug purposes, also keep the utility running as a utility container
