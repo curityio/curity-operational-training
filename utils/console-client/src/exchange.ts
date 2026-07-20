@@ -15,6 +15,7 @@ try {
     console.log(JSON.stringify(receivedAccessTokenClaims, null, 2));
 
     const exchangedAccessTokenJwt = await tokenExchangeRequest(receivedAccessTokenJwt);
+    
     const exchangedAccessTokenClaims = JSON.parse(base64UrlDecode(exchangedAccessTokenJwt.split('.')[1]).toString());
     console.log('Exchanged JWT access token:');
     console.log(JSON.stringify(exchangedAccessTokenClaims, null, 2));

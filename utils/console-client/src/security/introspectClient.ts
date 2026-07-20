@@ -14,7 +14,7 @@ const configuration = {
  * Real introspection is a backend API gateway responsibility
  * We do introspection in this test client to enable visualization of the token data
  */
-export async function introspectionRequest(opaqueAccessToken: string, accept = 'application/json'): Promise<any> {
+export async function introspectionRequest(opaqueAccessToken: string, accept = 'application/json'): Promise<string> {
     
     const formData = new URLSearchParams();
     formData.append('client_id', configuration.clientId);
@@ -24,7 +24,7 @@ export async function introspectionRequest(opaqueAccessToken: string, accept = '
     const options: RequestInit = {
         method: 'POST',
         headers: {
-            'accept': 'application/json',
+            accept,
             'content-type': 'application/x-www-form-urlencoded',
         },
         body: formData.toString(),
@@ -37,5 +37,5 @@ export async function introspectionRequest(opaqueAccessToken: string, accept = '
         throw new Error(processOAuthPostResponseError('Introspection', response.status, text));
     }
 
-    return await response.json();
+    return await response.text();
 }

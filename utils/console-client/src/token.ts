@@ -9,7 +9,8 @@ try {
     const tokens = await backChannelRequest(code);
     console.log(`Received opaque access token: ${tokens.access_token}`);
 
-    const claims = await introspectionRequest(tokens.access_token);
+    const claimsText = await introspectionRequest(tokens.access_token);
+    const claims = JSON.parse(claimsText);
     console.log('Visualizing JWT access token:');
     console.log(JSON.stringify(claims, null, 2));
 
