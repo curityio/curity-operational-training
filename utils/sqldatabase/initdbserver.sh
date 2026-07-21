@@ -17,7 +17,7 @@ do
 done
 
 #
-# Add a small delay to ensure the server reaches a ready state
+# Add a delay to the example deployment, to ensure the server is fully ready
 #
 sleep 10
 

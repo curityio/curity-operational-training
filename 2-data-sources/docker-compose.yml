@@ -85,6 +85,12 @@ services:
       MSSQL_SA_PASSWORD: Password1
       MSSQL_COLLATION: Latin1_General_100_CI_AS_SC_UTF8
       MSSQL_AGENT_ENABLED: true
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        /tmp/initscripts/initdbserver.sh &
+        exec /opt/mssql/bin/sqlservr
     healthcheck:
       test: ["CMD", "/tmp/initscripts/healthcheck.sh"]
       interval: 5s
