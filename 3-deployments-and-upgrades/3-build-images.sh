@@ -41,22 +41,9 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Get the latest MS SQL Server schema creation script
+# Build an image for the database server initialization job
 #
-../utils/sqldatabase/get-scripts.sh
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-#
-# Copy the script into the init container's folder
-#
-cp ../utils/sqldatabase/download/mssql-create_database.sql "$(pwd)/idsvr-dbinit"
-
-#
-# Build an image for the database initialization job
-#
-docker build --no-cache --platform linux/amd64 -f idsvr-dbinit/Dockerfile -t "idsvr-dbinit:$TAG" --build-arg DBSERVER_ARG="$DBSERVER" .
+docker build --no-cache --platform linux/amd64 -f idsvr-dbserverinit/Dockerfile -t "idsvr-dbserverinit:$TAG" --build-arg DBSERVER_ARG="$DBSERVER" .
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -72,11 +59,11 @@ if [ $? -ne 0 ]; then
 fi
 
 #
-# Push the database init job Docker image
+# Push the dbserver init job Docker image
 #
-IDSVR_DBINIT_IMAGE="$REGISTRY.azurecr.io/idsvr-dbinit:$TAG"
-docker tag "idsvr-dbinit:$TAG" "$IDSVR_DBINIT_IMAGE"
-docker push "$IDSVR_DBINIT_IMAGE"
+IDSVR_DBSERVERINIT_IMAGE="$REGISTRY.azurecr.io/idsvr-dbserverinit:$TAG"
+docker tag "idsvr-dbserverinit:$TAG" "$IDSVR_DBSERVERINIT_IMAGE"
+docker push "$IDSVR_DBSERVERINIT_IMAGE"
 if [ $? -ne 0 ]; then
   exit 1
 fi

@@ -48,7 +48,7 @@ az sql db create \
     --resource-group "$RESOURCE_GROUP" \
     --server "$DBSERVER" \
     --name "$DBNAME" \
-    --edition Free
+    --edition Basic
 if [ $? -ne 0 ]; then
   exit 1
 fi

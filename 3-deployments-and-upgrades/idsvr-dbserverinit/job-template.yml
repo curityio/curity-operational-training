@@ -1,7 +1,7 @@
 #
-# The deployment for the database job container
+# The deployment for the dbserver init job container
 #
-name: idsvr-dbinit
+name: idsvr-dbserverinit
 location : $REGION
 resourceGroup: $RESOURCE_GROUP
 type: Microsoft.App/containerApps
@@ -19,8 +19,8 @@ properties:
       server: $REGISTRY.azurecr.io
   template:
     containers:
-    - name: idsvr-dbinit-container
-      image: $IDSVR_DBINIT_IMAGE
+    - name: idsvr-dbserverinit-container
+      image: $IDSVR_DBSERVERINIT_IMAGE
       resources:
         cpu: 1
         memory: 2Gi

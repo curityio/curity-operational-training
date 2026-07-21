@@ -88,6 +88,7 @@ fi
 
 #
 # Bash manipulation to avoid needing to list each environment variable in yaml files
+# This enables the cloud deployment to use multiple 
 #
 echo 'Preparing environment variables ...'
 rm environment_variables.txt 2>/dev/null

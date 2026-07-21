@@ -7,7 +7,6 @@ cdb
 *.p12
 protected-secrets.env
 data
-mssql-create_database.sql
 infrastructure.env
 environment_variables.txt
 download

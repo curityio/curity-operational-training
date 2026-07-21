@@ -1,0 +1,30 @@
+#
+# This init job container creates or upgrades the schema for the Curity Identity Server
+#
+name: idsvr-schemainit
+location : $REGION
+resourceGroup: $RESOURCE_GROUP
+type: Microsoft.App/containerApps
+properties:
+  managedEnvironmentId: $ENVIRONMENT_ID
+  template:
+    containers:
+    - name: idsvr-schemainit-container
+      image: curity.azurecr.io/curity/idsvr:latest
+      env:
+      - name: JDBC_URL
+        value: "jdbc:sqlserver://$DBSERVER.database.windows.net;databaseName=idsvr;encrypt=false;sendStringParametersAsUnicode=false"
+      - name: JDBC_USERNAME
+        value: 'superuser'
+      - name: JDBC_PASSWORD
+        value: 'Password1'
+      command:
+        - /opt/idsvr/bin/idsvr
+      args:
+        - -I
+      resources:
+        cpu: 1
+        memory: 2Gi
+    scale:
+      minReplicas: 1
+      maxReplicas: 1
