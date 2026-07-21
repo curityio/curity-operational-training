@@ -65,7 +65,7 @@ chmod 777 data
 #
 # Run the Curity Identity Server with durable storage in a local SQL Server
 #
-docker compose up
+docker compose up --force-recreate
 if [ $? -ne 0 ]; then
   exit 1
 fi
