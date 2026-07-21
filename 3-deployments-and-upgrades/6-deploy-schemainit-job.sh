@@ -12,9 +12,16 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 . ./infrastructure.env
 
 #
-# Get values envsubst needs
+# Get environment variables to deploy a container app
 #
 export ENVIRONMENT_ID=$(az containerapp env show --resource-group "$RESOURCE_GROUP" --name "$ENVIRONMENT" --query id --output tsv)
+
+#
+# Get environment variables for the schema creation or upgrade
+#
+export JDBC_URL="jdbc:sqlserver://$DBSERVER.database.windows.net;databaseName=idsvr;encrypt=false;sendStringParametersAsUnicode=false"
+export JDBC_USERNAME='superuser'
+export JDBC_PASSWORD='Password1'
 
 #
 # Produce the final yaml file

@@ -13,11 +13,11 @@ properties:
       image: curity.azurecr.io/curity/idsvr:latest
       env:
       - name: JDBC_URL
-        value: "jdbc:sqlserver://$DBSERVER.database.windows.net;databaseName=idsvr;encrypt=false;sendStringParametersAsUnicode=false"
+        value: "$JDBC_URL"
       - name: JDBC_USERNAME
-        value: 'superuser'
+        value: "$JDBC_USERNAME"
       - name: JDBC_PASSWORD
-        value: 'Password1'
+        value: "$JDBC_PASSWORD"
       command:
         - /opt/idsvr/bin/idsvr
       args:
