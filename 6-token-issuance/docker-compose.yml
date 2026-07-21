@@ -51,9 +51,7 @@ services:
   curity-schema-init:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: dbschemainitializer
-    volumes:
-      - ../utils/sqldatabase/initschema.sh:/tmp/initschema.sh
-    command: ["/tmp/initschema.sh"]
+    command: ["/opt/idsvr/bin/idsvr", "-I"]
     environment:
       JDBC_URL: 'jdbc:sqlserver://dbserver:1433;databaseName=idsvr;encrypt=false;sendStringParametersAsUnicode=false'
       JDBC_USERNAME: 'sa'
