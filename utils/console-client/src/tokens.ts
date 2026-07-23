@@ -8,7 +8,8 @@ try {
     const code = await frontChannelRequest();
     const tokens = await backChannelRequest(code);
 
-    const accessTokenClaims = await introspectionRequest(tokens.access_token);
+    const accessTokenClaimsText = await introspectionRequest(tokens.access_token);
+    const accessTokenClaims = JSON.parse(accessTokenClaimsText);
     console.log('Visualizing JWT access token:');
     console.log(JSON.stringify(accessTokenClaims, null, 2));
 

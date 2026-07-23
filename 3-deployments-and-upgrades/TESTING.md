@@ -11,7 +11,7 @@ Run scripts one at a time and wait for each to complete successfully.
 ```bash
 export CONFIGURATION_FOLDER='6-token-issuance'
 ./3-build-images.sh
-./6-deploy-idsvr.sh
+./7-deploy-idsvr.sh
 ```
 
 ## Create a Test User Account
@@ -47,7 +47,7 @@ Get the database server full name, like `curity12345.database.windows.net`:
 Get a shell to a utility pod that contains database client tools:
 
 ```bash
-az containerapp exec --name idsvr-dbinit --resource-group curity-rg --command bash
+az containerapp exec --name idsvr-dbserverinit --resource-group curity-rg --command bash
 ```
 
 Then run database queries to understand identity data:

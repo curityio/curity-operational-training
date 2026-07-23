@@ -10,7 +10,7 @@ ENV DBSERVER=$DBSERVER_ARG
 RUN apt-get update && apt-get install -y curl jq
 
 RUN mkdir /tmp/initscripts
-COPY idsvr-dbinit/*.sql /tmp/initscripts/
-COPY idsvr-dbinit/*.sh  /tmp/initscripts/
+COPY idsvr-dbserverinit/*.sql /tmp/initscripts/
+COPY idsvr-dbserverinit/*.sh  /tmp/initscripts/
 
 ENTRYPOINT ["/tmp/initscripts/entrypoint.sh"]

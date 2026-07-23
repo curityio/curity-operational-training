@@ -20,7 +20,6 @@ services:
     image: curity.azurecr.io/curity/idsvr:latest
     hostname: idsvr-admin
     volumes:
-      - ./cdb:/opt/idsvr/var/cdb
       - ./config/cluster.xml:/opt/idsvr/etc/init/cluster.xml
       - ./configshared/base.xml:/opt/idsvr/etc/init/base.xml
       - ./configshared/authentication-service.xml:/opt/idsvr/etc/init/authentication-service.xml
@@ -35,7 +34,7 @@ services:
       LICENSE_KEY: '${LICENSE_KEY}'
     depends_on:
       curity-data:
-        condition: service_started
+        condition: service_healthy
 
   idsvr-runtime1:
     image: curity.azurecr.io/curity/idsvr:latest
@@ -54,7 +53,7 @@ services:
       LICENSE_KEY: '${LICENSE_KEY}'
     depends_on:
       curity-data:
-        condition: service_started
+        condition: service_healthy
 
   idsvr-runtime2:
     image: curity.azurecr.io/curity/idsvr:latest
@@ -73,8 +72,8 @@ services:
       LICENSE_KEY: '${LICENSE_KEY}'
     depends_on:
       curity-data:
-        condition: service_started
-
+        condition: service_healthy
+  
   curity-data:
     image: curity_mssql:1.0.0
     hostname: dbserver
@@ -86,3 +85,27 @@ services:
       MSSQL_SA_PASSWORD: Password1
       MSSQL_COLLATION: Latin1_General_100_CI_AS_SC_UTF8
       MSSQL_AGENT_ENABLED: true
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        /tmp/initscripts/initdbserver.sh &
+        exec /opt/mssql/bin/sqlservr
+    healthcheck:
+      test: ["CMD", "/tmp/initscripts/healthcheck.sh"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  curity-schema-init:
+    image: curity.azurecr.io/curity/idsvr:latest
+    hostname: dbschemainitializer
+    command: ["/opt/idsvr/bin/idsvr", "-I"]
+    environment:
+      JDBC_URL: 'jdbc:sqlserver://dbserver:1433;databaseName=idsvr;encrypt=false;sendStringParametersAsUnicode=false'
+      JDBC_USERNAME: 'sa'
+      JDBC_PASSWORD: 'Password1'
+    depends_on:
+      curity-data:
+        condition: service_healthy
